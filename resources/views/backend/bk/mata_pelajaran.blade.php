@@ -29,11 +29,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Mata Pelajaran</th>
                                     <th>Mata Pelajaran</th>
-                                    <th>Pengajar</th>
-                                    <th>Kurikulum</th>
-                                    <th>Muatan</th>
-                                    <th>KKM</th>
                                     <th>#Action</th>
                                 </tr>
                             </thead>
@@ -41,11 +38,8 @@
                                 @foreach ($pelajaran as $pel)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pel->kode_mapel }}</td>
                                     <td>{{ $pel->nama_mapel }}</td>
-                                    <td>{{ $pel->guru->nama }}</td>
-                                    <td>{{ $pel->kurikulum }}</td>
-                                    <td>{{ $pel->muatan }}</td>
-                                    <td>{{ $pel->kkm }}</td>
                                     <td>
                                         <div class="form-button-action">
                                             <button type="button" data-toggle="modal" data-target="#ModalEdit{{ $pel->id_mapel }}" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
@@ -82,6 +76,15 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg">
+                                                    <label for="kode_mapel">
+                                                        <h5>Kode Mata Pelajaran</h5>
+                                                    </label>
+                                                    <input type="text" class="form-control @error('kode_mapel')
+                                                        is-invalid
+                                                        @enderror" placeholder="Kode Mata Pelajaran" name="kode_mapel"><br>
+                                                    @error('kode_mapel')
+                                                    <span class="invalid-feedback">{{ $message }}</span>
+                                                    @enderror
                                                     <label for="nama_mapel">
                                                         <h5>Mata Pelajaran</h5>
                                                     </label>
@@ -91,42 +94,6 @@
                                                     @error('nama_mapel')
                                                     <span class="invalid-feedback">{{ $message }}</span>
                                                     @enderror
-                                                    <label for="nama_mapel">
-                                                        <h5>Pengajar</h5>
-                                                    </label>
-                                                    <select class="form-control" id="inputGroupSelect02" name="id_guru">
-                                                        <option selected> --pilih Guru--
-                                                        </option>
-                                                        @foreach ($guru as $gr)
-                                                        <option value="{{ $gr->id_guru }}">
-                                                            {{ $gr->nama }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('id_guru')
-                                                    <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                    <br>
-                                                    <label for="">kurikulum</label>
-                                                    <select class="form-control @error('kurikulum')
-                                                            is-invalid
-                                                            @enderror" name="kurikulum" id="skurikulum">
-                                                        @error('kurikulum')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                        @enderror
-                                                        <option selected> -- Pilih -- </option>
-                                                    </select>
-                                                    <label for="">Muatan</label>
-                                                    <select class="form-control @error('muatan')
-                                                            is-invalid
-                                                            @enderror" name="muatan" id="muatan">
-                                                        @error('muatan')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                        @enderror
-                                                        <option selected> -- Pilih -- </option>
-                                                    </select>
-                                                    <label>KKM</label>
-                                                    <input type="number" class="form-control" name="kkm">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -158,6 +125,17 @@
                                             @method('put')
                                             <div class="row">
                                                 <div class="col-lg">
+                                                    <label for="kode_mapel">
+                                                        <h5>Kode Mata Pelajaran</h5>
+                                                    </label>
+                                                    <input type="text" class="form-control @error('kode_mapel')
+                                                        is-invalid
+                                                        @enderror" placeholder="Kode Mata Pelajaran" name="kode_mapel" value="{{ $pl->kode_mapel }}"><br>
+                                                    @error('kode_mapel')
+                                                    <span class="invalid-feedback">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-lg">
                                                     <label for="nama_mapel">
                                                         <h5>Mata Pelajaran</h5>
                                                     </label>
@@ -167,53 +145,6 @@
                                                     @error('nama_mapel')
                                                     <span class="invalid-feedback">{{ $message }}</span>
                                                     @enderror
-                                                    <label for="nama_mapel">
-                                                        <h5>Pengajar</h5>
-                                                    </label>
-                                                    <select class="custom-select" id="inputGroupSelect02" name="id_guru">
-
-                                                        <option selected value="{{ $pl->id_guru }}">
-                                                            {{ $pl->guru->nama }}
-                                                        </option>
-                                                        @foreach ($guru as $gp)
-                                                        <option value="{{ $gp->id_guru }}">
-                                                            {{ $gp->nama }}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                    <br>
-                                                    @error('id_guru')
-                                                    <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
-                                                    <label for="">Katagori</label>
-                                                    <select class="form-control @error('katagori')
-                                                            is-invalid
-                                                            @enderror" name="katagori">
-                                                        @error('katagori')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                        @enderror
-                                                        <option selected value="{{ $pl->katagori }}">
-                                                            {{ $pl->katagori }}
-                                                        </option>
-                                                        <option>Muatan Nasional</option>
-                                                        <option>Muatan Kewilayahan</option>
-                                                        <option>Muatan Kejuruan</option>
-                                                    </select>
-                                                    <br>
-                                                    <label for="">kurikulum</label>
-                                                    <select class="form-control @error('kurikulum')
-                                                            is-invalid
-                                                            @enderror" name="kurikulum">
-                                                        @error('kurikulum')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                        @enderror
-                                                        <option selected value="{{ $pl->kurikulum }}">
-                                                            {{ $pl->kurikulum }}
-                                                        </option>
-                                                        <option>K-13</option>
-                                                        <option>Merdeka</option>
-                                                    </select>
-
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

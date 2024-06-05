@@ -19,21 +19,15 @@ class PelajaranController extends Controller
     public function ADDmapel(Request $request)
     {
         $this->validate($request, [
+            'kode_mapel' => 'required',
             'nama_mapel' => 'required',
-            'id_guru' => 'required',
-            'kurikulum' => 'required',
-            'muatan' => 'required',
-            'kkm' => 'required'
 
         ]);
 
         try {
             $data = new Pelajaran();
+            $data->kode_mapel = $request->kode_mapel;
             $data->nama_mapel = $request->nama_mapel;
-            $data->id_guru = $request->id_guru;
-            $data->kurikulum = $request->kurikulum;
-            $data->muatan = $request->muatan;
-            $data->kkm = $request->kkm;
             $data->save();
 
             return redirect('mapel')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
@@ -47,21 +41,15 @@ class PelajaranController extends Controller
     public function UPDmapel(Request $request, $id)
     {
         $this->validate($request, [
+            'kode_mapel' => 'required',
             'nama_mapel' => 'required',
-            'id_guru' => 'required',
-            'katagori' => 'required',
-            'kurikulum' => 'required',
-            'kkm' => 'required'
 
         ]);
 
         try {
             $data =  Pelajaran::find($id);
+            $data->kode_mapel = $request->kode_mapel;
             $data->nama_mapel = $request->nama_mapel;
-            $data->id_guru = $request->id_guru;
-            $data->katagori = $request->katagori;
-            $data->kurikulum = $request->kurikulum;
-            $data->kkm = $request->kkm;
             $data->save();
             return redirect('mapel')->with(['msg' => 'Data Berhasil Diubah', 'type' => 'success']);
         } catch (\Exception $e) {

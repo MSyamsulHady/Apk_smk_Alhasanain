@@ -34,9 +34,9 @@
                                 @foreach ($data as $dt)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $dt->id_kelas}}</td>
-                                    <td>{{ $dt->id_mapel }}</td>
-                                    <td>{{ $dt->id_guru}}</td>
+                                    <td>{{ $dt->kelas->nama_kelas}}</td>
+                                    <td>{{ $dt->mapel->nama_mapel }}</td>
+                                    <td>{{ $dt->guru->nama}}</td>
                                     <td>
                                         <button type="button" data-toggle="modal" data-target="#modalAddPeserta" title="" class="btn btn-success btn-sm" data-original-title="Edit ">
                                             <i class="fa fa-eye"></i>&nbsp; Detail
@@ -104,9 +104,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
@@ -116,7 +114,7 @@
                     {{-- end modal Add --}}
 
                     <!-- add peserta -->
-                    <x-modal title="PESERTA DIDIK" id="modalAddPeserta" class="modal-xl">
+                    {{-- <x-modal title="PESERTA DIDIK" id="modalAddPeserta" class="modal-xl">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-data" style="width:100%">
                                 <thead>
@@ -145,7 +143,7 @@
                             </div>
                         </div>
 
-                    </x-modal>
+                    </x-modal> --}}
                     <!-- end add peserta -->
                 </div>
             </div>

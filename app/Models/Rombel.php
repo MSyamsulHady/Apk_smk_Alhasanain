@@ -15,4 +15,16 @@ class Rombel extends Model
     {
         return $this->belongsTo(TrxRombel_siswa::class, 'id_rombel');
     }
+    public function guru()
+    {
+        return $this->hasOne(Guru::class, 'id_guru');
+    }
+    public function kelas()
+    {
+        return $this->hasOne(Kelas::class, 'id_kelas');
+    }
+    public function mapel()
+    {
+        return $this->hasOne(Pelajaran::class, 'id_mapel');
+    }
 }
