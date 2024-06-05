@@ -13,6 +13,7 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PertemuanController;
+use App\Http\Controllers\RombelController;
 use App\Http\Controllers\SanksiController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SiswaController;
@@ -101,12 +102,13 @@ Route::controller(TataTertibController::class)->group(function () {
 Route::controller(SanksiController::class)->group(function () {
     Route::get('/sanksi', 'index')->name('sanksi');
 });
-Route::controller(KelasPelajaranController::class)->group(function () {
-    Route::get('/rombel', 'index')->name('rombel');
-    Route::get('/getGuru/{id}', 'getGuru');
-    Route::post('/insertRombel', 'tambahK_pelajaran')->name('insertRombel');
-    Route::put('/rombel/update/{$id}', 'update')->name('updateRombel');
-});
+// Route::controller(KelasPelajaranController::class)->group(function () {
+//     Route::get('/rombel', 'index')->name('rombel');
+//     Route::get('/getGuru/{id}', 'getGuru');
+//     Route::post('/insertRombel', 'tambahK_pelajaran')->name('insertRombel');
+//     Route::put('/rombel/update/{$id}', 'update')->name('updateRombel');
+// });
+Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
 Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::post('/berita/insert', [BeritaController::class, 'insertBerita'])->name('insertberita');

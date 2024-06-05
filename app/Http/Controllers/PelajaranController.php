@@ -22,7 +22,8 @@ class PelajaranController extends Controller
             'nama_mapel' => 'required',
             'id_guru' => 'required',
             'kurikulum' => 'required',
-            'muatan' => 'required'
+            'muatan' => 'required',
+            'kkm' => 'required'
 
         ]);
 
@@ -32,6 +33,7 @@ class PelajaranController extends Controller
             $data->id_guru = $request->id_guru;
             $data->kurikulum = $request->kurikulum;
             $data->muatan = $request->muatan;
+            $data->kkm = $request->kkm;
             $data->save();
 
             return redirect('mapel')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
@@ -49,6 +51,7 @@ class PelajaranController extends Controller
             'id_guru' => 'required',
             'katagori' => 'required',
             'kurikulum' => 'required',
+            'kkm' => 'required'
 
         ]);
 
@@ -58,6 +61,7 @@ class PelajaranController extends Controller
             $data->id_guru = $request->id_guru;
             $data->katagori = $request->katagori;
             $data->kurikulum = $request->kurikulum;
+            $data->kkm = $request->kkm;
             $data->save();
             return redirect('mapel')->with(['msg' => 'Data Berhasil Diubah', 'type' => 'success']);
         } catch (\Exception $e) {

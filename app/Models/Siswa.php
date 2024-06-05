@@ -23,10 +23,6 @@ class Siswa extends Model
         'foto'
     ];
 
-    public function detail_kelas()
-    {
-        return $this->hasOne(Detail_kelas::class, 'id_detail');
-    }
     public function nilai()
     {
         return $this->hasMany(Nilai::class, 'id_nilai');

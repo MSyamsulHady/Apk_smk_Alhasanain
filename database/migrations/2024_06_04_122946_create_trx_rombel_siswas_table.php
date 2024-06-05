@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detail_kelas', function (Blueprint $table) {
-            $table->id('id_detail');
-            $table->foreignId('id_kelas');
-            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->cascadeOnUpdate()->cascadeOnDelete();
+        Schema::create('trx_rombel_siswas', function (Blueprint $table) {
+            $table->id('id_trx_rombel_siswa');
             $table->foreignId('id_siswa');
-            $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('id_rombel');
+            $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('id_rombel')->references('id_rombel')->on('rombels')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_kelas');
+        Schema::dropIfExists('trx_rombel_siswas');
     }
 };

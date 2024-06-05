@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('pelajarans', function (Blueprint $table) {
             $table->id('id_mapel');
-            $table->foreignId('id_guru');
-            $table->foreign('id_guru')->references('id_guru')->on('gurus')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('kode_mapel', 100);
             $table->string('nama_mapel', 100)->nullable()->default('text');
-            $table->enum('kurikulum', ['K-13', 'Merdeka']);
-            $table->string('muatan');
             $table->timestamps();
         });
     }

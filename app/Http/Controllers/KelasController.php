@@ -12,29 +12,24 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $guru = Guru::all();
         $semester = Semester::all();
 
         $sesi = session()->get('id_semester');
 
-        $kelas = Kelas::with('guru', 'semester')->where('id_semester', $sesi)->get();
+        $kelas = Kelas::with('semester')->where('id_semester', $sesi)->get();
         // dd($kelas);
-        return view('backend.bk.kelas', compact('guru', 'semester', 'kelas'));
+        return view('backend.bk.kelas', compact('semester', 'kelas'));
     }
     public function insertKelas(Request $request)
     {
         $this->validate($request, [
-            'id_guru' => 'required',
             'nama_kelas' => 'required',
             'id_semester' => 'required',
-            'ruangan' => 'required'
         ]);
         try {
             $data = new Kelas();
-            $data->id_guru = $request->id_guru;
             $data->nama_kelas = $request->nama_kelas;
             $data->id_semester = $request->id_semester;
-            $data->ruangan = $request->ruangan;
             $data->save();
             return redirect('/kelas')->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
         } catch (\Exception $e) {
@@ -44,17 +39,13 @@ class KelasController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
-            'id_guru' => 'required',
             'nama_kelas' => 'required',
             'id_semester' => 'required',
-            'ruangan' => 'required'
         ]);
         try {
             $data = Kelas::findOrFail($id);
-            $data->id_guru = $request->id_guru;
             $data->nama_kelas = $request->nama_kelas;
             $data->id_semester = $request->id_semester;
-            $data->ruangan = $request->ruangan;
             $data->save();
             return redirect('/kelas')->with(['msg' => 'Data Berhasil Diubah', 'type' => 'success']);
         } catch (\Exception $e) {

@@ -18,9 +18,10 @@ class SiswaController extends Controller
 
     public function index()
     {
-        $siswa = Siswa::with('detail_kelas.kelas')
-            ->whereRelation('detail_kelas.kelas', 'id_semester', session('id_semester'))
-            ->get();
+        // $siswa = Siswa::with('detail_kelas.kelas')
+        //     ->whereRelation('detail_kelas.kelas', 'id_semester', session('id_semester'))
+        //     ->get();
+        $siswa = Siswa::all();
 
         return view('backend.bk.data_siswa', compact('siswa'));
     }

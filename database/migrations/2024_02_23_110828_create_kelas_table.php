@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id('id_kelas');
-            $table->foreignId('id_guru');
-            $table->foreign('id_guru')->references('id_guru')->on('gurus')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('nama_kelas')->default('text');
             $table->foreignId('id_semester');
             $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('ruangan');
             $table->timestamps();
         });
     }
