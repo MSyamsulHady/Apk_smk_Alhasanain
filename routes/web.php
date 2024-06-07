@@ -18,6 +18,7 @@ use App\Http\Controllers\SanksiController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TataTertibController;
+use App\Http\Controllers\trxRombelController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
@@ -122,3 +123,4 @@ Route::controller(AbsenController::class)->group(function () {
 Route::controller(PertemuanController::class)->group(function () {
     Route::get('kelolaAbsen', 'index')->name('pertemuan');
 });
+Route::get('/trx_rombel/{$id}', [trxRombelController::class, 'index'])->name('trx_rombel');
