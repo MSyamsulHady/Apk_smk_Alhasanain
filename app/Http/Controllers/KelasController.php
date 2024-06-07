@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\Kelas;
+use App\Models\Rombel;
 use App\Models\Semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ class KelasController extends Controller
 {
     public function index()
     {
+
         $semester = Semester::all();
 
         $sesi = session()->get('id_semester');

@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('pertemuans', function (Blueprint $table) {
             $table->id('id_pertemuan');
-            $table->foreignId('id_absen');
-            $table->foreign('id_absen')->references('id_absen')->on('absens')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('pertemuan', 10)->nullable();
-            $table->date('tanggal_pertemuan');
-            $table->time('mulai');
-            $table->time('akhir');
-            $table->enum('keterangan', ['alpa', 'hadir', 'bolos', 'izin', 'sakit'])->nullable();
+            $table->foreignId('id_rombel');
+            $table->foreign('id_rombel')->references('id_rombel')->on('rombels')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('pertemuanKe', '25')->nullable()->default('text');
+            $table->date('tanggal_pertemuan')->nullable();
+            $table->time('mulai')->nullable();
+            $table->time('selesai')->nullable();
             $table->timestamps();
         });
     }

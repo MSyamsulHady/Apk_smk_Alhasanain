@@ -23,4 +23,15 @@ class Kelas extends Model
     {
         return $this->hasOne(Semester::class, 'id_semester', 'id_semester');
     }
+<<<<<<< HEAD
+=======
+    // public function detail_kelas()
+    // {
+    //     return $this->hasMany(Detail_kelas::class, 'id_kelas', 'id_kelas');
+    // }
+    // public function kelasPelajaran()
+    // {
+    //     return $this->belongsTo(KelasPelajaran::class, 'id_kelasPelajaran', 'id_kelasPelajaran');
+    // }
+>>>>>>> refs/remotes/origin/master
 }

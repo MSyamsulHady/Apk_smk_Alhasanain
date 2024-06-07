@@ -110,6 +110,9 @@ Route::controller(SanksiController::class)->group(function () {
 //     Route::put('/rombel/update/{$id}', 'update')->name('updateRombel');
 // });
 Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
+Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
+Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
+Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete');
 Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
 Route::post('/berita/insert', [BeritaController::class, 'insertBerita'])->name('insertberita');
