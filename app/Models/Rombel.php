@@ -17,14 +17,14 @@ class Rombel extends Model
     }
     public function guru()
     {
-        return $this->hasOne(Guru::class, 'id_guru');
+        return $this->hasOne(Guru::class, 'id_guru', 'id_guru');
     }
     public function kelas()
     {
-        return $this->hasOne(Kelas::class, 'id_kelas');
+        return $this->hasOne(Kelas::class, 'id_kelas', 'id_kelas');
     }
     public function mapel()
     {
-        return $this->hasOne(Pelajaran::class, 'id_mapel');
+        return $this->hasOne(Pelajaran::class, 'id_mapel', 'id_mapel');
     }
 }

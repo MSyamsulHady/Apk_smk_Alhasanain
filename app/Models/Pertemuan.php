@@ -11,7 +11,7 @@ class Pertemuan extends Model
     public $timestamps = true;
     protected $table = 'pertemuans';
     protected $primaryKey = 'id_pertemuan';
-    protected $fillable = ['id_absen', 'pertemuan', 'mulai', 'akhir', 'keterangan', 'tanggal_pertemuan'];
+    protected $fillable = ['pertemuanKe', 'tanggal_pertemuan', 'mulai', 'selesai'];
 
 
     public function Absen()
