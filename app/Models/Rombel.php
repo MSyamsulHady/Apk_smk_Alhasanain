@@ -11,9 +11,9 @@ class Rombel extends Model
     protected $primaryKey = 'id_rombel';
     protected $guarded = [];
 
-    public function siswa()
+    public function trx()
     {
-        return $this->belongsTo(TrxRombel_siswa::class, 'id_rombel');
+        return $this->hasMany(TrxRombel_siswa::class, 'id_rombel', 'id_rombel');
     }
     public function guru()
     {

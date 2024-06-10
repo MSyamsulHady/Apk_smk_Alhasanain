@@ -38,11 +38,7 @@
                                             <td>{{ $dt->mapel->nama_mapel }}</td>
                                             <td>{{ $dt->guru->nama }}</td>
                                             <td>
-                                                <button type="button" data-toggle="modal" data-target="#modalAddPeserta"
-                                                    title="" class="btn btn-success btn-sm"
-                                                    data-original-title="Edit ">
-                                                    <i class="fa fa-eye"></i>&nbsp; Detail
-                                                </button>
+                                                <a href="{{route('trx_rombel',$dt->id_rombel)}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i>&nbsp; Detail</a>
                                                 <div class="form-button-action">
                                                     <button type="button" data-toggle="modal"
                                                         data-target="#ModalEdit{{ $dt->id_rombel }}" title=""
