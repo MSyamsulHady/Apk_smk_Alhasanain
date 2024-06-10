@@ -29,7 +29,8 @@ class Siswa extends Model
         return $this->hasMany(Nilai::class, 'id_nilai');
     }
 
-    public function Absen(){
-        return  $this->belongsTo(Absen::class,'id_absen','id_absen');
+    public function Absen()
+    {
+        return  $this->belongsTo(Absen::class, 'id_siswa', 'id_siswa');
     }
 }

@@ -35,12 +35,11 @@
                                     @foreach ($absen as $ab)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $ab->kelasPelajaran->kelas->nama_kelas }}</td>
-                                            <td>{{ $ab->kelasPelajaran->mapel->nama_mapel }}</td>
-                                            <td>{{ $ab->kelasPelajaran->guru->nama }}</td>
-                                            <td>{{ $ab->semester->nama_semester }}</td>
-                                            <td><a href="{{ route('kelola_absen', $ab->KelasPelajaran->id_kelas) }}"
-                                                    class="btn btn-success pb-1 pt-0 px-2">
+                                            <td>{{ $ab->pertemuan->rombel->kelas->nama_kelas }}</td>
+                                            <td>{{ $ab->pertemuan->rombel->mapel->nama_mapel }}</td>
+                                            <td>{{ $ab->pertemuan->rombel->guru->nama }}</td>
+                                            <td>{{ $ab->pertemuan->rombel->kelas->semester->nama_semester }}</td>
+                                            <td><a href="" class="btn btn-success pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-list-columns-reverse"
                                                         viewBox="0 0 16 16">
@@ -76,12 +75,12 @@
                                                             <h5> Kelas</h5>
                                                         </label>
                                                         <select class="custom-select" id="inputGroupSelect02"
-                                                            name="id_kelasPelajaran">
+                                                            name="id_pertemuan">
                                                             <option selected> --pilih Kelas--
                                                             </option>
-                                                            @foreach ($kelasPelajaran as $kp)
-                                                                <option value="{{ $kp->id_kelasPelajaran }}">
-                                                                    {{ $kp->kelas->nama_kelas }}
+                                                            @foreach ($kelas as $a)
+                                                                <option value="{{ $a->pertemuan->rombel->kelas }}">
+                                                                    {{ $a->pertemuan->rombel->kelas->nama_kelas }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -90,22 +89,35 @@
                                                         <label for="nama_mapel">
                                                             <h5> Mata Pelajaran</h5>
                                                         </label>
-                                                        <select class="custom-select" id="kelasPelajaran"
-                                                            name="id_kelasPelajaran">
+                                                        <select class="custom-select" id="pertemuan" name="id_pertemuan">
                                                             <option selected> --pilih Mata Pelajaran--
                                                             </option>
-                                                            @foreach ($kelasPelajaran as $kp)
-                                                                <option value="{{ $kp->id_kelasPelajaran }}">
-                                                                    {{ $kp->mapel->nama_mapel }}
+                                                            @foreach ($absen as $a)
+                                                                <option value="{{ $a->pertemuan->rombel }}">
+                                                                    {{ $a->pertemuan->rombel->mapel->nama_mapel }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="nama_mapel">
+                                                            <h5> Guru Pengampu</h5>
+                                                        </label>
+                                                        <select class="custom-select" id="pertemuan" name="id_pertemuan">
+                                                            <option selected> --pilih guru pengampu--
+                                                            </option>
+                                                            @foreach ($absen as $a)
+                                                                <option value="{{ $a->pertemuan->rombel }}">
+                                                                    {{ $a->pertemuan->rombel->guru->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    {{-- <div class="form-group">
                                                         <label for="">Guru pengampu</label>
                                                         <input type="text" class="form-control" id="guru" readonly>
                                                         <input type="hidden" name="id_guru" id="id_guru">
-                                                    </div>
+                                                    </div> --}}
 
                                                 </div>
                                             </div>
@@ -126,10 +138,10 @@
         </div>
     </div>
 @endsection
-@section('script')
+{{-- @section('script')
     <script>
         $(document).ready(function() {
-            $('#kelasPelajaran').on('change', function() {
+            $('#pertemuan').on('change', function() {
                 let selectedValue = this.value;
 
                 $.ajax({
@@ -150,4 +162,4 @@
             });
         });
     </script>
-@endsection
+@endsection --}}

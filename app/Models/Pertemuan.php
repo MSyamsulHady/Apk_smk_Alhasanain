@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Roman;
 
 class Pertemuan extends Model
 {
@@ -17,5 +18,9 @@ class Pertemuan extends Model
     public function Absen()
     {
         return $this->belongsTo(Absen::class, 'id_absen', 'id_absen');
+    }
+    public function rombel()
+    {
+        return $this->belongsTo(Rombel::class, 'id_rombel', 'id_rombel');
     }
 }
