@@ -27,4 +27,8 @@ class Rombel extends Model
     {
         return $this->hasOne(Pelajaran::class, 'id_mapel', 'id_mapel');
     }
+    public function pertemuan()
+    {
+        return $this->hasMany(Pertemuan::class, 'id_rombel', 'id_rombel');
+    }
 }

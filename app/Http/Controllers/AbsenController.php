@@ -19,91 +19,76 @@ class AbsenController extends Controller
     {
         // $pertemuan = Absen::with('pertemuan')->get()->dd(d);
 
-        // $tr = TrxRombel_siswa::with('siswa')->get();
-        // $kelas = Kelas::all();
-        // $guru = Guru::all();
-        // $mapel = Pelajaran::all();
-        $absen = Absen::all();
 
+        $absen = Rombel::all();
         return view('backend.bk.absen', compact('absen'));
     }
 
-    // public function kelasAbsen($id_kelas)
-    // {
-    //     $absen = Absen::whereHas('kelasPelajaran', function ($query) use ($id_kelas) {
-    //         $query->whereHas('kelas', function ($query) use ($id_kelas) {
-    //             $query->where('id_kelas', $id_kelas);
-    //         });
-    //     })->get();
 
-    //     return view('backend.bk.absenSiswa', compact('absen'));
-    // }
-
-    // public function getGuru($id)
-    // {
-    //     $pertemuan = Pertemuan::with('rombel.guru')->find($id);
-
-    //     if ($pertemuan && $pertemuan->rombel && $pertemuan->rombel->guru) {
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'nama' => $pertemuan->rombel->guru->nama,
-    //             'id_guru' => $pertemuan->rombel->guru->id_guru,
-    //         ]);
-    //     }
-
-    //     return response()->json(['status' => 'error', 'message' => 'Guru tidak ditemukan'], 404);
-    // }
-    public function AddAbsen(Request $request)
+    public function absen($id)
     {
-        $request->validate([
-            'pertemuan_id' => 'required|exists:pertemuan,id',
-        ]);
+        $model = new Rombel();
+        $data = $model->with('pertemuan.absen', 'mapel', 'trx.siswa', 'kelas.semester')->findOrFail($id);
+        $siswa = Siswa::all();
 
-        $pertemuan = Pertemuan::with('rombel.kelas', 'rombel.guru', 'rombel.mapel')->find($request->id_pertemuan);
 
-        if ($pertemuan && $pertemuan->rombel) {
-            Absen::create([
-                'pertemuan_id' => $request->id_pertemuan,
-                'nama_kelas' => $pertemuan->rombel->kelas->nama_kelas,
-                'nama_mata_pelajaran' => $pertemuan->rombel->mapel->nama_mapel,
-                'nama_guru' => $pertemuan->rombel->guru->nama,
-            ]);
+        $absenSiswa = collect([]);
 
-            return redirect()->route('absen.index')->with('success', 'Data absen berhasil ditambahkan');
+        $modelAbsen = new Absen();
+
+        foreach ($data->trx as $key) {
+            $absenSiswa[$key->id_trx_rombel_siswa] = [
+                'nama' => $key->siswa->nama,
+                'nis' => $key->siswa->nis,
+                'jk' => $key->siswa->gender,
+                'absen' => $modelAbsen->where([
+                    'id_semester' => $data->kelas->semester->id_semester,
+                    'id_trx_rombel_siswa' => $key->id_trx_rombel_siswa
+                ])->get()
+            ];
         }
-
-        return redirect()->route('absen.index')->with('error', 'Gagal menambahkan data absen');
+        return view('backend.bk.absenSiswa', compact('absenSiswa', 'siswa', 'data'));
     }
 
+    public function addAbsen($id_rombel, $id_pertemuan)
+    {
+        $model = new Rombel();
+        $data = $model->with(['pertemuan.absen', 'mapel', 'trx.siswa', 'kelas.semester'])->findOrFail($id_rombel);
+
+        return view('backend.bk.insertAbsen', compact('data', 'id_pertemuan'));
+    }
+
+    public function SimpanAbsen(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'id_siswa' => 'required|array',
+                'keterangan' => 'required|array'
+            ]
+        );
+        $rombel = Rombel::findOrFail($id);
+        $semester = Pertemuan::findOrFail($id)->id_semester;
+        $data = [];
 
 
+        foreach ($request->id_siswa as  $value) {
+            $data[] = [
+                'id_trx_rombel_siswa' => $value,
+                'keterangan' => $request->keterangan[$value],
+                'id_pertemuan' => $id,
+                'id_semester' => $semester
+            ];
+        }
 
 
+        try {
+            Absen::insert($data);
+            return redirect('')->route('kelola_absen', [
+                $rombel->id_rombel,
 
-
-
-
-
-
-    // public function kelola_absen()
-    // {
-
-    //     $absens = Absen::all();
-    //     // $this->validate($requestuest, [
-    //     //     'keterangan' => 'required',
-    //     //     'tanggal_absen' => 'required',
-    //     // ]);
-    //     // try {
-
-    //     //     $data = new Absen();
-    //     //     $data->keterangan = $request->keterangan;
-    //     //     $data->tanggal_absen = $request->tanggal_absen;
-    //     //     $data->save();
-    //     //     return redirect('dataguru')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
-    //     // } catch (\Exception $e) {
-    //     //     return redirect('dataguru')->with(['msg' => $e . 'Data Gagal Ditambah ', 'type' => 'error']);
-    //     // }
-
-    //     return view('backend.bk.kelola_absen', compact('absens'));
-    // }
+            ])->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
+        } catch (\Throwable $e) {
+            return $e->getMessage();
+        }
+    }
 }

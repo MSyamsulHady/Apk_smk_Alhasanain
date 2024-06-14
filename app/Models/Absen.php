@@ -11,10 +11,14 @@ class Absen extends Model
     public $timestamps = true;
     protected $table = 'absens';
     protected $primaryKey = 'id_absen';
-    protected $fillable = ['id_siswa', 'id_pertemuan', 'keterangan'];
+    protected $guarded = [];
 
     public function pertemuan()
     {
         return $this->hasMany(Pertemuan::class, 'id_pertemuan', 'id_pertemuan');
+    }
+    public function trx()
+    {
+        return $this->belongsTo(TrxRombel_siswa::class, 'id_trx_rombel_siswa', 'id_trx_rombel_siswa');
     }
 }

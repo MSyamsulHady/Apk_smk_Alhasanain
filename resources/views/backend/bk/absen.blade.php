@@ -35,11 +35,12 @@
                                     @foreach ($absen as $ab)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $ab->pertemuan->rombel->kelas->nama_kelas }}</td>
-                                            <td>{{ $ab->pertemuan->rombel->mapel->nama_mapel }}</td>
-                                            <td>{{ $ab->pertemuan->rombel->guru->nama }}</td>
-                                            <td>{{ $ab->pertemuan->rombel->kelas->semester->nama_semester }}</td>
-                                            <td><a href="" class="btn btn-success pb-1 pt-0 px-2">
+                                            <td>{{ $ab->kelas->nama_kelas }}</td>
+                                            <td>{{ $ab->mapel->nama_mapel }}</td>
+                                            <td>{{ $ab->guru->nama }}</td>
+
+                                            <td><a href="{{ route('kelola_absen', $ab->id_rombel) }}"
+                                                    class="btn btn-success pb-1 pt-0 px-2">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-list-columns-reverse"
                                                         viewBox="0 0 16 16">
@@ -55,7 +56,7 @@
                             </table>
                         </div>
                         {{-- modal Add --}}
-                        <div class="modal fade " id="ModalAdd" tabindex="-1" role="dialog"
+                        {{-- <div class="modal fade " id="ModalAdd" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -119,7 +120,7 @@
                                                         <input type="hidden" name="id_guru" id="id_guru">
                                                     </div> --}}
 
-                                                </div>
+                        {{-- </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -130,7 +131,9 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+
+
                         {{-- end modal Add --}}
                     </div>
                 </div>

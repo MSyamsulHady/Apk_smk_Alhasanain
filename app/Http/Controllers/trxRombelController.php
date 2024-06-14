@@ -13,8 +13,9 @@ class trxRombelController extends Controller
     public function index($id)
     {
         $siswa = Siswa::all();
+        $mapel = Rombel::with('mapel')->get();
         $rombel = Rombel::with('trx.siswa')->find($id);
-        return view('backend.bk.trxRombel', compact('siswa', 'rombel'));
+        return view('backend.bk.trxRombel', compact('siswa', 'mapel', 'rombel'));
     }
     public function addPeserta(Request $request, $id)
     {

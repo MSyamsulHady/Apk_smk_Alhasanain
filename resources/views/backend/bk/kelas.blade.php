@@ -85,7 +85,7 @@
                                                         </option>
                                                         @foreach ($semester as $smtr)
                                                         <option value="{{ $smtr->id_semester }}">
-                                                            {{ $smtr->nama_semester }} ->>
+                                                            {{ $smtr->nama_semester }}
                                                             {{ $smtr->tahun_ajaran }}
                                                         </option>
                                                         @endforeach

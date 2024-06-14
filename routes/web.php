@@ -94,15 +94,7 @@ Route::controller(DetailKelasController::class)->group(function () {
     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
     Route::post('/insert/detail', 'insertdetail')->name('insertdetail');
 });
-Route::controller(PelanggaranController::class)->group(function () {
-    Route::get('/pelanggaran', 'index')->name('pelanggaran');
-});
-Route::controller(TataTertibController::class)->group(function () {
-    Route::get('/tataTertib', 'index')->name('tataTertib');
-});
-Route::controller(SanksiController::class)->group(function () {
-    Route::get('/sanksi', 'index')->name('sanksi');
-});
+
 // Route::controller(KelasPelajaranController::class)->group(function () {
 //     Route::get('/rombel', 'index')->name('rombel');
 //     Route::get('/getGuru/{id}', 'getGuru');
@@ -114,17 +106,23 @@ Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel
 Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
 Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete');
 Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
-Route::get('/berita', [BeritaController::class, 'index'])->name('berita');
-Route::post('/berita/insert', [BeritaController::class, 'insertBerita'])->name('insertberita');
 
-// Route::controller(AbsenController::class)->group(function () {
-//     Route::get('/absen', 'index')->name('absen');
-//     Route::get('ambilGuru/{id}', 'getGuru');
-//     Route::get('/absen/kelas/{id_kelas}', 'kelasAbsen')->name('kelola_absen');
-//     Route::post('/insertAbsen', 'addAbsen')->name('tambahAbsen');
-// });
-Route::controller(PertemuanController::class)->group(function () {
-    Route::get('kelolaAbsen', 'index')->name('pertemuan');
+
+Route::controller(AbsenController::class)->group(function () {
+    Route::get('/absen', 'index')->name('absen');
+    // Route::get('ambilGuru/{id}', 'getGuru');
+    Route::get('/absen/kelas/{id}', 'absen')->name('kelola_absen');
+    Route::get('/insertAbsen/{id_rombel}/{id_pertemuan}', 'addAbsen')->name('tambahAbsen');
+    Route::post('simpan/{id}', 'SimpanAbsen')->name('simpanAbsen');
 });
+
+
+Route::controller(PertemuanController::class)->group(function () {
+    Route::post('addPertemuan/{id}', 'addPertemuan')->name('pertemuan');
+    Route::put('updatePertemuan/{id}', 'updatePertemuan')->name('updatePertemuan');
+});
+
+
+
 Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel');
 Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])->name('add_peserta');

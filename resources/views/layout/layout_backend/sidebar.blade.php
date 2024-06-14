@@ -18,33 +18,33 @@
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li class="{{ request()->is('allsiswa') ? 'active' : '' }}">
-                                <a href="{{ route('allsiswa') }}" >
+                                <a href="{{ route('allsiswa') }}">
                                     <span class="sub-item">All DataSiswa</span>
                                 </a>
                             </li>
                             <li class="{{ request()->is('datasiswa') ? 'active' : '' }}">
-                                <a href="{{ route('datasiswa') }}" >
+                                <a href="{{ route('datasiswa') }}">
                                     <span class="sub-item">Data Siswa </span>
                                 </a>
                             </li>
                             <li class="{{ request()->is('dataguru') ? 'active' : '' }}">
-                                <a href="{{ route('dataguru') }}" >
+                                <a href="{{ route('dataguru') }}">
                                     <span class="sub-item">Data Guru</span>
                                 </a>
                             </li>
 
                             <li class="{{ request()->is('mapel') ? 'active' : '' }}">
-                                <a href="{{ route('mapel') }}" >
+                                <a href="{{ route('mapel') }}">
                                     <span class="sub-item">Mata Pelajaran</span>
                                 </a>
                             </li>
                             <li class="{{ request()->is('semester') ? 'active' : '' }}">
-                                <a href="{{ route('semester') }}" >
+                                <a href="{{ route('semester') }}">
                                     <span class="sub-item">Semester</span>
                                 </a>
                             </li>
                             <li class="{{ request()->is('datauser') ? 'active' : '' }}">
-                                <a href="{{ route('datauser') }}" >
+                                <a href="{{ route('datauser') }}">
                                     <span class="sub-item">Data User</span>
                                 </a>
                             </li>
@@ -63,29 +63,29 @@
                         <p>Rombel</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a data-toggle="collapse" href="#absen">
+                <li class="nav-item {{ request()->routeIs('absen') ? 'active' : '' }} ">
+                    <a href="{{ route('absen') }}">
                         <i class="fas fa-layer-group"></i>
                         <p>Absensi </p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="absen">
-                        <ul class="nav nav-collapse">
-                            {{-- <li>
+                    {{-- <div class="collapse" id="absen">
+                        <ul class="nav nav-collapse"> --}}
+                    {{-- <li>
                                 <a href="{{ route('absen') }}" class="{{ request()->is('absen') ? 'active' : '' }}">
                                     <span class="sub-item">Absensi</span>
                                 </a>
                             </li> --}}
+                    {{-- </ul>
+                    </div> --}}
+                </li>
+                <li class="nav-item  ">
+                    <a href="">
+                        <i class="fas fa-th-list"></i>
+                        <p>Nilai Siswa</p>
+                    </a>
+                </li>
             </ul>
         </div>
-        </li>
-        <li class="nav-item  ">
-            <a href="">
-                <i class="fas fa-th-list"></i>
-                <p>Nilai Siswa</p>
-            </a>
-        </li>
-        </ul>
     </div>
-</div>
 </div>

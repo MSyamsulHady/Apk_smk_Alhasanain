@@ -12,12 +12,12 @@ class Pertemuan extends Model
     public $timestamps = true;
     protected $table = 'pertemuans';
     protected $primaryKey = 'id_pertemuan';
-    protected $fillable = ['pertemuanKe', 'tanggal_pertemuan', 'mulai', 'selesai'];
+    protected $guarded = [];
 
 
-    public function Absen()
+    public function absen()
     {
-        return $this->belongsTo(Absen::class, 'id_absen', 'id_absen');
+        return $this->hasMany(Absen::class, 'id_pertemuan', 'id_pertemuan');
     }
     public function rombel()
     {
