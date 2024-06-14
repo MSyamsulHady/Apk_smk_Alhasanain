@@ -71,11 +71,11 @@
                     </a>
                     <div class="collapse" id="absen">
                         <ul class="nav nav-collapse">
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('absen') }}" class="{{ request()->is('absen') ? 'active' : '' }}">
                                     <span class="sub-item">Absensi</span>
                                 </a>
-                            </li>
+                            </li> --}}
             </ul>
         </div>
         </li>

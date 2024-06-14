@@ -17,7 +17,7 @@ class RombelController extends Controller
         $mapel = Pelajaran::all();
         $kelas = Kelas::all();
         $guru = Guru::all();
-        $data = Rombel::with('trx_rombel_siswa', 'kelas', 'guru', 'mapel')->get();
+        $data = Rombel::with('kelas', 'guru', 'mapel')->get();
         return view('backend.bk.rombel', compact('data', 'mapel', 'kelas', 'guru'));
     }
 
@@ -45,7 +45,6 @@ class RombelController extends Controller
 
         ]);
         try {
-
             $data = Rombel::findOrFail($id);
             $data->id_kelas = $request->id_kelas;
             $data->id_mapel = $request->id_mapel;
