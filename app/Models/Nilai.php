@@ -4,29 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Nilai extends Model
 {
     use HasFactory;
+
     protected $primaryKey = 'id_nilai';
-    protected $fillable = [
-        'id_siswa',
-        'id_kelasPelajaran',
-        'id_semester',
-        'tugas',
-        'uts',
-        'uas'
-    ];
-    public function siswa()
+    protected $guraded = [];
+
+    public function trx_siswa()
     {
-        return $this->hasOne(Siswa::class, 'id_siswa', 'id_siswa');
-    }
-    public function kelasPelajaran()
-    {
-        return $this->belongsTo(KelasPelajaran::class, 'id_kelasPelajaran');
+        return $this->hasOne(TrxRombel_siswa::class, 'id_trx_rombel_siswa');
     }
     public function semester()
     {
-        return $this->belongsTo(Semester::class, 'id_semester');
+        return $this->HasOne(Semester::class, 'id_semester');
     }
 }

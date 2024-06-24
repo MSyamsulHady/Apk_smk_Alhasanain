@@ -69,18 +69,9 @@
                         <p>Absensi </p>
                         <span class="caret"></span>
                     </a>
-                    {{-- <div class="collapse" id="absen">
-                        <ul class="nav nav-collapse"> --}}
-                    {{-- <li>
-                                <a href="{{ route('absen') }}" class="{{ request()->is('absen') ? 'active' : '' }}">
-                                    <span class="sub-item">Absensi</span>
-                                </a>
-                            </li> --}}
-                    {{-- </ul>
-                    </div> --}}
                 </li>
-                <li class="nav-item  ">
-                    <a href="">
+                <li class="nav-item  {{ request()->routeIs('nilai') ? 'active' : '' }}">
+                    <a href="{{ route('nilai') }}">
                         <i class="fas fa-th-list"></i>
                         <p>Nilai Siswa</p>
                     </a>

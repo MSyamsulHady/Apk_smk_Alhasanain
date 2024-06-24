@@ -105,7 +105,6 @@ Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
 Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
 Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
 Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete');
-Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
 
 
 Route::controller(AbsenController::class)->group(function () {
@@ -126,3 +125,6 @@ Route::controller(PertemuanController::class)->group(function () {
 
 Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel');
 Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])->name('add_peserta');
+
+Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai');
+Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai');

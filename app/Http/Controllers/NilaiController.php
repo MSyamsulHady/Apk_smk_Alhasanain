@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KelasPelajaran;
-use App\Models\Nilai;
-use App\Models\Semester;
+use App\Models\Rombel;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
 {
-    public function index($id)
+    public function index()
     {
+        $rombel = Rombel::all();
+        return view('backend.bk.nilai', compact('rombel'));
+    }
+    public function kelolaNilai($id)
+    {
+        $model = new Rombel();
+        $data = $model->with('mapel', 'trx.siswa', 'kelas.semester')->findOrFail($id);
         $siswa = Siswa::all();
-        $semester = Semester::all();
-        $kelasPelajaran = KelasPelajaran::all();
-        $data = Nilai::with('nilai.kelasPelajaran')->find($id);
-        return view('backend.bk.nilai', compact('siswa', 'data', 'smester', 'kelasPelajaran'));
+        return view('backend.bk.kelola_nilai', compact('model', 'data', 'siswa'));
     }
 }
