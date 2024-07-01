@@ -99,25 +99,12 @@ Route::controller(DetailKelasController::class)->group(function () {
     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
     Route::post('/insert/detail', 'insertdetail')->name('insertdetail')->middleware('auth');
 });
-<<<<<<< HEAD
 
-// Route::controller(KelasPelajaranController::class)->group(function () {
-//     Route::get('/rombel', 'index')->name('rombel');
-//     Route::get('/getGuru/{id}', 'getGuru');
-//     Route::post('/insertRombel', 'tambahK_pelajaran')->name('insertRombel');
-//     Route::put('/rombel/update/{$id}', 'update')->name('updateRombel');
-// });
-Route::get('/rombel', [RombelController::class, 'index'])->name('rombel')->middleware('auth');
-Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add')->middleware('auth');
-Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt')->middleware('auth');
-Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete')->middleware('auth');
-Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
-=======
 Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
 Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
 Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
 Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete');
->>>>>>> 2421b03580b947097ca99a4447dd4df8f7ef7b50
+
 
 
 Route::controller(AbsenController::class)->group(function () {
