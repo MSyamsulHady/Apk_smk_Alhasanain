@@ -21,6 +21,7 @@ class PelajaranController extends Controller
         $this->validate($request, [
             'kode_mapel' => 'required',
             'nama_mapel' => 'required',
+            'kkm' => 'required|numeric',
 
         ]);
 
@@ -28,6 +29,7 @@ class PelajaranController extends Controller
             $data = new Pelajaran();
             $data->kode_mapel = $request->kode_mapel;
             $data->nama_mapel = $request->nama_mapel;
+            $data->kkm = $request->kkm;
             $data->save();
 
             return redirect('mapel')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
@@ -43,6 +45,8 @@ class PelajaranController extends Controller
         $this->validate($request, [
             'kode_mapel' => 'required',
             'nama_mapel' => 'required',
+            'kkm' => 'required|numeric',
+
 
         ]);
 
@@ -50,6 +54,8 @@ class PelajaranController extends Controller
             $data =  Pelajaran::find($id);
             $data->kode_mapel = $request->kode_mapel;
             $data->nama_mapel = $request->nama_mapel;
+            $data->kkm = $request->kkm;
+
             $data->save();
             return redirect('mapel')->with(['msg' => 'Data Berhasil Diubah', 'type' => 'success']);
         } catch (\Exception $e) {

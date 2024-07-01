@@ -17,6 +17,8 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('asset_backend') }}/css/demo.css">
+    {{-- quill js --}}
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 
     <!-- Datatables -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -25,6 +27,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.bootstrap4.js"></script>
+    {{-- quill js --}}
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 
     <script src="{{ asset('asset_backend') }}/js/plugin/webfont/webfont.min.js"></script>
 
@@ -73,9 +77,7 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="copyright ml-auto">
-                        SMK Al~Hasanain <i class="fa fa-heart heart text-danger"></i> by <a
-                            href="http://www.themekita.com/">Msyh @ Firman Haris
-                        </a>
+                        2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com/">ThemeKita</a>
                     </div>
                 </div>
             </footer>
@@ -107,8 +109,7 @@
                                                     class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
-                                                <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
-                                                    class="avatar-img rounded-circle border border-white">
+                                                <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
                                                 <img src="{{ asset('asset_backend') }}/img/mlane.jpg" alt="..."

@@ -99,6 +99,7 @@ Route::controller(DetailKelasController::class)->group(function () {
     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
     Route::post('/insert/detail', 'insertdetail')->name('insertdetail')->middleware('auth');
 });
+<<<<<<< HEAD
 
 // Route::controller(KelasPelajaranController::class)->group(function () {
 //     Route::get('/rombel', 'index')->name('rombel');
@@ -111,6 +112,12 @@ Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel
 Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt')->middleware('auth');
 Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete')->middleware('auth');
 Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
+=======
+Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
+Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
+Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
+Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete');
+>>>>>>> 2421b03580b947097ca99a4447dd4df8f7ef7b50
 
 
 Route::controller(AbsenController::class)->group(function () {
@@ -132,3 +139,11 @@ Route::controller(PertemuanController::class)->group(function () {
 
 Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel')->middleware('auth');
 Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])->name('add_peserta');
+
+Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai');
+Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai');
+Route::controller(BeritaController::class)->group(function () {
+    Route::get('/berita', 'index')->name('berita');
+    Route::post('/berita/insert', 'insertBerita')->name('insertBerita');
+    Route::delete('/berita/delete/{id}', 'deleteBerita')->name('deleteBerita');
+});

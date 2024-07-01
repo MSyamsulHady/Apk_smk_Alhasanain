@@ -14,8 +14,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddPeserta">
-                            Add
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddPeserta"><i
+                                class="fas fa-plus"></i>
+                            Tambah
                         </button>
                     </div>
                     <div class="table-responsive">
@@ -25,7 +26,7 @@
                                     <th>No</th>
                                     <th>Nis</th>
                                     <th>Nama Siswa</th>
-                                    <th>#Action</th>
+                                    {{-- <th>#Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,8 +35,12 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $dt->siswa->nis }}</td>
                                         <td>{{ $dt->siswa->nama }}</td>
-                                        <td>
-                                        </td>
+                                        {{-- <td>
+                                            <a href="" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                                                Tambah Nilai</a>
+                                            <a href="" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i>Lihat
+                                                Nilai</a>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>

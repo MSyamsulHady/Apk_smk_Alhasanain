@@ -77,20 +77,17 @@
                         <p>Absensi </p>
 
                     </a>
-                    {{-- <div class="collapse" id="absen">
-                        <ul class="nav nav-collapse"> --}}
-                    {{-- <li>
-                                <a href="{{ route('absen') }}" class="{{ request()->is('absen') ? 'active' : '' }}">
-                                    <span class="sub-item">Absensi</span>
-                                </a>
-                            </li> --}}
-                    {{-- </ul>
-                    </div> --}}
                 </li>
                 <li class="nav-item  ">
                     <a href="">
-                        <i class="fa fa-signal"></i>
+                        <i class="fas fa-th-list"></i>
                         <p>Nilai Siswa</p>
+                    </a>
+                </li>
+                <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
+                    <a href="{{ route('berita') }}">
+                        <i class="fas fa-th-list"></i>
+                        <p>Berita</p>
                     </a>
                 </li>
             </ul>
