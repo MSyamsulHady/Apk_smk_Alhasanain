@@ -10,6 +10,8 @@ use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class RombelController extends Controller
+
+
 {
     public function index()
     {

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Imports\SiswaImport;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Ramsey\Uuid\Uuid;
 
@@ -58,11 +61,19 @@ class SiswaController extends Controller
                 $data->foto = $name;
             }
             $data->save();
-            // dd($data);
+
+            // memasukan user
+            $user = new User();
+            $user->username = $request->nis;
+            $user->password = Hash::make($request->nis);
+            $user->role = 'Siswa';
+            $user->save();
+            DB::commit();
+
             return redirect('datasiswa')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
         } catch (\Exception $e) {
-            // return redirect('datasiswa')->with(['msg' => 'Data  Gagal Ditambah', 'type' => 'error']);
-            return $e;
+            DB::rollBack();
+            return redirect('datasiswa')->with(['msg' => 'Data Gagal Ditambah', 'type' => 'error']);
         }
     }
     public function editsiswa(Request $request, $id)
@@ -117,5 +128,10 @@ class SiswaController extends Controller
     {
         Excel::import(new SiswaImport, $request->file('file'));
         return redirect('datasiswa')->with(['msg' => 'Data Berhasi Di Import !', 'type' => 'success']);
+    }
+    public function siswaShow($id)
+    {
+        $show = Siswa::findOrFail($id);
+        return view('backend.bk.data_siswa', compact('show'));
     }
 }

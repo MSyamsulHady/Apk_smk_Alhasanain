@@ -119,22 +119,22 @@
                                                     <input type="hidden" name="id_siswa[]"
                                                         value="{{ $a->id_trx_rombel_siswa }}">
 
-                                                    <select
-                                                        class="form-control @error('keterangan')
-                                                    is-invalid
-                                                    @enderror"
+                                                    <select class="form-control @error('keterangan') is-invalid @enderror"
                                                         name="keterangan[{{ $a->id_trx_rombel_siswa }}]">
-
-                                                        <option value="" selected> -- Pilih -- </option>
-                                                        <option>Hadir</option>
-                                                        <option>Alpa</option>
-                                                        <option>Izin</option>
-                                                        <option>Sakit</option>
-                                                        <option>bolos</option>
+                                                        <option value="H" {{ $a == 'H' ? 'selected' : '' }}>Hadir
+                                                        </option>
+                                                        <option value="A" {{ $a == 'A' ? 'selected' : '' }}>Alpa
+                                                        </option>
+                                                        <option value="I" {{ $a == 'I' ? 'selected' : '' }}>Izin
+                                                        </option>
+                                                        <option value="S" {{ $a == 'S' ? 'selected' : '' }}>Sakit
+                                                        </option>
+                                                        <option value="b" {{ $a == 'b' ? 'selected' : '' }}>bolos
+                                                        </option>
+                                                        @error('keterangan')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </select>
-                                                    @error('keterangan')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
                                                 </td>
                                             </tr>
                                         </tbody>

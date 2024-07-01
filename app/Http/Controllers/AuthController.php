@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absen;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Pelajaran;
+use App\Models\Pertemuan;
 use App\Models\Semester;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,5 +90,16 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('home');
+    }
+
+    public function dashboard()
+    {
+        $jumlahSiswa = Siswa::count();
+        $jumlahGuru = Guru::count();
+        $jumlahMapel = Pelajaran::count();
+        $jumlahAbsensi = Pertemuan::count();
+        $jumlahKelas = Kelas::count();
+
+        return view('backend.dashboard', compact('jumlahSiswa', 'jumlahGuru', 'jumlahAbsensi', 'jumlahKelas', 'jumlahMapel'));
     }
 }

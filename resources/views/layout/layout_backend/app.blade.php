@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{ asset('asset_backend') }}/css/demo.css">
 
     <!-- Datatables -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
@@ -40,9 +41,11 @@
             <div class="logo-header" data-background-color="white">
 
                 <a href="index-2.html" class="logo">
-                    <img src="{{ asset('asset_backend') }}/img/logo/kol.png" width="185" alt="navbar brand" class="navbar-brand">
+                    <img src="{{ asset('asset_backend') }}/img/logo/kol.png" width="185" alt="navbar brand"
+                        class="navbar-brand">
                 </a>
-                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <i class="icon-menu"></i>
                     </span>
@@ -69,27 +72,10 @@
             @yield('content')
             <footer class="footer">
                 <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://www.themekita.com/">
-                                    ThemeKita
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Help
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Licenses
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                     <div class="copyright ml-auto">
-                        2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com/">ThemeKita</a>
+                        SMK Al~Hasanain <i class="fa fa-heart heart text-danger"></i> by <a
+                            href="http://www.themekita.com/">Msyh @ Firman Haris
+                        </a>
                     </div>
                 </div>
             </footer>
@@ -101,9 +87,12 @@
             </a>
             <div class="quick-sidebar-wrapper">
                 <ul class="nav nav-tabs nav-line nav-color-secondary" role="tablist">
-                    <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#messages" role="tab" aria-selected="true">Messages</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab" aria-selected="false">Tasks</a> </li>
-                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-selected="false">Settings</a> </li>
+                    <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#messages"
+                            role="tab" aria-selected="true">Messages</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#tasks" role="tab"
+                            aria-selected="false">Tasks</a> </li>
+                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab"
+                            aria-selected="false">Settings</a> </li>
                 </ul>
                 <div class="tab-content mt-3">
                     <div class="tab-chat tab-pane fade show active" id="messages" role="tabpanel">
@@ -114,16 +103,20 @@
                                         <span class="category-title mt-0">Contacts</span>
                                         <div class="avatar-group">
                                             <div class="avatar">
-                                                <img src="{{ asset('asset_backend') }}/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                <img src="{{ asset('asset_backend') }}/img/jm_denis.jpg" alt="..."
+                                                    class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
-                                                <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
+                                                    class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
-                                                <img src="{{ asset('asset_backend') }}/img/mlane.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                <img src="{{ asset('asset_backend') }}/img/mlane.jpg" alt="..."
+                                                    class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
-                                                <img src="{{ asset('asset_backend') }}/img/talha.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                <img src="{{ asset('asset_backend') }}/img/talha.jpg" alt="..."
+                                                    class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
                                                 <span class="avatar-title rounded-circle border border-white">+</span>
@@ -134,7 +127,9 @@
                                             <div class="user">
                                                 <a href="#">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('asset_backend') }}/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                        <img src="{{ asset('asset_backend') }}/img/jm_denis.jpg"
+                                                            alt="..."
+                                                            class="avatar-img rounded-circle border border-white">
                                                     </div>
                                                     <div class="user-data">
                                                         <span class="name">Jimmy Denis</span>
@@ -145,7 +140,9 @@
                                             <div class="user">
                                                 <a href="#">
                                                     <div class="avatar avatar-offline">
-                                                        <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                        <img src="{{ asset('asset_backend') }}/img/chadengle.jpg"
+                                                            alt="..."
+                                                            class="avatar-img rounded-circle border border-white">
                                                     </div>
                                                     <div class="user-data">
                                                         <span class="name">Chad</span>
@@ -156,7 +153,9 @@
                                             <div class="user">
                                                 <a href="#">
                                                     <div class="avatar avatar-offline">
-                                                        <img src="{{ asset('asset_backend') }}/img/mlane.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                        <img src="{{ asset('asset_backend') }}/img/mlane.jpg"
+                                                            alt="..."
+                                                            class="avatar-img rounded-circle border border-white">
                                                     </div>
                                                     <div class="user-data">
                                                         <span class="name">John Doe</span>
@@ -171,7 +170,9 @@
                                             <div class="user">
                                                 <a href="#">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('asset_backend') }}/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                        <img src="{{ asset('asset_backend') }}/img/jm_denis.jpg"
+                                                            alt="..."
+                                                            class="avatar-img rounded-circle border border-white">
                                                     </div>
                                                     <div class="user-data2">
                                                         <span class="name">Jimmy Denis</span>
@@ -182,7 +183,9 @@
                                             <div class="user">
                                                 <a href="#">
                                                     <div class="avatar avatar-offline">
-                                                        <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                        <img src="{{ asset('asset_backend') }}/img/chadengle.jpg"
+                                                            alt="..."
+                                                            class="avatar-img rounded-circle border border-white">
                                                     </div>
                                                     <div class="user-data2">
                                                         <span class="name">Chad</span>
@@ -193,7 +196,9 @@
                                             <div class="user">
                                                 <a href="#">
                                                     <div class="avatar avatar-away">
-                                                        <img src="{{ asset('asset_backend') }}/img/talha.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                        <img src="{{ asset('asset_backend') }}/img/talha.jpg"
+                                                            alt="..."
+                                                            class="avatar-img rounded-circle border border-white">
                                                     </div>
                                                     <div class="user-data2">
                                                         <span class="name">Talha</span>
@@ -210,7 +215,8 @@
                             <div class="messages-title">
                                 <div class="user">
                                     <div class="avatar avatar-offline float-right ml-2">
-                                        <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                        <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
+                                            class="avatar-img rounded-circle border border-white">
                                     </div>
                                     <span class="name">Chad</span>
                                     <span class="last-active">Active 2h ago</span>
@@ -223,7 +229,8 @@
                                 <div class="message-content-wrapper">
                                     <div class="message message-in">
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                            <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
+                                                class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="message-body">
                                             <div class="message-content">
@@ -254,7 +261,8 @@
                                 <div class="message-content-wrapper">
                                     <div class="message message-in">
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                            <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
+                                                class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="message-body">
                                             <div class="message-content">
@@ -287,7 +295,8 @@
                                 <div class="message-content-wrapper">
                                     <div class="message message-in">
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                            <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
+                                                class="avatar-img rounded-circle border border-white">
                                         </div>
                                         <div class="message-body">
                                             <div class="message-content">
@@ -303,7 +312,8 @@
                             </div>
                             <div class="messages-form">
                                 <div class="messages-form-control">
-                                    <input type="text" placeholder="Type here" class="form-control input-pill input-solid message-input">
+                                    <input type="text" placeholder="Type here"
+                                        class="form-control input-pill input-solid message-input">
                                 </div>
                                 <div class="messages-form-tool">
                                     <a href="#" class="attachment">
@@ -321,7 +331,9 @@
                                     <ul class="tasks-list">
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" checked="" class="custom-control-input"><span class="custom-control-label">Planning new project structure</span>
+                                                <input type="checkbox" checked=""
+                                                    class="custom-control-input"><span
+                                                    class="custom-control-label">Planning new project structure</span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -331,7 +343,8 @@
                                         </li>
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Create the main structure </span>
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    class="custom-control-label">Create the main structure </span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -341,7 +354,8 @@
                                         </li>
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Add new Post</span>
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    class="custom-control-label">Add new Post</span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -351,7 +365,8 @@
                                         </li>
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Finalise the design proposal</span>
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    class="custom-control-label">Finalise the design proposal</span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -365,7 +380,8 @@
                                     <ul class="tasks-list">
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Initialize the project </span>
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    class="custom-control-label">Initialize the project </span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -375,7 +391,8 @@
                                         </li>
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Create the main structure </span>
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    class="custom-control-label">Create the main structure </span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -385,7 +402,8 @@
                                         </li>
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span class="custom-control-label">Updates changes to GitHub </span>
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    class="custom-control-label">Updates changes to GitHub </span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
                                                         <i class="flaticon-interface-5"></i>
@@ -395,7 +413,9 @@
                                         </li>
                                         <li>
                                             <label class="custom-checkbox custom-control checkbox-secondary">
-                                                <input type="checkbox" class="custom-control-input"><span title="This task is too long to be displayed in a normal space!" class="custom-control-label">This task is too long to be displayed
+                                                <input type="checkbox" class="custom-control-input"><span
+                                                    title="This task is too long to be displayed in a normal space!"
+                                                    class="custom-control-label">This task is too long to be displayed
                                                     in a normal space! </span>
                                                 <span class="task-action">
                                                     <a href="#" class="link text-danger">
@@ -428,25 +448,29 @@
                                         <li>
                                             <span class="item-label">Enable Notifications</span>
                                             <div class="item-control">
-                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round" data-size>
+                                                <input type="checkbox" checked data-toggle="toggle"
+                                                    data-onstyle="primary" data-style="btn-round" data-size>
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">Signin with social media</span>
                                             <div class="item-control">
-                                                <input type="checkbox" data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" data-toggle="toggle" data-onstyle="primary"
+                                                    data-style="btn-round">
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">Backup storage</span>
                                             <div class="item-control">
-                                                <input type="checkbox" data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" data-toggle="toggle" data-onstyle="primary"
+                                                    data-style="btn-round">
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">SMS Alert</span>
                                             <div class="item-control">
-                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" checked data-toggle="toggle"
+                                                    data-onstyle="primary" data-style="btn-round">
                                             </div>
                                         </li>
                                     </ul>
@@ -456,31 +480,36 @@
                                         <li>
                                             <span class="item-label">Email Notifications</span>
                                             <div class="item-control">
-                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" checked data-toggle="toggle"
+                                                    data-onstyle="primary" data-style="btn-round">
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">New Comments</span>
                                             <div class="item-control">
-                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" checked data-toggle="toggle"
+                                                    data-onstyle="primary" data-style="btn-round">
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">Chat Messages</span>
                                             <div class="item-control">
-                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" checked data-toggle="toggle"
+                                                    data-onstyle="primary" data-style="btn-round">
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">Project Updates</span>
                                             <div class="item-control">
-                                                <input type="checkbox" data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" data-toggle="toggle" data-onstyle="primary"
+                                                    data-style="btn-round">
                                             </div>
                                         </li>
                                         <li>
                                             <span class="item-label">New Tasks</span>
                                             <div class="item-control">
-                                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="primary" data-style="btn-round">
+                                                <input type="checkbox" checked data-toggle="toggle"
+                                                    data-onstyle="primary" data-style="btn-round">
                                             </div>
                                         </li>
                                     </ul>

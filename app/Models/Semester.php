@@ -20,7 +20,7 @@ class Semester extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'id');
+        return $this->hasMany(User::class, 'id_semester', 'id_semester');
     }
     public function absen()
     {

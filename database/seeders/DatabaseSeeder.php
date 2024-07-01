@@ -5,8 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
+use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -32,30 +34,38 @@ class DatabaseSeeder extends Seeder
             [
                 'username' => 'admin',
                 'password' => Hash::make('123456'),
-                'role' => 'admin',
+                'role' => 'Admin',
             ],
             [
                 'username' => 'palahady',
                 'password' => Hash::make('123456'),
-                'role' => 'guru',
+                'role' => 'Guru',
             ],
             [
                 'username' => 'firman',
                 'password' => Hash::make('123456'),
-                'role' => 'siswa',
+                'role' => 'Siswa',
             ],
             [
                 'username' => 'hasyim',
                 'password' => Hash::make('123456'),
-                'role' => 'kepsek',
+                'role' => 'kepala Sekolah',
             ],
-            [
-                'username' => 'riki',
-                'password' => Hash::make('123456'),
-                'role' => 'wakasek',
-            ],
+
 
         );
         User::insert($data);
+
+
+        $siswa = Siswa::get();
+        foreach ($siswa as $key) {
+            if (!empty($key->nama)) {
+                DB::table('users')->insert([
+                    'username' => $key->nis,
+                    'role' => 'siswa',
+                    'password' => $key->nis,
+                ]);
+            }
+        }
     }
 }

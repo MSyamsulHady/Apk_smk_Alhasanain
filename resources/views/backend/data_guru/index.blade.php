@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                Add
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
                             </button>
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                 data-target="#Import">
@@ -35,11 +35,7 @@
                                         <th>No</th>
                                         <th>NUPTK</th>
                                         <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>Jenis Kelamin</th>
                                         <th>No HP</th>
-                                        <th>Pendidikan Terakhir</th>
                                         <th>Foto</th>
                                         <th>#Action</th>
                                     </tr>
@@ -55,11 +51,7 @@
                                                 {{ $gr->nuptk }}
                                             </td>
                                             <td>{{ $gr->nama }}</td>
-                                            <td>{{ $gr->alamat }}</td>
-                                            <td>{{ $gr->tgl_lahir }}</td>
-                                            <td>{{ $gr->gender }}</td>
                                             <td>{{ $gr->tlp }}</td>
-                                            <td>{{ $gr->pend_terakhir }}</td>
                                             <td>
                                                 @empty($gr->foto)
                                                     -
@@ -69,6 +61,11 @@
                                             </td>
                                             <td>
                                                 <div class="form-button-action">
+                                                    <button type="button" data-toggle="modal"
+                                                        data-target="#Modalshow{{ $gr->id_guru }}" title=""
+                                                        class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
                                                     <button type="button" data-toggle="modal"
                                                         data-target="#ModalEdit{{ $gr->id_guru }}" title=""
                                                         class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
@@ -316,6 +313,72 @@
                                                     <button type="submit" class="btn btn-primary">Edit</button>
                                                 </div>
                                             </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Modal Update -->
+                            @endforeach
+                            @foreach ($guru as $gp)
+                                <div class="modal fade bd-example-modal-lg" id="Modalshow{{ $gp->id_guru }}"
+                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-center" id="exampleModalLabel">Form
+                                                    Edit Data Guru</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <table class="ml-3">
+                                                <tr class="border-bottom">
+                                                    <div class="text-center mb-2">
+                                                        <img src="{{ asset('Foto_guru/' . $gp->foto) }}" alt=""
+                                                            width="150" height="150" style="border-radius: 50%">
+                                                    </div>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">Nama Lengkap</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td> {{ $gp->nama }}</td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">NUPTK</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td>{{ $gp->nuptk }}</td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">Jenis Kelamin</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td>{{ $gp->gender }}
+                                                    </td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">Tanggal Lahir</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td>{{ $gp->tgl_lahir }}</td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">Alamat</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td>{{ $gp->alamat }}</td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">Telepon</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td>{{ $gp->tlp }}</td>
+                                                </tr>
+                                                <tr class="border-bottom">
+                                                    <td class="fw-bold">Pendidikan Terakhir</td>
+                                                    <td style="width: 1px;">:</td>
+                                                    <td>
+                                                        {{ $gp->pend_terakhir }}
+                                                    </td>
+                                                </tr>
+                                            </table>
 
                                         </div>
                                     </div>

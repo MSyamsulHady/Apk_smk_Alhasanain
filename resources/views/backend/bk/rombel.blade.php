@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                Add
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
                             </button>
                         </div>
                         <div class="table-responsive">
@@ -38,7 +38,9 @@
                                             <td>{{ $dt->mapel->nama_mapel }}</td>
                                             <td>{{ $dt->guru->nama }}</td>
                                             <td>
-                                                <a href="{{route('trx_rombel',$dt->id_rombel)}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i>&nbsp; Detail</a>
+                                                <a href="{{ route('trx_rombel', $dt->id_rombel) }}"
+                                                    class="btn btn-sm btn-success"><i class="fa fa-eye"></i>&nbsp;
+                                                    Detail</a>
                                                 <div class="form-button-action">
                                                     <button type="button" data-toggle="modal"
                                                         data-target="#ModalEdit{{ $dt->id_rombel }}" title=""

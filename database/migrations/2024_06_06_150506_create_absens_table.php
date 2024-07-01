@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreign('id_trx_rombel_siswa')->references('id_trx_rombel_siswa')->on('trx_rombel_siswas')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('id_semester');
             $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->enum('keterangan', ['hadir', 'alpa', 'bolos', 'sakit', 'izin']);
+            $table->enum('keterangan', ['H', 'A', 'B', 'S', 'I']);
+            $table->char('pertemuan', 5)->nullable();
             $table->timestamps();
         });
     }

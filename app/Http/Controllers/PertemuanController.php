@@ -2,61 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Pelajaran;
 use App\Models\Pertemuan;
 use App\Models\Rombel;
+use App\Models\Semester;
+use Carbon\Carbon;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PertemuanController extends Controller
 {
-    public function addPertemuan(Request $request, $id)
+    public function index()
     {
-        $data = $request->validate([
-            'pertemuanKe' => 'required',
-            'tanggal_pertemuan' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required',
-            // dd($request)
-        ]);
+        //
+        $date = Carbon::now();
 
-        $rombel = Rombel::findOrFail($id);
+        // Atur locale ke bahasa Indonesia
+        Carbon::setLocale('id');
 
-        $data['id_rombel'] = $id;
-        $data['id_semester'] = $rombel->kelas->semester->id_semester;
+        // Format tanggal menjadi nama hari dalam bahasa Indonesia
+        $dayName = $date->translatedFormat('l');
+        $semester = Semester::all();
+        $rombel = Rombel::with('kelas', 'mapel', 'guru')->get();
+        $jadwal = Pertemuan::with('rombel')->get();
+
+        return view('backend.bk.jadwal', compact('jadwal', 'rombel', 'semester'));
+    }
+    public function addPertemuan(Request $request)
+    {
         try {
-            $pertemuan = Pertemuan::create($data);
-            return redirect()->route('tambahAbsen', [
-                $rombel->id_rombel,
-                $pertemuan->id_pertemuan
-
-            ])->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
-        } catch (\Throwable $e) {
+            Pertemuan::create($request->all());
+            return redirect()->route('jadwal')->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
     public function updatePertemuan(Request $request, $id)
     {
-        $data = $request->validate([
-            'pertemuanKe' => 'required',
-            'tanggal_pertemuan' => 'required',
-            'mulai' => 'required',
-            'selesai' => 'required',
-            // dd($request)
-        ]);
+        $pertemuan = Pertemuan::findOrFail($id);
 
-        $rombel = Rombel::findOrFail($id);
+        // Update the fields of the Pertemuan record
+        $pertemuan->id_rombel = $request->id_rombel;
+        $pertemuan->id_semester = $request->id_semester;
+        $pertemuan->pertemuanKe = $request->pertemuanKe;
+        $pertemuan->hari = $request->hari;
+        $pertemuan->mulai = $request->mulai;
+        $pertemuan->selesai = $request->selesai;
 
-        $data['id_rombel'] = $id;
-        $data['id_semester'] = $rombel->kelas->semester->id_semester;
         try {
-            $pertemuan = Pertemuan::updated($data);
-            return redirect()->route('tambahAbsen', [
-                $rombel->id_rombel,
-                // $pertemuan->id_pertemuan
-
-            ])->with(['msg' => 'Data Berhasil Diubah', 'type' => 'success']);
+            // Save the changes
+            $pertemuan->save();
+            return redirect()->route('jadwal')->with(['msg' => 'Data Berhasil Diperbarui', 'type' => 'success']);
         } catch (\Throwable $e) {
-            return $e->getMessage();
+            // Log the error message
+            Log::error('Error updating pertemuan: ' . $e->getMessage());
+
+            // Redirect back with error message
+            return redirect()->back()->with(['msg' => 'Data Gagal Diperbarui', 'type' => 'danger']);
         }
+    }
+
+
+    public function deletePertemuan($id)
+    {
+
+        $pertemuan = Pertemuan::findOrFail($id);
+        $pertemuan->delete();
+        return redirect()->route('jadwal')->with(['msg' => 'Data Berhasil DiHapus', 'type' => 'success']);
     }
 }

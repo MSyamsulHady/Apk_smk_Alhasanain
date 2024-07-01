@@ -19,6 +19,7 @@
                     <i class="fa fa-search"></i>
                 </a>
             </li>
+            <h3 class="ms-2 white text-white mr-3 mt-2">{{ Auth::User()->username }}</h3>
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
@@ -48,7 +49,7 @@
             </li>
         </ul>
     </div>
-    <h3 class="ms-2 white text-white">{{ Auth::User()->username }}</h3>
-      
+
+
 
 </nav>

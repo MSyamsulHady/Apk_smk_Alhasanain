@@ -43,9 +43,9 @@ Route::controller(LandingController::class)->group(function () {
     Route::get('/prestasi', 'prestasi')->name('prestasi');
     Route::get('/kegiatan', 'kegiatan')->name('kegiatan');
 });
-Route::get('/dashboard', function () {
-    return view('backend.dashboard');
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('backend.dashboard');
+// })->name('dashboard')->middleware('auth');
 
 Route::get('/profile', function () {
     return view('backend.profile');
@@ -53,46 +53,51 @@ Route::get('/profile', function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('DataUser', 'index')->name('datauser');
-    Route::get('/login', 'login')->name('login');
+    Route::get('/login', 'login')->name('login')->middleware('guest');
     Route::post('prosesLogin', 'proseslogin')->name('proseslogin');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
 });
 Route::controller(PelajaranController::class)->group(function () {
-    Route::get('/mapel', 'index')->name('mapel');
-    Route::post('/mapel/insert', 'ADDmapel')->name('mapelinsert');
-    Route::put('/mapel/update/{id}', 'UPDmapel')->name('updatemapel');
+    Route::get('/mapel', 'index')->name('mapel')->middleware('auth');
+    Route::post('/mapel/insert', 'ADDmapel')->name('mapelinsert')->middleware('auth');
+    Route::put('/mapel/update/{id}', 'UPDmapel')->name('updatemapel')->middleware('auth');
+    Route::delete('/deleteMapel/{id}', 'deleteMapel')->name('deleteMapel')->middleware('auth');
 });
 Route::controller(SiswaController::class)->group(function () {
-    Route::get('/allsiswa', 'allsiswa')->name('allsiswa');
-    Route::get('/datasiswa', 'index')->name('datasiswa');
-    Route::post('/datasiswa/insert_siswa', 'tambahSiswa')->name('insert_siswa');
-    Route::put('/datasiswa/update/{id}', 'editsiswa')->name('update_siswa');
-    Route::delete('/datasiswa/delete/{id}', 'deletesiswa')->name('delete_siswa');
-    Route::post('/prosesImport', 'importSiswa')->name('import_siswa');
+    Route::get('/datasiswa', 'index')->name('datasiswa')->middleware('auth');
+    Route::post('/datasiswa/insert_siswa', 'tambahSiswa')->name('insert_siswa')->middleware('auth');
+    Route::put('/datasiswa/update/{id}', 'editsiswa')->name('update_siswa')->middleware('auth');
+    Route::delete('/datasiswa/delete/{id}', 'deletesiswa')->name('delete_siswa')->middleware('auth');
+    Route::get('showSiswa', 'siswaShow')->name('showSiswa')->name('showSiswa')->middleware('auth');
+    Route::post('/prosesImport', 'importSiswa')->name('import_siswa')->middleware('auth');
 });
 Route::controller(GuruController::class)->group(function () {
-    Route::get('/dataguru', 'index')->name('dataguru');
-    Route::post('/insert_guru', 'tambah_guru')->name('insert_guru');
-    Route::put('/dataguru/update/{id}', 'edit_guru');
-    Route::delete('/dataguru/delete/{id}', 'delete')->name('delete_guru');
-    Route::post('/importguru', 'importGuru')->name('importGuru');
+    Route::get('/dataguru', 'index')->name('dataguru')->middleware('auth');
+    Route::post('/insert_guru', 'tambah_guru')->name('insert_guru')->middleware('auth');
+    Route::put('/dataguru/update/{id}', 'edit_guru')->middleware('auth')->middleware('auth');
+    Route::delete('/dataguru/delete/{id}', 'delete')->name('delete_guru')->middleware('auth');
+    ROute::get('showGuru/{id}', 'showguru')->name('showguru')->middleware('auth');
+    Route::post('/importguru', 'importGuru')->name('importGuru')->middleware('auth');
 });
 Route::controller(SemesterController::class)->group(function () {
-    Route::get('/semester', 'index')->name('semester');
-    Route::post('/insert_semester', 'insertSemester')->name('insert_semester');
-    Route::put('/semester/update/{id}', 'updateSemester')->name('update_semester');
+    Route::get('/semester', 'index')->name('semester')->middleware('auth');
+    Route::post('/insert_semester', 'insertSemester')->name('insert_semester')->middleware('auth');
+    Route::put('/semester/update/{id}', 'updateSemester')->name('update_semester')->middleware('auth');
+    Route::delete('/deletesemester/{id}', 'deleteSemester')->name('deleteSemester')->middleware('auth');
 });
 Route::controller(KelasController::class)->group(function () {
-    Route::get('/kelas', 'index')->name('datakelas');
-    Route::post('/insert_kelas', 'insertKelas')->name('insertKelas');
-    Route::put('/kelas/update/{id}', 'updateKelas')->name('update_kelas');
+    Route::get('/kelas', 'index')->name('datakelas')->middleware('auth');
+    Route::post('/insert_kelas', 'insertKelas')->name('insertKelas')->middleware('auth');
+    Route::put('/kelas/update/{id}', 'updateKelas')->name('update_kelas')->middleware('auth');
+    Route::delete('/deleteKelas/{id}', 'deleteKelas')->name('deleteKelas')->middleware('auth');
 });
 
 Route::controller(DetailKelasController::class)->group(function () {
-    Route::get('/detail/kelas/{id_kelas}', 'index')->name('detailkelas');
+    Route::get('/detail/kelas/{id_kelas}', 'index')->name('detailkelas')->middleware('auth');
     // menampilkan siswa berdasarkan id kelasnya
     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
-    Route::post('/insert/detail', 'insertdetail')->name('insertdetail');
+    Route::post('/insert/detail', 'insertdetail')->name('insertdetail')->middleware('auth');
 });
 
 // Route::controller(KelasPelajaranController::class)->group(function () {
@@ -101,28 +106,29 @@ Route::controller(DetailKelasController::class)->group(function () {
 //     Route::post('/insertRombel', 'tambahK_pelajaran')->name('insertRombel');
 //     Route::put('/rombel/update/{$id}', 'update')->name('updateRombel');
 // });
-Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
-Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
-Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
-Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete');
+Route::get('/rombel', [RombelController::class, 'index'])->name('rombel')->middleware('auth');
+Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add')->middleware('auth');
+Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt')->middleware('auth');
+Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])->name('rombel.delete')->middleware('auth');
 Route::get('/nilai/{$id}', [NilaiController::class, 'index'])->name('nilai');
 
 
 Route::controller(AbsenController::class)->group(function () {
-    Route::get('/absen', 'index')->name('absen');
-    // Route::get('ambilGuru/{id}', 'getGuru');
-    Route::get('/absen/kelas/{id}', 'absen')->name('kelola_absen');
-    Route::get('/insertAbsen/{id_rombel}/{id_pertemuan}', 'addAbsen')->name('tambahAbsen');
-    Route::post('simpan/{id}', 'SimpanAbsen')->name('simpanAbsen');
+    Route::get('/absen', 'index')->name('absen')->middleware('auth');
+    Route::get('/absenSiswa/{id}', 'absen')->name('kelola_absen')->middleware('auth');
+    Route::post('simpan/{id}/{id_pertemuan}', 'SimpanAbsen')->name('simpanAbsen')->middleware('auth');
+    Route::get('rekapAbsen/{id}', 'rekapAbsen')->name('rekapAbsen')->middleware('auth');
 });
 
 
 Route::controller(PertemuanController::class)->group(function () {
-    Route::post('addPertemuan/{id}', 'addPertemuan')->name('pertemuan');
-    Route::put('updatePertemuan/{id}', 'updatePertemuan')->name('updatePertemuan');
+    Route::get('/jadwalPelajaran', 'index')->name('jadwal');
+    Route::post('addPertemuan/', 'addPertemuan')->name('addjadwal')->middleware('auth');
+    Route::put('updatePertemuan/{id}', 'updatePertemuan')->name('updatePertemuan')->middleware('auth');
+    Route::delete('deletePertemuan/{id}', 'deletePertemuan')->name('deletePertemuan')->middleware('auth');
 });
 
 
 
-Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel');
+Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel')->middleware('auth');
 Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])->name('add_peserta');

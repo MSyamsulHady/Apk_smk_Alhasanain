@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('id_semester')->nullable();
             $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('username');
-            $table->enum('role', ['admin', 'siswa', 'guru', 'kepsek', 'wakasek'])->default('siswa');
+            $table->enum('role', ['Admin', 'Siswa', 'Guru', 'Kepala Sekolah'])->default('siswa');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
