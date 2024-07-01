@@ -9,9 +9,5 @@ class Berita extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_berita';
-    protected $fillable = [
-        'judul',
-        'isi_beita',
-        'gambar'
-    ];
+    protected $guarded = [];
 }

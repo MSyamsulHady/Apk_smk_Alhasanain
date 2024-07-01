@@ -13,12 +13,12 @@ class Nilai extends Model
     protected $primaryKey = 'id_nilai';
     protected $guraded = [];
 
-    public function trx_siswa()
+    public function rombel()
     {
-        return $this->hasOne(TrxRombel_siswa::class, 'id_trx_rombel_siswa');
+        return $this->hasOne(Rombel::class, 'id_rombel', 'id_rombel');
     }
-    public function semester()
+    public function siswa()
     {
-        return $this->HasOne(Semester::class, 'id_semester');
+        return $this->HasOne(Siswa::class, 'id_siswa', 'id_siswa');
     }
 }

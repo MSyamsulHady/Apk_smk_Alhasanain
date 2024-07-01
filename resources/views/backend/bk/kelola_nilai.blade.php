@@ -15,33 +15,22 @@
                                                     <div class="row">
                                                         <div class="table-responsive">
                                                             <table class="table-borderless">
-
-
                                                                 <tr>
                                                                     <td class="fw-bold">Kelas</td>
                                                                     <td style="width: 1px" class="px-2">:</td>
-                                                                    <td>{{ $data->kelas->nama_kelas }}
-                                                                    </td>
+                                                                    <td></td>
                                                                 </tr>
-
-                                                                <tr>
-                                                                    <td class="fw-bold">Mata Pelajaran</td>
-                                                                    <td style="width: 1px" class="px-2">:</td>
-                                                                    <td>
-                                                                        {{ $data->mapel->nama_mapel }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
+                                                                {{-- <tr>
                                                                     <td class="fw-bold">Guru Pengampu</td>
                                                                     <td style="width: 1px" class="px-2">:</td>
-                                                                    <td> {{ $data->guru->nama }}</td>
+                                                                    <td> {{ $data->rombel->guru->nama }}</td>
 
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="fw-bold">Tahun Pelajaran</td>
                                                                     <td style="width: 1px" class="px-2">:</td>
-                                                                    {{-- <td>{{ $ab->semester->tahun_ajaran }}</td> --}}
-                                                                </tr>
+                                                                    <td>{{ $ab->semester->tahun_ajaran }}</td>
+                                                                </tr> --}}
                                                             </table>
                                                         </div>
 
@@ -75,7 +64,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <button type="button" class="btn btn-success mt-3" data-toggle="modal"
+                        <button type="button" class="btn btn-success mt-3 mb-3" data-toggle="modal"
                             data-target="#tambahPertemuan"
                             href="https://absensipembelajaran.vanzdev.com/admin/rekapabsensi/print/1" target="_blank"
                             class="btn btn-success btn-sm mb-3">
@@ -89,74 +78,45 @@
                             Cetak Rekapitulasi</a>
 
                         </button>
-                        <div class="table-responsive">
-                            <table class="table">
+                        {{-- <div class="table-responsive">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th rowspan="2">No</th>
-                                        <th rowspan="2">Nama Siswa</th>
-                                        <th colspan="8" class="text-center">Nilai</th>
-                                        <th rowspan="2">#Action</th>
-                                    <tr>
-
-                                        <th>Nilai Tugas 1</th>
-                                        <th>Nilai Tugas 2</th>
-                                        <th>Nilai Tugas 3</th>
-                                        <th>Nilai Tugas 4</th>
-                                        <th>Nilai Tugas 5</th>
-                                        <th>Nilai Tugas 6</th>
-                                        <th>Nilai Uts</th>
-                                        <th>Nilai Uas</th>
-
+                                        <th rowspan="2">Nis</th>
+                                        <th rowspan="2">Nama</th>
+                                        <th colspan="{{ $data->mapel->count() }}">Nilai</th>
+                                        <th rowspan="2">Action</th>
                                     </tr>
+                                    <tr>
+                                        @foreach ($data->mapel as $mat)
+                                            <td>{{ $mat->nama_mapel }}</td>
+                                        @endforeach
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data->trx as $dt)
+                                    @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $dt->siswa->nama }}</td>
+                                            <td>{{ $item->siswa->nis }}</td>
+                                            <td>{{ $item->siswa->nama }}</td>
+                                            @foreach ($data->mapel as $mp)
+                                                <form action="" method="post" id="{{ $item->siswa->id_siswa }}">
+                                                    <td style="width:5%">
+                                                        <input type="number" class="form-control"
+                                                            name="{{ $mp->id_mapel }}">
+                                                    </td>
+                                                </form>
+                                            @endforeach
+                                            <td>
+                                                <button @class(['btn btn-sm btn-success']) type="submit" value="submit"
+                                                    form="{{ $item->siswa->id_siswa }}">Simpan</button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-
-                        {{-- <table border="1" cellspacing="10" cellpadding="0">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">NO</th>
-                                    <th rowspan="2">NAMA</th>
-                                    <th colspan="3">NILAI</th>
-                                </tr>
-                                <tr>
-
-                                    <th>MTK</th>
-                                    <th>B. INGGRIS</th>
-                                    <th>B. INDONESIA</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <td>3</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <!-- Tambahkan baris lainnya sesuai kebutuhan -->
-                            </tbody>
-                        </table> --}}
+                        </div> --}}
                     </div>
                 </div>
             </div>

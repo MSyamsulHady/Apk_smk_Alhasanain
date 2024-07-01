@@ -6,3 +6,16 @@ table.dataTable td.dt-type-numeric,
 table.dataTable td.dt-type-date {
     text-align: left;
 }
+.table_nilai {
+    width: 100%;
+    border-collapse: collapse;
+}
+.th_n,
+.td_n {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+.th_n {
+    background-color: #f2f2f2;
+}

@@ -15,18 +15,14 @@ return new class extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id('id_nilai');
-            $table->foreignId('id_trx_rombel_siswa');
-            $table->foreignId('id_semester');
-            $table->integer('tugas1');
-            $table->integer('tugas2');
-            $table->integer('tugas3');
-            $table->integer('tugas4');
-            $table->integer('tugas5');
-            $table->integer('tugas6');
-            $table->integer('uts');
-            $table->integer('uas');
-            $table->foreign('id_trx_rombel_siswa')->references('id_trx_rombel_siswa')->on('trx_rombel_siswas')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('id_rombel');
+            $table->foreignId('id_siswa');
+            $table->foreignId('id_kelas');
+            $table->integer('nilai')->nullable();
+            $table->integer('rata-rata')->nullable();
+            $table->foreign('id_rombel')->references('id_rombel')->on('rombels')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

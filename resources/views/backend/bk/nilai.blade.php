@@ -22,20 +22,20 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kelas</th>
-                                        <th>Mata Pelajaran</th>
+                                        <th>Jumlah Mata Pelajaran</th>
                                         <th>#Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($rombel as $rm)
+                                    @foreach ($rombel as $rmb)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $rm->kelas->nama_kelas }}</td>
-                                            <td>{{ $rm->mapel->nama_mapel }}</td>
+                                            <td>{{ $rmb->kelas->nama_kelas ?? '' }}</td>
+                                            <td>{{ $rmb->jml_mapel }}</td>
                                             <td>
-                                                <a href="{{ route('kelola_nilai', $rm->id_rombel) }}"
-                                                    class="btn btn-sm btn-warning"><i class="fas fa-eye"></i>Pilih
-                                                    Rombel</a>
+                                                <a href="{{ route('kelola_nilai', $rmb->id_kelas) }}"
+                                                    class="btn btn-sm btn-success"><i class=""></i>&nbsp;
+                                                    Pilih kelas</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id('id_trx_rombel_siswa');
             $table->foreignId('id_siswa');
             $table->foreignId('id_rombel');
+            $table->foreignId('id_kelas');
             $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('id_rombel')->references('id_rombel')->on('rombels')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

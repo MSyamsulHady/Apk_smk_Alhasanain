@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
 use App\Models\Rombel;
 use App\Models\Siswa;
 use App\Models\TrxRombel_siswa;
@@ -30,17 +31,24 @@ class trxRombelController extends Controller
         // } else {
         //     $checkbox = '';
         // }
+
         $request->validate([
             'id_siswa' => 'required|array',
         ]);
         try {
+            DB::beginTransaction();
             $data = [];
+            $model = new Rombel();
             foreach ($request->id_siswa as $key) {
-                $data[] = ['id_siswa' => $key, 'id_rombel' => $id];
+                $data[] = ['id_siswa' => $key, 'id_rombel' => $id, 'id_kelas' => $model->find($id)->id_kelas];
             }
+            // dd($data);
             TrxRombel_siswa::insert($data);
+            Nilai::insert($data);
+            DB::commit();
             return back()->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
         } catch (\Exception $e) {
+            DB::rollback();
             return abort('404');
         }
     }

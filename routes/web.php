@@ -94,13 +94,6 @@ Route::controller(DetailKelasController::class)->group(function () {
     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
     Route::post('/insert/detail', 'insertdetail')->name('insertdetail');
 });
-
-// Route::controller(KelasPelajaranController::class)->group(function () {
-//     Route::get('/rombel', 'index')->name('rombel');
-//     Route::get('/getGuru/{id}', 'getGuru');
-//     Route::post('/insertRombel', 'tambahK_pelajaran')->name('insertRombel');
-//     Route::put('/rombel/update/{$id}', 'update')->name('updateRombel');
-// });
 Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
 Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
 Route::put('/rombel/edit/{id}', [RombelController::class, 'updtRombel'])->name('rombel.updt');
@@ -128,3 +121,8 @@ Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])-
 
 Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai');
 Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai');
+Route::controller(BeritaController::class)->group(function () {
+    Route::get('/berita', 'index')->name('berita');
+    Route::post('/berita/insert', 'insertBerita')->name('insertBerita');
+    Route::delete('/berita/delete/{id}', 'deleteBerita')->name('deleteBerita');
+});

@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pelajarans', function (Blueprint $table) {
-            $table->id('id_mapel');
-            $table->string('kode_mapel', 100);
-            $table->string('nama_mapel', 100)->nullable()->default('text');
-            $table->integer('kkm');
+        Schema::create('beritas', function (Blueprint $table) {
+            $table->id('id_berita');
+            $table->string('judul_berita');
+            $table->longText('isi_berita');
+            $table->string('gambar');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pelajarans');
+        Schema::dropIfExists('beritas');
     }
 };

@@ -76,6 +76,12 @@
                         <p>Nilai Siswa</p>
                     </a>
                 </li>
+                <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
+                    <a href="{{ route('berita') }}">
+                        <i class="fas fa-th-list"></i>
+                        <p>Berita</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
