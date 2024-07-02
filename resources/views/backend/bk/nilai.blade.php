@@ -41,6 +41,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{-- add nilai --}}
+                        <x-modal title="Input Nilai"></x-modal>
+                        {{-- /add nilai --}}
                     </div>
                 </div>
             </div>

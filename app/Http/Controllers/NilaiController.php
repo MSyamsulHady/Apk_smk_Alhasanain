@@ -18,7 +18,12 @@ class NilaiController extends Controller
     {
         // group berdasarkan id kelas
         // $rombel = Rombel::with('kelas')->select('id_kelas', DB::raw('count(id_mapel) as jml_mapel , min(id_rombel) as id_rombel'))->groupBy('id_kelas')->get();
-        $model = Rombel::with('kelas', 'mapel')->where('id_guru', Auth::user()->id_guru)->get();
+        if (Auth::user()->role == 'Guru') {
+            $model = Rombel::with('kelas', 'mapel')->where('id_guru', Auth::user()->id_guru)->get();
+        } else {
+
+            $model = Rombel::with('kelas', 'mapel')->get();
+        }
         return view('backend.bk.nilai', compact('model'));
     }
     public function kelolaNilai($id_kelas)
