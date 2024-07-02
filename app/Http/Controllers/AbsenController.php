@@ -8,8 +8,6 @@ use App\Models\Rombel;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Siswa;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class AbsenController extends Controller
@@ -27,7 +25,7 @@ class AbsenController extends Controller
 
     public function absen($id)
     {
-        $data = Rombel::with('pertemuan', 'trx.siswa')->findOrFail($id);
+        $data = Rombel::with('pertemuan', 'kelas.trx_siswa.siswa')->findOrFail($id);
         $siswa = Siswa::all();
         $dp = Pertemuan::find($id);
 
@@ -42,7 +40,7 @@ class AbsenController extends Controller
         $kehadiranSiswa = [];
         $absenSiswa = [];
 
-        foreach ($data->trx as $trx) {
+        foreach ($data->kelas->trx_siswa as $trx) {
             $absensi = Absen::where('id_trx_rombel_siswa', $trx->id_trx_rombel_siswa)
                 ->where('id_pertemuan', $dp->id_pertemuan)
                 ->get();
@@ -117,7 +115,7 @@ class AbsenController extends Controller
     }
     public function rekapAbsen($id)
     {
-        $data = Rombel::with('pertemuan', 'trx.siswa')->findOrFail($id);
+        $data = Rombel::with('pertemuan', 'kelas.trx_siswa.siswa')->findOrFail($id);
         $siswa = Siswa::all();
         $dp = Pertemuan::find($id);
 
@@ -132,7 +130,7 @@ class AbsenController extends Controller
         $kehadiranSiswa = [];
         $absenSiswa = [];
 
-        foreach ($data->trx as $trx) {
+        foreach ($data->kelas->trx_siswa as $trx) {
             $absensi = Absen::where('id_trx_rombel_siswa', $trx->id_trx_rombel_siswa)
                 ->where('id_pertemuan', $dp->id_pertemuan)
                 ->get();

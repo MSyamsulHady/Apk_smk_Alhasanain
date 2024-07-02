@@ -87,13 +87,13 @@
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" ">No</th>
-                                                    <th rowspan="2">Nis</th>
-                                                    <th rowspan="2">Nama</th>
-                                                    <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
-                                                    <th colspan="5" class="text-center">Jumlah</th>
-                                                </tr>
-                                                <tr>
-                                                     @foreach ($per as $p)
+                                                            <th rowspan="2">Nis</th>
+                                                            <th rowspan="2">Nama</th>
+                                                            <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
+                                                            <th colspan="5" class="text-center">Jumlah</th>
+                                                        </tr>
+                                                        <tr>
+                                                               @foreach ($per as $p)
                                                 <td>{{ $p }}</td>
                                                 @endforeach
                                                 <td class="text-center">H</td>
@@ -106,7 +106,7 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach ($data->trx as $item)
+                                            @foreach ($data->kelas->trx_siswa as $item)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->siswa->nis }}</td>
