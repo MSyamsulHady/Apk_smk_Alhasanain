@@ -2,8 +2,11 @@
 
 namespace App\Imports;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
 class SiswaImport implements ToCollection
@@ -28,7 +31,17 @@ class SiswaImport implements ToCollection
                 $data['jurusan'] = $row[9];
                 $data['foto'] = !empty($row[10]) ? $row[10] : '';
                 // dd($row);
-                Siswa::create($data);
+                $siswa = Siswa::create($data);
+                Log::info('Created Guru with ID: ' . $siswa->id_siswa);
+
+                // Buat user berdasarkan data guru yang baru dibuat
+                $user = User::create([
+                    'username' => $data['nis'],
+                    'password' => Hash::make($data['nis']),
+                    'role' => 'Siswa',
+                    'id_siswa' => $siswa->id_siswa,
+                ]);
+                Log::info('Created User: ', $user->toArray());
             }
             $i++;
         }

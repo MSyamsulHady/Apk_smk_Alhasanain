@@ -78,7 +78,7 @@
                             Cetak Rekapitulasi</a>
 
                         </button>
-                        {{-- <div class="table-responsive">
+                        <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -116,7 +116,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

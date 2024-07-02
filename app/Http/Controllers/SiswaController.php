@@ -68,6 +68,7 @@ class SiswaController extends Controller
             $user->password = Hash::make($request->nis);
             $user->role = 'Siswa';
             $user->save();
+            $user->id_siswa;
             DB::commit();
 
             return redirect('datasiswa')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
