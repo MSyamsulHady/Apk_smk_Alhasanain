@@ -79,14 +79,14 @@
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="">
-                        <i class="fas fa-th-list"></i>
+                    <a href="{{ route('nilai') }}">
+                        <i class="fas fa-signal"></i>
                         <p>Nilai Siswa</p>
                     </a>
                 </li>
                 <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
                     <a href="{{ route('berita') }}">
-                        <i class="fas fa-th-list"></i>
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                         <p>Berita</p>
                     </a>
                 </li>

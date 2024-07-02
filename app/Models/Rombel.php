@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Rombel extends Model
 {
@@ -19,7 +20,7 @@ class Rombel extends Model
     {
         return $this->hasOne(Guru::class, 'id_guru', 'id_guru');
     }
-    public function kelas()
+    public function kelas(): HasOne
     {
         return $this->hasOne(Kelas::class, 'id_kelas', 'id_kelas');
     }

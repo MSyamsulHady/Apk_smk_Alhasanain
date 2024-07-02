@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kelas extends Model
 {
@@ -31,4 +32,25 @@ class Kelas extends Model
     // {
     //     return $this->belongsTo(KelasPelajaran::class, 'id_kelasPelajaran', 'id_kelasPelajaran');
     // }
+
+    /**
+     * Get all of the comments for the Kelas
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rombel(): HasMany
+    {
+        return $this->hasMany(Rombel::class, 'id_kelas', 'id_kelas');
+    }
+
+
+    /**
+     * Get all of the comments for the Kelas
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function trx_siswa(): HasMany
+    {
+        return $this->hasMany(TrxRombel_siswa::class, 'id_kelas', 'id_kelas');
+    }
 }
