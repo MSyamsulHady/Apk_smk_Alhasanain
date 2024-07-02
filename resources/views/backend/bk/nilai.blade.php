@@ -41,6 +41,29 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{-- untuk tampilan guru --}}
+                            {{-- <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nis</th>
+                                        <th>Nama</th>
+                                        <th>Nilai</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td width="200"><input type="number" class="form-control form-control-sm"></td>
+                                        <td><a href="" class="btn btn-link btn-primary btn-lg"><i
+                                                    class="fa fa-edit"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table> --}}
+                            {{-- /untuk tampilan guru --}}
                         </div>
                     </div>
                 </div>

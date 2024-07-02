@@ -121,6 +121,7 @@ Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])-
 
 Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai');
 Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai');
+Route::post('/nilai/add', [NilaiController::class, 'InputNilai'])->name('inputNilai');
 Route::controller(BeritaController::class)->group(function () {
     Route::get('/berita', 'index')->name('berita');
     Route::post('/berita/insert', 'insertBerita')->name('insertBerita');

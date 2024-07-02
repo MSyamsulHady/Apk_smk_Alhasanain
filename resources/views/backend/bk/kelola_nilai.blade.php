@@ -78,45 +78,48 @@
                             Cetak Rekapitulasi</a>
 
                         </button>
-                        {{-- <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2">No</th>
-                                        <th rowspan="2">Nis</th>
-                                        <th rowspan="2">Nama</th>
-                                        <th colspan="{{ $data->mapel->count() }}">Nilai</th>
-                                        <th rowspan="2">Action</th>
-                                    </tr>
-                                    <tr>
-                                        @foreach ($data->mapel as $mat)
-                                            <td>{{ $mat->nama_mapel }}</td>
-                                        @endforeach
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($data as $item)
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Import">
+                            <i class="fa fa-upload"></i> Import
+                        </button>
+                        <table class="table_nilai">
+                            <thead>
+                                <tr>
+                                    <th class="th_n" rowspan="2">No</th>
+                                    <th class="th_n" rowspan="2">Nis</th>
+                                    <th class="th_n" rowspan="2">Nama</th>
+                                    <th class="th_n text-center" colspan="{{ $jmlh }}">Nilai</th>
+                                </tr>
+                                <tr>
+                                    @foreach ($kelas->first() as $key)
+                                        <td class="th_n text-center">{{ $key->mapel->nama_mapel }}</td>
+                                    @endforeach
+                                    <td class="th_n">Rata-Rata</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form id="f_nilai" action="{{ route('inputNilai') }}" method="post">
+                                    @csrf
+                                    @foreach ($siswa as $siswas)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->siswa->nis }}</td>
-                                            <td>{{ $item->siswa->nama }}</td>
-                                            @foreach ($data->mapel as $mp)
-                                                <form action="" method="post" id="{{ $item->siswa->id_siswa }}">
-                                                    <td style="width:5%">
-                                                        <input type="number" class="form-control"
-                                                            name="{{ $mp->id_mapel }}">
-                                                    </td>
-                                                </form>
+                                            <td class="td_n">{{ $loop->iteration }}</td>
+                                            <td class="td_n">{{ $siswas->siswa->nis }}</td>
+                                            <td class="td_n">{{ $siswas->siswa->nama }}</td>
+
+                                            @foreach ($kelas->first() as $key)
+                                                <td class="td_n" width="100">
+                                                    <input type="number"
+                                                        name="{{ $key->mapel->id_mapel . "[$siswas->id_siswa]" }}">
+                                                </td>
                                             @endforeach
-                                            <td>
-                                                <button @class(['btn btn-sm btn-success']) type="submit" value="submit"
-                                                    form="{{ $item->siswa->id_siswa }}">Simpan</button>
-                                            </td>
+                                            <td class="td_n"></td>
                                         </tr>
                                     @endforeach
-                                </tbody>
-                            </table>
-                        </div> --}}
+                                </form>
+                            </tbody>
+                        </table>
+                        <div class="mt-3">
+                            <button form="f_nilai" type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
                     </div>
                 </div>
             </div>
