@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($rombel->trx as $dt)
+                                @foreach ($model->kelas->trx_siswa as $dt)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $dt->siswa->nis }}</td>
@@ -47,40 +47,7 @@
                         </table>
                     </div>
 
-                    <!-- add peserta -->
-                    <x-modal title="PESERTA DIDIK" id="modalAddPeserta" class="modal-xl">
-                        <form action="{{ route('add_peserta', $rombel->id_rombel) }}" method="post">
-                            @csrf
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-data" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nis</th>
-                                            <th>Nama</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($siswa as $pst)
-                                            <tr>
-                                                <td class="td-left">{{ $loop->iteration }}</td>
-                                                <td>{{ $pst->nis }}</td>
-                                                <td>{{ $pst->nama }}</td>
-                                                <td>
-                                                    <input type="checkbox" name="id_siswa[]" value="{{ $pst->id_siswa }}">
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="d-flex justify-content-end">
-                                    <button class="btn btn-sm btn-success">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </x-modal>
-                    <!-- end add peserta -->
+
                 </div>
             </div>
         </div>

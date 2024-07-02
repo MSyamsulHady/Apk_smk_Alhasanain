@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('id_siswa')->nullable();
             $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('id_guru')->nullable();
-            $table->foreign('id_guru')->references('id_guru')->on('gurus')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
+            $table->foreign('id_guru')->references('id_guru')->on('gurus')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('username');
             $table->enum('role', ['Admin', 'Siswa', 'Guru', 'Kepala Sekolah'])->default('siswa');
             $table->string('password');

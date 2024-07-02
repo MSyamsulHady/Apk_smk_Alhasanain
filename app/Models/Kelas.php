@@ -49,7 +49,7 @@ class Kelas extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function siswa(): HasMany
+    public function trx_siswa(): HasMany
     {
         return $this->hasMany(TrxRombel_siswa::class, 'id_kelas', 'id_kelas');
     }

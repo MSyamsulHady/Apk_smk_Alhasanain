@@ -38,7 +38,13 @@
                                             <td>{{ $kls->semester->nama_semester }}</td>
                                             <td>{{ $kls->semester->tahun_ajaran }}</td>
                                             <td>
+                                                <button type="button" data-toggle="modal"
+                                                    data-target="#modalAddPeserta{{ $kls->id_kelas }}" title=""
+                                                    class="btn btn-success btn-sm" data-original-title="Edit ">
+                                                    <i class="fa fa-plus"></i> Peserta
+                                                </button>
                                                 <div class="form-button-action">
+
                                                     <button type="button" data-toggle="modal"
                                                         data-target="#ModalEdit{{ $kls->id_kelas }}" title=""
                                                         class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
@@ -56,13 +62,50 @@
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                     </form>
-
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        <!-- add peserta -->
+                        @foreach ($kelas as $item)
+                            <x-modal title="PESERTA DIDIK" id="modalAddPeserta{{ $item->id_kelas }}" class="modal-xl">
+                                <form action="{{ route('add_peserta', $item->id_kelas) }}" method="post">
+                                    @csrf
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-data" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nis</th>
+                                                    <th>Nama</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($siswa as $pst)
+                                                    <tr>
+                                                        <td class="td-left">{{ $loop->iteration }}</td>
+                                                        <td>{{ $pst->nis }}</td>
+                                                        <td>{{ $pst->nama }}</td>
+                                                        <td>
+                                                            <input type="checkbox" name="id_siswa[]"
+                                                                value="{{ $pst->id_siswa }}">
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="btn btn-sm btn-success">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </x-modal>
+                        @endforeach
+                        <!-- end add peserta -->
                         {{-- modal Add --}}
                         <div class="modal fade " id="ModalAdd" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,7 +172,8 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Input Semester</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>

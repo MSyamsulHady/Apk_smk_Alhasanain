@@ -13,6 +13,7 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PertemuanController;
+use App\Http\Controllers\rombel_kelasController;
 use App\Http\Controllers\RombelController;
 use App\Http\Controllers\SanksiController;
 use App\Http\Controllers\SemesterController;
@@ -34,8 +35,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
-//     // return view('welcome');
-//     phpinfo();
+//     return view('welcome');
 // });
 Route::controller(LandingController::class)->group(function () {
     Route::get('/', 'home')->name('home');
@@ -94,12 +94,12 @@ Route::controller(KelasController::class)->group(function () {
     Route::delete('/deleteKelas/{id}', 'deleteKelas')->name('deleteKelas')->middleware('auth');
 });
 
-Route::controller(DetailKelasController::class)->group(function () {
-    Route::get('/detail/kelas/{id_kelas}', 'index')->name('detailkelas')->middleware('auth');
-    // menampilkan siswa berdasarkan id kelasnya
-    // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
-    Route::post('/insert/detail', 'insertdetail')->name('insertdetail')->middleware('auth');
-});
+// Route::controller(DetailKelasController::class)->group(function () {
+//     Route::get('/detail/kelas/{id_kelas}', 'index')->name('detailkelas')->middleware('auth');
+//     // menampilkan siswa berdasarkan id kelasnya
+//     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
+//     Route::post('/insert/detail', 'insertdetail')->name('insertdetail')->middleware('auth');
+// });
 
 Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
 Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');

@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Rombel;
 use App\Models\Semester;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +18,10 @@ class KelasController extends Controller
         $semester = Semester::all();
 
         $sesi = session()->get('id_semester');
-
+        $siswa = Siswa::all();
         $kelas = Kelas::with('semester')->where('id_semester', $sesi)->get();
         // dd($kelas);
-        return view('backend.bk.kelas', compact('semester', 'kelas'));
+        return view('backend.bk.kelas', compact('semester', 'kelas', 'siswa'));
     }
     public function insertKelas(Request $request)
     {

@@ -20,7 +20,6 @@ class AuthController extends Controller
     {
         $user = User::all();
         $use = Auth::user();
-        // $guru=User::where('guru')
         $semes = $user->semesters;
         return view('backend.auth.data_user', compact('user', 'use', 'semes'));
     }

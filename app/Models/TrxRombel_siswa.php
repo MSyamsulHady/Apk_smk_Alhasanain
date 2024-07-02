@@ -17,9 +17,9 @@ class TrxRombel_siswa extends Model
         return $this->hasOne(Siswa::class, 'id_siswa', 'id_siswa');
     }
 
-    public function rombel()
+    public function kelas()
     {
-        return $this->hasMany(Rombel::class, 'id_rombel', 'id_rombel');
+        return $this->hasOne(Kelas::class, 'id_kelas', 'id_kelas');
     }
     public function absen()
     {

@@ -14,41 +14,26 @@ class trxRombelController extends Controller
     public function index($id)
     {
         $siswa = Siswa::all();
-        $mapel = Rombel::with('mapel')->get();
-        $rombel = Rombel::with('trx.siswa')->find($id);
-        return view('backend.bk.trxRombel', compact('siswa', 'mapel', 'rombel'));
+        $model = Rombel::with('kelas.trx_siswa.siswa')->find($id);
+        // dd($model);
+        return view('backend.bk.trxRombel', compact('siswa', 'model'));
     }
     public function addPeserta(Request $request, $id)
     {
-        // if (!empty($request->input('id_siswa'))) {
-
-        //     // $will_insert = [];
-        //     // foreach ($request->input('id_siswa') as $key => $value) {
-        //     //     array_push($will_insert, ['id_siswa' => $value]);
-        //     // }
-        //     // DB::table('trx_rombel_siswas')->insert($will_insert);
-        //     // dd($will_insert);
-        // } else {
-        //     $checkbox = '';
-        // }
 
         $request->validate([
             'id_siswa' => 'required|array',
         ]);
         try {
-            DB::beginTransaction();
             $data = [];
-            $model = new Rombel();
+            // $model = new Kelas();
             foreach ($request->id_siswa as $key) {
-                $data[] = ['id_siswa' => $key, 'id_rombel' => $id, 'id_kelas' => $model->find($id)->id_kelas];
+                $data[] = ['id_kelas' => $id, 'id_siswa' => $key];
             }
             // dd($data);
             TrxRombel_siswa::insert($data);
-            Nilai::insert($data);
-            DB::commit();
             return back()->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
         } catch (\Exception $e) {
-            DB::rollback();
             return abort('404');
         }
     }
