@@ -113,6 +113,7 @@ Route::controller(AbsenController::class)->group(function () {
     Route::get('/absenSiswa/{id}', 'absen')->name('kelola_absen')->middleware('auth');
     Route::post('simpan/{id}/{id_pertemuan}', 'SimpanAbsen')->name('simpanAbsen')->middleware('auth');
     Route::get('rekapAbsen/{id}', 'rekapAbsen')->name('rekapAbsen')->middleware('auth');
+    Route::get('/rekap-absen/pdf/{id}', 'downloadRekapAbsenPDF')->name('rekapAbsen.pdf');
 });
 
 

@@ -74,7 +74,7 @@
         </thead>
         <tbody>
 
-            @foreach ($data->trx as $item)
+            @foreach ($data->kelas->trx_siswa as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->siswa->nis }}</td>
@@ -112,6 +112,9 @@
             @endforeach
         </tbody>
     </table>
+    <script type="text/javascript">
+        window.print();
+    </script>
 
 
 </body>

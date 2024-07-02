@@ -48,14 +48,15 @@ class GuruController extends Controller
             }
 
             $data->save();
+            // dd($data->id_guru);
 
             // create guru user
             $user = new User();
             $user->username = $request->nuptk;
             $user->password = Hash::make($request->nuptk);
             $user->role = 'Guru';
+            $user->id_guru = $data->id_guru;
             $user->save();
-            $user->id_guru;
             DB::commit();
             return redirect('dataguru')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
         } catch (\Exception $e) {
