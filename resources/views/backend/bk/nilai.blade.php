@@ -23,11 +23,21 @@
                                         <th>No</th>
                                         <th>Kelas</th>
                                         <th>Mata Pelajaran</th>
-                                        <th>Jumlah Mata Pelajaran</th>
                                         <th>#Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($model as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->kelas->nama_kelas }}</td>
+                                            <td>{{ $item->mapel->nama_mapel }}</td>
+                                            <td>
+                                                <a href="" class="btn btn-sm btn-success"><i
+                                                        class="fa fa-plus"></i>&nbsp; Nilai</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -9,6 +9,7 @@ use App\Models\Rombel;
 use App\Models\Siswa;
 use App\Models\TrxRombel_siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class NilaiController extends Controller
@@ -16,8 +17,9 @@ class NilaiController extends Controller
     public function index()
     {
         // group berdasarkan id kelas
-        $rombel = Rombel::with('kelas')->select('id_kelas', DB::raw('count(id_mapel) as jml_mapel , min(id_rombel) as id_rombel'))->groupBy('id_kelas')->get();
-        return view('backend.bk.nilai', compact('rombel'));
+        // $rombel = Rombel::with('kelas')->select('id_kelas', DB::raw('count(id_mapel) as jml_mapel , min(id_rombel) as id_rombel'))->groupBy('id_kelas')->get();
+        $model = Rombel::with('kelas', 'mapel')->where('id_guru', Auth::user()->id_guru)->get();
+        return view('backend.bk.nilai', compact('model'));
     }
     public function kelolaNilai($id_kelas)
     {
