@@ -83,24 +83,25 @@
                                     action="{{ route('simpanAbsen', [$data->id_rombel, $dp->id_pertemuan]) }}"
                                     method="post">
                                     @csrf
-                                    <table class="table table-bordered">
+                                    <table class="table_nilai">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2" ">No</th>
-                                                    <th rowspan="2">Nis</th>
-                                                    <th rowspan="2">Nama</th>
-                                                    <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
-                                                    <th colspan="5" class="text-center">Jumlah</th>
-                                                </tr>
-                                                <tr>
-                                                     @foreach ($per as $p)
-                                                <td>{{ $p }}</td>
+                                                <th class="th_n" rowspan="2">No</th>
+                                                <th class="th_n" rowspan="2">Nis</th>
+                                                <th class="th_n" rowspan="2">Nama</th>
+                                                <th class="th_n" colspan="{{ $jumlahPertemuan }}" class="text-center">
+                                                    Pertemuan</th>
+                                                <th class="th_n" colspan="5" class="text-center">Jumlah</th>
+                                            </tr>
+                                            <tr>
+                                                @foreach ($per as $p)
+                                                    <td class="th_n">{{ $p }}</td>
                                                 @endforeach
-                                                <td class="text-center">H</td>
-                                                <td class="text-center">I</td>
-                                                <td class="text-center">S</td>
-                                                <td class="text-centet">A</td>
-                                                <td class="text-center">B</td>
+                                                <td class="th_n text-center">H</td>
+                                                <td class="th_n text-center">I</td>
+                                                <td class="th_n text-center">S</td>
+                                                <td class="th_n text-centet">A</td>
+                                                <td class="th_n text-center">B</td>
                                             </tr>
 
                                         </thead>
@@ -108,11 +109,11 @@
 
                                             @foreach ($data->trx as $item)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $item->siswa->nis }}</td>
-                                                    <td>{{ $item->siswa->nama }}</td>
+                                                    <td class="td_n">{{ $loop->iteration }}</td>
+                                                    <td class="td_n">{{ $item->siswa->nis }}</td>
+                                                    <td class="td_n">{{ $item->siswa->nama }}</td>
                                                     @foreach ($per as $p)
-                                                        <td>
+                                                        <td class="td_n">
                                                             @if (!empty($absenSiswa[$item->id_trx_rombel_siswa]))
                                                                 @if (!empty($absenSiswa[$item->id_trx_rombel_siswa][$p]))
                                                                     {{ $absenSiswa[$item->id_trx_rombel_siswa][$p] }}
@@ -143,22 +144,27 @@
                                                         </td>
                                                     @endforeach
 
-                                                    <td>{{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_hadir'] }}
+                                                    <td class="td_n">
+                                                        {{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_hadir'] }}
                                                     </td>
-                                                    <td>{{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_izin'] }}
+                                                    <td class="td_n">
+                                                        {{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_izin'] }}
                                                     </td>
-                                                    <td>{{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_sakit'] }}
+                                                    <td class="td_n">
+                                                        {{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_sakit'] }}
                                                     </td>
-                                                    <td>{{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_alpa'] }}
+                                                    <td class="td_n">
+                                                        {{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_alpa'] }}
                                                     </td>
-                                                    <td>{{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_bolos'] }}
+                                                    <td class="td_n">
+                                                        {{ $kehadiranSiswa[$item->id_trx_rombel_siswa]['total_bolos'] }}
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </form>
-                                <button id="saveButton" class="btn btn-primary btn-sm ml-2">simpan</button>
+                                <button id="saveButton" class="btn btn-primary btn-sm  mt-3">simpan</button>
 
                                 <script>
                                     document.getElementById('saveButton').addEventListener('click', function() {
@@ -171,4 +177,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

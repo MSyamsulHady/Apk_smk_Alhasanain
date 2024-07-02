@@ -80,13 +80,13 @@
                 </li>
                 <li class="nav-item  ">
                     <a href="">
-                        <i class="fas fa-th-list"></i>
+                        <i class="fas fa-signal"></i>
                         <p>Nilai Siswa</p>
                     </a>
                 </li>
                 <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
                     <a href="{{ route('berita') }}">
-                        <i class="fas fa-th-list"></i>
+                        <i class="fas fa-newspaper"></i>
                         <p>Berita</p>
                     </a>
                 </li>

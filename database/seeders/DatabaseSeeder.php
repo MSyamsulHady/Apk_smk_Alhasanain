@@ -37,16 +37,6 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Admin',
             ],
             [
-                'username' => 'palahady',
-                'password' => Hash::make('123456'),
-                'role' => 'Guru',
-            ],
-            [
-                'username' => 'firman',
-                'password' => Hash::make('123456'),
-                'role' => 'Siswa',
-            ],
-            [
                 'username' => 'hasyim',
                 'password' => Hash::make('123456'),
                 'role' => 'kepala Sekolah',
@@ -55,17 +45,5 @@ class DatabaseSeeder extends Seeder
 
         );
         User::insert($data);
-
-
-        $siswa = Siswa::get();
-        foreach ($siswa as $key) {
-            if (!empty($key->nama)) {
-                DB::table('users')->insert([
-                    'username' => $key->nis,
-                    'role' => 'siswa',
-                    'password' => $key->nis,
-                ]);
-            }
-        }
     }
 }
