@@ -21,4 +21,8 @@ class Absen extends Model
     {
         return $this->belongsTo(TrxRombel_siswa::class, 'id_trx_rombel_siswa', 'id_trx_rombel_siswa');
     }
+    public function semester()
+    {
+        return $this->hasOne(Semester::class, 'id_semester', 'id_semester');
+    }
 }

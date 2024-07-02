@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                Add
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
                             </button>
                         </div>
                         <div class="table-responsive">
@@ -44,17 +44,18 @@
                                                         class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                    {{-- <form action="{{ route('delete_siswa', $smt->id_semester) }}"
+                                                    <form action="{{ route('deleteSemester', $smt->id_semester) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="button" data-toggle="" title=""
-                                                            data-id="{{ $smt->id_semester }}" data-nama="{{ $sw->nama }}"
+                                                            data-id="{{ $smt->id_semester }}"
+                                                            data-nama="{{ $smt->nama_semester }}  | {{ $smt->tahun_ajaran }}"
                                                             class="btn btn-link btn-danger deletealertsiswa"
                                                             data-original-title="Hapus">
                                                             <i class="fa fa-times"></i>
                                                         </button>
-                                                    </form> --}}
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -135,7 +136,8 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Input Semester</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>

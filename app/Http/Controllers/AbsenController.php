@@ -3,92 +3,174 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absen;
-use App\Models\Guru;
-use App\Models\Kelas;
-use App\Models\KelasPelajaran;
-use App\Models\Pelajaran;
 use App\Models\Pertemuan;
 use App\Models\Rombel;
+use App\Models\Semester;
 use App\Models\Siswa;
-use App\Models\TrxRombel_siswa;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class AbsenController extends Controller
 {
     public function index()
     {
-        // $pertemuan = Absen::with('pertemuan')->get()->dd(d);
+        $absen = Pertemuan::all();
+        // $absen = Absen::with('pertemuan')->get();
 
 
-        $absen = Rombel::all();
+        // $absen = Rombel::all();
         return view('backend.bk.absen', compact('absen'));
     }
 
 
     public function absen($id)
     {
-        $model = new Rombel();
-        $data = $model->with('pertemuan.absen', 'mapel', 'trx.siswa', 'kelas.semester')->findOrFail($id);
+        $data = Rombel::with('pertemuan', 'trx.siswa')->findOrFail($id);
         $siswa = Siswa::all();
+        $dp = Pertemuan::find($id);
+
+        $jumlahPertemuan = $dp->pertemuanKe;
+        $per = [];
+
+        for ($i = 1; $i <= $jumlahPertemuan; $i++) {
+            $per[] = "p$i";
+        }
 
 
-        $absenSiswa = collect([]);
+        $kehadiranSiswa = [];
+        $absenSiswa = [];
 
-        $modelAbsen = new Absen();
+        foreach ($data->trx as $trx) {
+            $absensi = Absen::where('id_trx_rombel_siswa', $trx->id_trx_rombel_siswa)
+                ->where('id_pertemuan', $dp->id_pertemuan)
+                ->get();
+            $totalHadir = 0;
+            $totalIzin = 0;
+            $totalSakit = 0;
+            $totalAlpa = 0;
+            $totalBolos = 0;
 
-        foreach ($data->trx as $key) {
-            $absenSiswa[$key->id_trx_rombel_siswa] = [
-                'nama' => $key->siswa->nama,
-                'nis' => $key->siswa->nis,
-                'jk' => $key->siswa->gender,
-                'absen' => $modelAbsen->where([
-                    'id_semester' => $data->kelas->semester->id_semester,
-                    'id_trx_rombel_siswa' => $key->id_trx_rombel_siswa
-                ])->get()
+            foreach ($absensi as $absen) {
+                $keterangan = $absen->keterangan ?? '-';
+                $pertemuan = $absen->pertemuan;
+                $absenSiswa[$trx->id_trx_rombel_siswa][$absen->pertemuan] = $keterangan;
+                if (!isset($absenSiswa[$trx->id_trx_rombel_siswa])) {
+                    $absenSiswa[$trx->id_trx_rombel_siswa] = [];
+                }
+
+                $absenSiswa[$trx->id_trx_rombel_siswa][$pertemuan] = $keterangan;
+                if ($keterangan == 'H') {
+                    $totalHadir++;
+                } elseif ($keterangan == 'I') {
+                    $totalIzin++;
+                } elseif ($keterangan == 'S') {
+                    $totalSakit++;
+                } elseif ($keterangan == 'A') {
+                    $totalAlpa++;
+                } elseif ($keterangan == 'B') {
+                    $totalBolos++;
+                }
+            }
+            $kehadiranSiswa[$trx->id_trx_rombel_siswa] = [
+                'total_hadir' => $totalHadir,
+                'total_izin' => $totalIzin,
+                'total_sakit' => $totalSakit,
+                'total_alpa' => $totalAlpa,
+                'total_bolos' => $totalBolos,
             ];
         }
-        return view('backend.bk.absenSiswa', compact('absenSiswa', 'siswa', 'data'));
+
+
+        return view('backend.bk.absenSiswa', compact('dp', 'absenSiswa', 'siswa', 'data', 'jumlahPertemuan', 'per', 'kehadiranSiswa'));
     }
 
-    public function addAbsen($id_rombel, $id_pertemuan)
+    public function SimpanAbsen(Request $request, $id, $id_pertemuan)
     {
-        $model = new Rombel();
-        $data = $model->with(['pertemuan.absen', 'mapel', 'trx.siswa', 'kelas.semester'])->findOrFail($id_rombel);
-
-        return view('backend.bk.insertAbsen', compact('data', 'id_pertemuan'));
-    }
-
-    public function SimpanAbsen(Request $request, $id)
-    {
-        $request->validate(
-            [
-                'id_siswa' => 'required|array',
-                'keterangan' => 'required|array'
-            ]
-        );
-        $rombel = Rombel::findOrFail($id);
-        $semester = Pertemuan::findOrFail($id)->id_semester;
+        $semester = Pertemuan::findOrFail($id);
         $data = [];
 
+        foreach ($request->all() as $key => $value) {
+            if ($key !== '_token') {
+                foreach ($value as $k => $v) {
+                    if ($v !== null) {
+                        $data[] = [
+                            'id_trx_rombel_siswa' => $k,
+                            'keterangan' => $v,
+                            'id_pertemuan' => $id_pertemuan,
+                            'id_semester' => $semester->id_semester,
+                            'pertemuan' => $key
+                        ];
+                    }
+                }
+                // dd($data);
+            }
+        }
+        try {
+            Absen::insert($data);
+            return redirect()->route('kelola_absen', $semester->id_pertemuan)->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
+        } catch (\Throwable $e) {
 
-        foreach ($request->id_siswa as  $value) {
-            $data[] = [
-                'id_trx_rombel_siswa' => $value,
-                'keterangan' => $request->keterangan[$value],
-                'id_pertemuan' => $id,
-                'id_semester' => $semester
+            dd($e->getMessage());
+        }
+    }
+    public function rekapAbsen($id)
+    {
+        $data = Rombel::with('pertemuan', 'trx.siswa')->findOrFail($id);
+        $siswa = Siswa::all();
+        $dp = Pertemuan::find($id);
+
+        $jumlahPertemuan = $dp->pertemuanKe;
+        $per = [];
+
+        for ($i = 1; $i <= $jumlahPertemuan; $i++) {
+            $per[] = "p$i";
+        }
+
+
+        $kehadiranSiswa = [];
+        $absenSiswa = [];
+
+        foreach ($data->trx as $trx) {
+            $absensi = Absen::where('id_trx_rombel_siswa', $trx->id_trx_rombel_siswa)
+                ->where('id_pertemuan', $dp->id_pertemuan)
+                ->get();
+            $totalHadir = 0;
+            $totalIzin = 0;
+            $totalSakit = 0;
+            $totalAlpa = 0;
+            $totalBolos = 0;
+
+            foreach ($absensi as $absen) {
+                $keterangan = $absen->keterangan ?? '-';
+                $pertemuan = $absen->pertemuan;
+                $absenSiswa[$trx->id_trx_rombel_siswa][$absen->pertemuan] = $keterangan;
+                if (!isset($absenSiswa[$trx->id_trx_rombel_siswa])) {
+                    $absenSiswa[$trx->id_trx_rombel_siswa] = [];
+                }
+
+                $absenSiswa[$trx->id_trx_rombel_siswa][$pertemuan] = $keterangan;
+                if ($keterangan == 'H') {
+                    $totalHadir++;
+                } elseif ($keterangan == 'I') {
+                    $totalIzin++;
+                } elseif ($keterangan == 'S') {
+                    $totalSakit++;
+                } elseif ($keterangan == 'A') {
+                    $totalAlpa++;
+                } elseif ($keterangan == 'B') {
+                    $totalBolos++;
+                }
+            }
+            $kehadiranSiswa[$trx->id_trx_rombel_siswa] = [
+                'total_hadir' => $totalHadir,
+                'total_izin' => $totalIzin,
+                'total_sakit' => $totalSakit,
+                'total_alpa' => $totalAlpa,
+                'total_bolos' => $totalBolos,
             ];
         }
 
 
-        try {
-            Absen::insert($data);
-            return redirect('')->route('kelola_absen', [
-                $rombel->id_rombel,
-
-            ])->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
-        } catch (\Throwable $e) {
-            return $e->getMessage();
-        }
+        return view('backend.bk.rekapAbsen', compact('dp', 'absenSiswa', 'siswa', 'data', 'jumlahPertemuan', 'per', 'kehadiranSiswa'));
     }
 }

@@ -50,4 +50,11 @@ class SemesterController extends Controller
             return redirect('semester')->with(['msg' => 'Data Gagal DiUbah', 'type' => 'error']);
         }
     }
+
+    public function deleteSemester($id)
+    {
+        $semester = Semester::findOrFail($id);
+        $semester->delete();
+        return redirect('semester')->with(['msg' => 'Data Berhasil Dihapus', 'type' => 'success']);
+    }
 }

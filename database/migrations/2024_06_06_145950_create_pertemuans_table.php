@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreign('id_rombel')->references('id_rombel')->on('rombels')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('id_semester');
             $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('pertemuanKe', '25')->nullable()->default('text');
-            $table->date('tanggal_pertemuan')->nullable();
+            $table->string('pertemuanKe')->nullable();
+            $table->string('hari')->nullable();
             $table->time('mulai')->nullable();
             $table->time('selesai')->nullable();
             $table->timestamps();

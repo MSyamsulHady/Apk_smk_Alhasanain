@@ -61,4 +61,11 @@ class PelajaranController extends Controller
         } catch (\Exception $e) {
         }
     }
+
+    public function deleteMapel($id)
+    {
+        $mapel = Pelajaran::findOrfail($id);
+        $mapel->delete();
+        return redirect('mapel')->with(['msg' => 'Data Berhasil Dihapus', 'type' => 'success']);
+    }
 }

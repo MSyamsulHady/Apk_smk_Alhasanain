@@ -91,11 +91,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <form action="{{ route('simpanAbsen', $id_pertemuan) }}" method="post">
-
+                            <form action="{{ route('simpanUpdateAbsen', $id_pertemuan) }}"method="post">
+                                @csrf
+                                @method('put')
                                 <table class="table">
                                     <thead>
-                                        {{-- <table border="1"> --}}
+
                                         <tr>
                                             <th style="height: 1px" rowspan="2">No</th>
                                             <th rowspan="2">Nis</th>
@@ -105,36 +106,39 @@
 
                                         </tr>
                                     </thead>
-                                    @foreach ($data->trx as $a)
+                                    @foreach ($data as $a)
                                         <tbody>
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
 
-                                                <td>{{ $a->siswa->nis }}
+                                                <td>{{ $a->trx->siswa->nis }}
                                                 </td>
-                                                <td>{{ $a->siswa->nama }}</td>
-                                                <td>{{ $a->siswa->gender }}</td>
+                                                <td>{{ $a->trx->siswa->nama }}</td>
+                                                <td>{{ $a->trx->siswa->gender }}</td>
+                                                {{-- <td>{{ $a }}</td> --}}
                                                 <td>
                                                     @csrf
                                                     <input type="hidden" name="id_siswa[]"
                                                         value="{{ $a->id_trx_rombel_siswa }}">
+                                                    {{-- <input type="hidden" name="id_absen" value="{{ $a->id_absen }}"> --}}
 
-                                                    <select
-                                                        class="form-control @error('keterangan')
-                                                    is-invalid
-                                                    @enderror"
+
+                                                    <select class="form-control @error('keterangan') is-invalid @enderror"
                                                         name="keterangan[{{ $a->id_trx_rombel_siswa }}]">
-
-                                                        <option value="" selected> -- Pilih -- </option>
-                                                        <option>Hadir</option>
-                                                        <option>Alpa</option>
-                                                        <option>Izin</option>
-                                                        <option>Sakit</option>
-                                                        <option>bolos</option>
+                                                        <option value="H" @selected($a->keterangan == 'H')>Hadir
+                                                        </option>
+                                                        <option value="A" @selected($a->keterangan == 'A')>Alpa
+                                                        </option>
+                                                        <option value="I" @selected($a->keterangan == 'I')>Izin
+                                                        </option>
+                                                        <option value="S" @selected($a->keterangan == 'S')>Sakit
+                                                        </option>
+                                                        <option value="B" @selected($a->keterangan == 'B')>bolos
+                                                        </option>
+                                                        @error('keterangan')
+                                                            <span class="invalid-feedback">{{ $message }}</span>
+                                                        @enderror
                                                     </select>
-                                                    @error('keterangan')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                    @enderror
                                                 </td>
                                             </tr>
                                         </tbody>

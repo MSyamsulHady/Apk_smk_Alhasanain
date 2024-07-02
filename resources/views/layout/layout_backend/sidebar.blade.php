@@ -15,70 +15,78 @@
                         <p>Data Master</p>
                         <span class="caret"></span>
                     </a>
+
                     <div class="collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
-                            <li class="{{ request()->is('allsiswa') ? 'active' : '' }}">
-                                <a href="{{ route('allsiswa') }}">
-                                    <span class="sub-item">All DataSiswa</span>
-                                </a>
-                            </li>
                             <li class="{{ request()->is('datasiswa') ? 'active' : '' }}">
                                 <a href="{{ route('datasiswa') }}">
                                     <span class="sub-item">Data Siswa </span>
                                 </a>
                             </li>
-                            <li class="{{ request()->is('dataguru') ? 'active' : '' }}">
-                                <a href="{{ route('dataguru') }}">
-                                    <span class="sub-item">Data Guru</span>
-                                </a>
-                            </li>
+                            @if (Auth::user()->role != 'Guru' && Auth::user()->role != 'Siswa')
+                                <li class="{{ request()->is('dataguru') ? 'active' : '' }}">
+                                    <a href="{{ route('dataguru') }}">
+                                        <span class="sub-item">Data Guru</span>
+                                    </a>
+                                </li>
+                                <li class="{{ request()->is('datakelas') ? 'active' : '' }}">
+                                    <a href="{{ route('datakelas') }}">
+                                        <span class="sub-item">Kelas</span>
+                                    </a>
+                                </li>
+                                <li class="{{ request()->is('mapel') ? 'active' : '' }}">
+                                    <a href="{{ route('mapel') }}">
+                                        <span class="sub-item">Mata Pelajaran</span>
+                                    </a>
+                                </li>
 
-                            <li class="{{ request()->is('mapel') ? 'active' : '' }}">
-                                <a href="{{ route('mapel') }}">
-                                    <span class="sub-item">Mata Pelajaran</span>
-                                </a>
-                            </li>
-                            <li class="{{ request()->is('semester') ? 'active' : '' }}">
-                                <a href="{{ route('semester') }}">
-                                    <span class="sub-item">Semester</span>
-                                </a>
-                            </li>
-                            <li class="{{ request()->is('datauser') ? 'active' : '' }}">
-                                <a href="{{ route('datauser') }}">
-                                    <span class="sub-item">Data User</span>
-                                </a>
-                            </li>
+                                <li class="{{ request()->is('semester') ? 'active' : '' }}">
+                                    <a href="{{ route('semester') }}">
+                                        <span class="sub-item">Semester</span>
+                                    </a>
+                                </li>
+                                @if (Auth::user()->role == 'Admin')
+                                    <li class="{{ request()->is('datauser') ? 'active' : '' }}">
+                                        <a href="{{ route('datauser') }}">
+                                            <span class="sub-item">Data User</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endif
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item  {{ request()->routeIs('datakelas') ? 'active' : '' }}">
-                    <a href="{{ route('datakelas') }}" class="">
-                        <i class="fas fa-th-list"></i>
-                        <p>Kelas</p>
-                    </a>
-                </li>
-                <li class="nav-item {{ request()->routeIs('rombel') ? 'active' : '' }} ">
-                    <a href="{{ route('rombel') }}" class="">
-                        <i class="fas fa-th-list"></i>
-                        <p>Rombel</p>
+                @if (Auth::user()->role != 'Guru' && Auth::user()->role != 'Siswa')
+                    <li class="nav-item {{ request()->routeIs('rombel') ? 'active' : '' }} ">
+                        <a href="{{ route('rombel') }}" class="">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>Rombel</p>
+                        </a>
+                    </li>
+                @endif
+                <li class="nav-item {{ request()->routeIs('jadwal') ? 'active' : '' }} ">
+                    <a href="{{ route('jadwal') }}">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Jadwal </p>
+
                     </a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('absen') ? 'active' : '' }} ">
                     <a href="{{ route('absen') }}">
-                        <i class="fas fa-layer-group"></i>
+                        <i class="fas fa-calendar-alt"></i>
                         <p>Absensi </p>
-                        <span class="caret"></span>
+
                     </a>
                 </li>
-                <li class="nav-item  {{ request()->routeIs('nilai') ? 'active' : '' }}">
-                    <a href="{{ route('nilai') }}">
-                        <i class="fas fa-th-list"></i>
+                <li class="nav-item  ">
+                    <a href="">
+                        <i class="fas fa-signal"></i>
                         <p>Nilai Siswa</p>
                     </a>
                 </li>
                 <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
                     <a href="{{ route('berita') }}">
-                        <i class="fas fa-th-list"></i>
+                        <i class="fas fa-newspaper"></i>
                         <p>Berita</p>
                     </a>
                 </li>

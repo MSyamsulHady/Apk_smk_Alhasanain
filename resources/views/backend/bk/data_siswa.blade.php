@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                Add
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
                             </button>
                             <button type="button" class="btn btn-outline-primary" data-toggle="modal"
                                 data-target="#Import">
@@ -29,33 +29,21 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>NISN</th>
                                         <th>NIS</th>
-                                        <th>NIK</th>
                                         <th>Nama</th>
-                                        <th>alamat</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>Orang Tua</th>
-                                        <th>No HP</th>
                                         <th>Jurusan</th>
                                         <th>Foto</th>
-                                        <th>#Action</th>
+                                        <th class="text-center">#Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($siswa as $sw)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $sw->nisn }}</td>
                                             <td>{{ $sw->nis }}</td>
-                                            <td>{{ $sw->nik }}</td>
                                             <td>{{ $sw->nama }}</td>
-                                            <td>{{ $sw->alamat }}</td>
                                             <td>{{ $sw->gender }}</td>
-                                            <td>{{ $sw->tanggal_lahir }}</td>
-                                            <td>{{ $sw->orang_tua }}</td>
-                                            <td>{{ $sw->nohp_ortu }}</td>
                                             <td>{{ $sw->jurusan }}</td>
                                             <td>
                                                 @empty($sw->foto)
@@ -67,10 +55,17 @@
                                             <td>
                                                 <div class="form-button-action">
                                                     <button type="button" data-toggle="modal"
+                                                        data-target="#ModalShow{{ $sw->id_siswa }}" title=""
+                                                        class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+
+                                                    <button type="button" data-toggle="modal"
                                                         data-target="#ModalEdit{{ $sw->id_siswa }}" title=""
                                                         class="btn btn-link btn-primary btn-lg" data-original-title="Edit ">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
+
                                                     <form action="{{ route('delete_siswa', $sw->id_siswa) }}"
                                                         method="POST">
                                                         @csrf
@@ -82,6 +77,7 @@
                                                             <i class="fa fa-times"></i>
                                                         </button>
                                                     </form>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -465,6 +461,92 @@
                                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
                                             </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Modal -->
+                            @endforeach
+
+                            {{-- modal show --}}
+                            @foreach ($siswa as $sis)
+                                <div class="modal fade bd-example-modal-lg" id="ModalShow{{ $sis->id_siswa }}"
+                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-md modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title fw-bold poppins" id="exampleModalLabel">Detail
+                                                    Siswa
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body pe-0">
+                                                <div class="table-responsive row">
+                                                    <table class="ml-3">
+                                                        <tr class="border-bottom">
+                                                            <div class="text-center mb-2">
+                                                                <img style="border-radius:50%"
+                                                                    src="{{ asset('Foto_Siswa/' . $sis->foto) }}"
+                                                                    alt="" width="150" height="150">
+                                                            </div>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Nama Lengkap</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->nama }}</td>
+                                                        </tr>
+                                                        {{-- <tr class="border-bottom">
+                                                            <td class="fw-bold">Kelas</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>X TKJ 1</td>
+                                                        </tr> --}}
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Jenis Kelamin</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->gender }}
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">NIS</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->nis }}</td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">NISN</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->nisn }}</td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Tanggal Lahir</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->tanggal_lahir }}</td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Orang Tua</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->orang_tua }}</td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Alamat</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->alamat }}</td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Telepon</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>{{ $sis->nohp_ortu }}</td>
+                                                        </tr>
+                                                        <tr class="border-bottom">
+                                                            <td class="fw-bold">Jurusan</td>
+                                                            <td style="width: 1px;">:</td>
+                                                            <td>
+                                                                {{ $sis->jurusan }}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

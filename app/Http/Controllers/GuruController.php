@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Imports\GuruImport;
 use App\Models\Guru;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Ramsey\Uuid\Uuid;
 
@@ -45,6 +48,15 @@ class GuruController extends Controller
             }
 
             $data->save();
+
+            // create guru user
+            $user = new User();
+            $user->username = $request->nuptk;
+            $user->password = Hash::make($request->nuptk);
+            $user->role = 'Guru';
+            $user->save();
+            $user->id_guru;
+            DB::commit();
             return redirect('dataguru')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
         } catch (\Exception $e) {
             return redirect('dataguru')->with(['msg' => $e . 'Data Gagal Ditambah ', 'type' => 'error']);
@@ -106,5 +118,10 @@ class GuruController extends Controller
         } catch (\Exception $e) {
             return $e;
         }
+    }
+    public function showguru($id)
+    {
+        $showguru = Guru::findOrFail($id);
+        return view("backend.data_guru.index", compact('showguru'));
     }
 }

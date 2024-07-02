@@ -54,4 +54,11 @@ class KelasController extends Controller
             return $e;
         }
     }
+
+    public function deleteKelas($id)
+    {
+        $data = Kelas::findOrFail($id);
+        $data->delete();
+        return redirect('/kelas')->with(['msg' => 'Data Berhasi Di hapus !', 'type' => 'success']);
+    }
 }

@@ -34,9 +34,6 @@
                                         <span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span>
                                     </a>
                                 </div>
-                                <div class="view-profile">
-                                    <a href="#" class="btn btn-secondary btn-block">View Full Profile</a>
-                                </div>
                             </div>
                         </div>
                         <div class="card-footer">

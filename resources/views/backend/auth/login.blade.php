@@ -43,7 +43,7 @@
         </div>
         <div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
             <div class="container container-login container-transparent animated fadeIn">
-                <h3 class="text-center">Sign In To Admin</h3>
+                <h2 class="text-center">Login</h2>
                 <form action="{{ route('proseslogin') }}" method="POST">
                     @csrf
                     <div class="login-form">
@@ -57,7 +57,6 @@
                         </div>
                         <div class="form-group">
                             <label for="password" class="placeholder"><b>Password</b></label>
-                            <a href="#" class="link float-right">Forget Password ?</a>
                             <div class="position-relative">
                                 <input id="password" name="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" required>
@@ -86,16 +85,12 @@
                         <div class="form-group form-action-d-flex mb-3">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="rememberme">
-                                <label class="custom-control-label m-0" for="rememberme">Remember Me</label>
                             </div>
                             <!-- <button  class="btn btn-success login" > login</button> -->
-                            <button id="login"
-                                class="btn btn-secondary col-md-5 float-right mt-3 mt-sm-0 fw-bold  login">Sign
+                            <button id="login" class="btn btn-secondary   fw-bold  login">Sign
                                 In</button>
                         </div>
                         <div class="login-account">
-                            <span class="msg">Don't have an account yet ?</span>
-                            <a href="#" id="show-signup" class="link">Sign Up</a>
                         </div>
                     </div>
             </div>
