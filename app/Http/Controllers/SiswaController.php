@@ -69,6 +69,7 @@ class SiswaController extends Controller
             $user->role = 'Siswa';
             $user->save();
             DB::commit();
+
             return redirect('datasiswa')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -128,7 +129,6 @@ class SiswaController extends Controller
         Excel::import(new SiswaImport, $request->file('file'));
         return redirect('datasiswa')->with(['msg' => 'Data Berhasi Di Import !', 'type' => 'success']);
     }
-
     public function siswaShow($id)
     {
         $show = Siswa::findOrFail($id);

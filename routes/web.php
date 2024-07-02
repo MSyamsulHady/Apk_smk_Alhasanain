@@ -34,8 +34,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
-//     // return view('welcome');
-//     phpinfo();
+//     return view('welcome');
 // });
 Route::controller(LandingController::class)->group(function () {
     Route::get('/', 'home')->name('home');
