@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Absen;
 use App\Models\Pertemuan;
 use App\Models\Rombel;
-use App\Models\Semester;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\Siswa;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -172,5 +174,64 @@ class AbsenController extends Controller
 
 
         return view('backend.bk.rekapAbsen', compact('dp', 'absenSiswa', 'siswa', 'data', 'jumlahPertemuan', 'per', 'kehadiranSiswa'));
+    }
+    public function downloadRekapAbsenPDF($id)
+    {
+        $data = Rombel::with('pertemuan', 'trx.siswa')->findOrFail($id);
+        $siswa = Siswa::all();
+        $dp = Pertemuan::find($id);
+
+        $jumlahPertemuan = $dp->pertemuanKe;
+        $per = [];
+
+        for ($i = 1; $i <= $jumlahPertemuan; $i++) {
+            $per[] = "p$i";
+        }
+
+        $kehadiranSiswa = [];
+        $absenSiswa = [];
+
+        foreach ($data->trx as $trx) {
+            $absensi = Absen::where('id_trx_rombel_siswa', $trx->id_trx_rombel_siswa)
+                ->where('id_pertemuan', $dp->id_pertemuan)
+                ->get();
+            $totalHadir = 0;
+            $totalIzin = 0;
+            $totalSakit = 0;
+            $totalAlpa = 0;
+            $totalBolos = 0;
+
+            foreach ($absensi as $absen) {
+                $keterangan = $absen->keterangan ?? '-';
+                $pertemuan = $absen->pertemuan;
+                $absenSiswa[$trx->id_trx_rombel_siswa][$absen->pertemuan] = $keterangan;
+                if (!isset($absenSiswa[$trx->id_trx_rombel_siswa])) {
+                    $absenSiswa[$trx->id_trx_rombel_siswa] = [];
+                }
+
+                $absenSiswa[$trx->id_trx_rombel_siswa][$pertemuan] = $keterangan;
+                if ($keterangan == 'H') {
+                    $totalHadir++;
+                } elseif ($keterangan == 'I') {
+                    $totalIzin++;
+                } elseif ($keterangan == 'S') {
+                    $totalSakit++;
+                } elseif ($keterangan == 'A') {
+                    $totalAlpa++;
+                } elseif ($keterangan == 'B') {
+                    $totalBolos++;
+                }
+            }
+            $kehadiranSiswa[$trx->id_trx_rombel_siswa] = [
+                'total_hadir' => $totalHadir,
+                'total_izin' => $totalIzin,
+                'total_sakit' => $totalSakit,
+                'total_alpa' => $totalAlpa,
+                'total_bolos' => $totalBolos,
+            ];
+        }
+
+        $pdf = FacadePdf::loadView('backend.bk.rekapAbsenPDF', compact('dp', 'absenSiswa', 'siswa', 'data', 'jumlahPertemuan', 'per', 'kehadiranSiswa'));
+        return $pdf->download('rekap-absen.pdf');
     }
 }
