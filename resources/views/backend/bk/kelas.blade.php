@@ -14,11 +14,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <div class="mb-3">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
-                            </button>
-                        </div>
+
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -81,6 +77,7 @@
                                                     <th>No</th>
                                                     <th>Nis</th>
                                                     <th>Nama</th>
+                                                    <th>Jurusan</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -90,6 +87,7 @@
                                                         <td class="td-left">{{ $loop->iteration }}</td>
                                                         <td>{{ $pst->nis }}</td>
                                                         <td>{{ $pst->nama }}</td>
+                                                        <td>{{ $pst->jurusan }}</td>
                                                         <td>
                                                             <input type="checkbox" name="id_siswa[]"
                                                                 value="{{ $pst->id_siswa }}">
