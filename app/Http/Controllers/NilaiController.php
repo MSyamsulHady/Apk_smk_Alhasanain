@@ -9,6 +9,7 @@ use App\Models\Rombel;
 use App\Models\Semester;
 use App\Models\Siswa;
 use App\Models\TrxRombel_siswa;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -37,29 +38,30 @@ class NilaiController extends Controller
 
         return view('backend.bk.nilai', compact('model'));
     }
-    public function kelolaNilai($id_kelas)
+    public function kelolaNilai($id)
     {
-        $nilai = Nilai::where('id_kelas', $id_kelas)->get()->dd();
+        $model = Rombel::with(['kelas.trx_siswa.siswa.nilai' => function ($q) use ($id) {
+            $q->where('id_rombel', $id);
+        }])->findOrFail($id);
 
-        $kelas =  Kelas::findOrFail($id_kelas)->rombel->groupBy('id_kelas');
-
-        $model = new Nilai();
-        $mapel = Pelajaran::where('id');
-        // $data = $model->with('rombel', 'rombel.kelas', 'siswa')->where('id_rombel', $id_rombel)->get();
-        $jmlh = $kelas->first()->count() + 1;
-
-        $siswa = TrxRombel_siswa::with('siswa')->where('id_kelas', $id_kelas)->select('id_siswa')->groupBy('id_siswa')->get();
-        return view('backend.bk.kelola_nilai', compact('model', 'mapel', 'siswa', 'kelas', 'jmlh'));
+        return view('backend.bk.detail_nilai', compact('model'));
     }
-    public function InputNilai(Request $req)
+    public function InputNilai(Request $req, $id)
     {
-        // $nilais = [];
-        // foreach($req->all() as $key => $val){
-        //     foreach($val as $nilai){
-        //     if(!empty($nilai)){
-        //         $nilais[]=
-        //     }
-        //     }
-        // }
+        // dd($req->all());
+        try {
+            $nilais = [];
+            foreach ($req->all() as $key => $val) {
+                if ($key != "_token") {
+                    $nilais[] = ['id_rombel' => $id, 'id_siswa' => $key, 'nilai' => $val];
+                }
+            }
+            // dd($nilais);
+            Nilai::insert($nilais);
+            return back()->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
+        } catch (\Exception $e) {
+            // return abort('404');
+            return $e->getMessage();
+        }
     }
 }

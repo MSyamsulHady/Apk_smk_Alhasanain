@@ -5,7 +5,7 @@
             <div class="page-inner py-5">
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                     <div>
-                        <h2 class="text-white pb-2 fw-bold ">Nilai Siswa</h2>
+                        <h2 class="text-white pb-2 fw-bold ">Rekapitulasi</h2>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kelas</th>
-                                        <th>Mata Pelajaran</th>
+                                        <th>Jumlah Pelajaran</th>
                                         <th>#Action</th>
                                     </tr>
                                 </thead>
@@ -31,10 +31,10 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->kelas->nama_kelas }}</td>
-                                            <td>{{ $item->mapel->nama_mapel }}</td>
+                                            <td>{{ $item->jml_mapel }}</td>
                                             <td>
-                                                <a href="{{ route('kelola_nilai', $item->id_rombel) }}"
-                                                    class="btn btn-sm btn-success">Pilih Kelas</a>
+                                                <a href="{{ route('cetakLaporan', $item->kelas->id_kelas) }}"
+                                                    class="btn btn-sm btn-info">Pilih Kelas</a>
                                             </td>
                                         </tr>
                                     @endforeach

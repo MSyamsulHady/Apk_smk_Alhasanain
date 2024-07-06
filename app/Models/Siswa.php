@@ -23,10 +23,9 @@ class Siswa extends Model
         'jurusan',
         'foto'
     ];
-
     public function nilai()
     {
-        return $this->hasMany(Nilai::class, 'id_nilai');
+        return $this->hasMany(Nilai::class, 'id_siswa', 'id_siswa');
     }
 
     public function Absen()
