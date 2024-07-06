@@ -61,16 +61,6 @@ class SiswaController extends Controller
                 $data->foto = $name;
             }
             $data->save();
-
-            // memasukan user
-            $user = new User();
-            $user->username = $request->nis;
-            $user->password = Hash::make($request->nis);
-            $user->role = 'Siswa';
-            $user->id_siswa = $data->id_siswa;
-            $user->save();
-            DB::commit();
-
             return redirect('datasiswa')->with(['msg' => 'Data Berhasil Ditambah', 'type' => 'success']);
         } catch (\Exception $e) {
             DB::rollBack();

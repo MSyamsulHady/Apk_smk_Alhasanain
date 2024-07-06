@@ -68,20 +68,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="tahun_ajaran">
-                                <h5>Semester</h5>
-                            </label>
-                            <select class="custom-select" id="inputGroupSelect02" name="id_semester">
-                                <option selected> --pilih Semester--
-                                </option>
-                                @foreach ($semester as $sm)
-                                    <option value="{{ $sm->id_semester }}">
-                                        Semester {{ $sm->nama_semester . '-->' . $sm->tahun_ajaran }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="form-group form-action-d-flex mb-3">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="rememberme">

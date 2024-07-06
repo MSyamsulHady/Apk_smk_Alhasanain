@@ -30,6 +30,10 @@ class Rombel extends Model
     }
     public function pertemuan()
     {
-        return $this->hasMany(Pertemuan::class, 'id_rombel', 'id_rombel');
+        return $this->hasOne(Pertemuan::class, 'id_rombel', 'id_rombel');
+    }
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'id_nilai', 'id_nilai');
     }
 }

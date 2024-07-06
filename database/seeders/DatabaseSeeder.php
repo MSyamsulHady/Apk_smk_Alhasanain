@@ -36,11 +36,7 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('123456'),
                 'role' => 'Admin',
             ],
-            [
-                'username' => 'hasyim',
-                'password' => Hash::make('123456'),
-                'role' => 'kepala Sekolah',
-            ],
+
 
 
         );

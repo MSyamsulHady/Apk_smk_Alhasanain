@@ -86,7 +86,7 @@
                                     {{ $absenSiswa[$item->id_trx_rombel_siswa][$p] }}
                                 @endif
                             @else
-                                <select name="{{ $p }}[{{ $item->id_trx_rombel_siswa }}]"
+                                {{-- <select name="{{ $p }}[{{ $item->id_trx_rombel_siswa }}]"
                                     class="keterangan-select" required>
                                     <option value="">?</option>
                                     <option value="H">H</option>
@@ -94,7 +94,7 @@
                                     <option value="S">S</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
-                                </select>
+                                </select> --}}
                             @endif
                         </td>
                     @endforeach

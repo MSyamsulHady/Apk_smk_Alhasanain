@@ -9,50 +9,27 @@
                     <div class="card card-profile">
                         <div class="card-header" style="background-image: url('../assets/img/blogpost.jpg')">
                             <div class="profile-picture">
-                                <div class="avatar avatar-xl">
-                                    <img src="{{ asset('asset_backend') }}/img/profile.jpg" alt="..."
-                                        class="avatar-img rounded-circle">
+                                <div class="avatar avatar-xl mr-2">
+                                    <img width="100" height="100"
+                                        src="https://img.icons8.com/metro/100/user-male-circle.png"
+                                        alt="user-male-circle" />
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="user-profile text-center">
-                                <div class="name">Hizrian, 19</div>
-                                <div class="job">Frontend Developer</div>
-                                <div class="desc">A man who hates loneliness</div>
-                                <div class="social-media">
-                                    <a class="btn btn-info btn-twitter btn-sm btn-link" href="#">
-                                        <span class="btn-label just-icon"><i class="flaticon-twitter"></i> </span>
-                                    </a>
-                                    <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
-                                        <span class="btn-label just-icon"><i class="flaticon-google-plus"></i> </span>
-                                    </a>
-                                    <a class="btn btn-primary btn-sm btn-link" rel="publisher" href="#">
-                                        <span class="btn-label just-icon"><i class="flaticon-facebook"></i> </span>
-                                    </a>
-                                    <a class="btn btn-danger btn-sm btn-link" rel="publisher" href="#">
-                                        <span class="btn-label just-icon"><i class="flaticon-dribbble"></i> </span>
-                                    </a>
-                                </div>
-                                <div class="view-profile">
-                                    <a href="#" class="btn btn-secondary btn-block">View Full Profile</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row user-stats text-center">
-                                <div class="col">
-                                    <div class="number">125</div>
-                                    <div class="title">Post</div>
-                                </div>
-                                <div class="col">
-                                    <div class="number">25K</div>
-                                    <div class="title">Followers</div>
-                                </div>
-                                <div class="col">
-                                    <div class="number">134</div>
-                                    <div class="title">Following</div>
-                                </div>
+
+
+                                @if ($user->role == 'Guru' && $user->guru)
+                                    <p class="card-text">{{ $user->guru->nama }}</p>
+                                    <p class="card-text">{{ $user->role }}</p>
+                                    <p class="card-text">{{ $user->guru->alamat }}</p>
+                                @elseif($user->role == 'Siswa' && $user->siswa)
+                                    <p class="card-text h2"> {{ $user->siswa->nama }}</p>
+                                    <p class="card-tex h3">{{ $user->role }}</p>
+                                    <p class="card-text h3">{{ $user->siswa->alamat }}</p>
+                               
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -63,9 +40,8 @@
                             <div class="row row-nav-line">
                                 <ul class="nav nav-tabs nav-line nav-color-secondary w-100 pl-3" role="tablist">
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile"
-                                            role="tab" aria-selected="false">Profile</a> </li>
-                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings"
-                                            role="tab" aria-selected="false">Ganti Password</a> </li>
+                                            role="tab" aria-selected="false">Profile</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -74,15 +50,34 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
                                         <label>Name</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Name"
-                                            value="Hizrian">
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <p class="card-text ">{{ $user->guru->nama }}</p>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <p class="card-text"> {{ $user->siswa->nama }}</p>
+                                        @elseif ($user->role == 'Admin')
+                                            <p class="card-text">Administrator</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group form-group-default">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Name"
-                                            value="hello@example.com">
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <label>NUPTK</label>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <label>NISN</label>
+                                        @elseif ($user->role == 'Admin')
+                                            <label for="Email">Email</label>
+                                        @endif
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <p class="card-text ">{{ $user->guru->nuptk }}</p>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <p class="card-text"> {{ $user->siswa->nisn }}</p>
+                                        @elseif($user->role == 'Admin')
+                                            <p class="card-text"> Administrator@gmail.com</p>
+                                        @elseif($user->role == 'Kepala Sekolah')
+                                            <p class="card-text"> Administrator@gmail.com</p>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -90,24 +85,43 @@
                                 <div class="col-md-4">
                                     <div class="form-group form-group-default">
                                         <label>Birth Date</label>
-                                        <input type="text" class="form-control" id="datepicker" name="datepicker"
-                                            value="03/21/1998" placeholder="Birth Date">
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <p class="card-text"> {{ $user->guru->tgl_lahir }}</p>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <p class="card-text">{{ $user->siswa->tanggal_lahir }}</p>
+                                        @elseif($user->role == 'Admin')
+                                            <p class="card-text">00-00-00</p>
+                                        @elseif($user->role == 'Kepala Sekolah' && $user->siswa)
+                                            <p class="card-text">{{ $user->siswa->tanggal_lahir }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group form-group-default">
                                         <label>Gender</label>
-                                        <select class="form-control" id="gender">
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <p class="card-text"> {{ $user->guru->gender }}</p>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <p class="card-text"> {{ $user->siswa->gender }}</p>
+                                        @elseif($user->role == 'Admin')
+                                            <p class="card-text">Laki Laki</p>
+                                        @elseif($user->role == 'Kelapa Sekolah')
+                                            <p class="card-text">Laki Laki</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group form-group-default">
                                         <label>Phone</label>
-                                        <input type="text" class="form-control" value="+62008765678" name="phone"
-                                            placeholder="Phone">
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <p class="card-text">{{ $user->guru->tlp }}</p>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <p class="card-text"> {{ $user->siswa->nohp_ortu }}</p>
+                                        @elseif($user->role == 'Admin')
+                                            <p class="card-text">081XXXXXXXXX</p>
+                                        @elseif($user->role == 'Kepala Sekolah' && $user->siswa)
+                                            <p class="card-text">081XXXXXXXXX</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -115,29 +129,23 @@
                                 <div class="col-md-12">
                                     <div class="form-group form-group-default">
                                         <label>Address</label>
-                                        <input type="text" class="form-control"
-                                            value="st Merdeka Putih, Jakarta Indonesia" name="address"
-                                            placeholder="Address">
+                                        @if ($user->role == 'Guru' && $user->guru)
+                                            <p class="card-text">{{ $user->guru->alamat }}</p>
+                                        @elseif($user->role == 'Siswa' && $user->siswa)
+                                            <p class="card-text"> {{ $user->siswa->alamat }}</p>
+                                        @elseif($user->role == 'Admin')
+                                            <p class="card-text">Desa Beraim</p>
+                                        @elseif($user->role == 'Kepala Sekolah')
+                                            <p class="card-text">Desa Beraim</p>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mt-3 mb-1">
-                                <div class="col-md-12">
-                                    <div class="form-group form-group-default">
-                                        <label>About Me</label>
-                                        <textarea class="form-control" name="about" placeholder="About Me" rows="3">A man who hates loneliness</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-right mt-3 mb-3">
-                                <button class="btn btn-success">Save</button>
-                                <button class="btn btn-danger">Reset</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        {{-- </div> --}}
-    @endsection
+    </div>
+    {{-- </div> --}}
+@endsection

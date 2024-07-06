@@ -12,6 +12,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -20,68 +21,106 @@ class AuthController extends Controller
     {
         $user = User::all();
         $use = Auth::user();
-        $semes = $user->semesters;
-        return view('backend.auth.data_user', compact('user', 'use', 'semes'));
+
+        return view('backend.auth.data_user', compact('user', 'use'));
     }
 
 
     // login
     public function login()
     {
-        $semester = Semester::all();
+        if (Auth::check()) {
+            $user = Auth::user();
 
-
-        if ($user =
-            Auth::user()
-
-        ) {
-            if ($user->role == 'admin') {
-                return redirect()->intended('dashboard');
-            } elseif ($user->role == 'guru') {
-                return redirect()->intended('dashboard');
-            } elseif ($user->role == 'siswa') {
-                return redirect()->intended('dashboard');
-            } elseif ($user->role == 'kepsek') {
-                return redirect()->intended('dashboard');
-            } elseif ($user->role == 'wakasek') {
-                return redirect()->intended('dashboard');
-            } else {
-                return redirect()->intended('login');
+            switch ($user->role) {
+                case 'admin':
+                    return redirect()->intended('dashboard');
+                    break;
+                case 'Guru':
+                    return redirect()->intended('dashboard');
+                    break;
+                default:
+                    return redirect()->intended('login');
+                    break;
             }
         }
-        return view('backend.auth.login', compact('semester'));
+        return view('backend.auth.login');
     }
 
-    // proses login user
+
+
+    // Metode lain
     public function prosesLogin(Request $request)
     {
-        $semester = Semester::all();
+        $semesterAactive = Semester::where('status', 'Aktif')->first();
+
+
         $request->validate([
             'username' => 'required',
             'password' => 'required',
-            'id_semester' => 'required'
         ]);
 
-        $kredensial = $request->only('username', 'password');
-        $kredensial['id_semester'] = $request->tahun_ajaran;
-        if (Auth::attempt($kredensial)) {
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            session()->put('id_semester', $request->id_semester);
+            $request->session()->put('semester', $semesterAactive);
+            // Ambil user yang berhasil login
             $user = Auth::user();
-            $semester = $user->semester;
-            if ($user->role == 'admin') {
-                return redirect()->intended('dashboard')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
-            } elseif ($user->role == 'siswa') {
-                return redirect()->intended('dashboard')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
-            } elseif ($user->role == 'guru') {
-                return redirect()->intended('dashboard')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
-            } else {
-                return redirect()->intended('login');
-            }
-        } else {
-            return  redirect()->back()->with(['msg' => 'Username atau Password Salah', 'type' => 'error']);
+
+            // Logging
+            Log::info('User logged in', ['username' => $user->username]);
+            return redirect()->route('dashboard')->with('msg', 'Selamat Datang!');
+            // Cek role user
+            // switch ($user->role) {
+            //     case 'Admin':
+            //         $activeSemester = $this->getActiveSemester();
+
+            //         // Logging
+            //         Log::info('Active Semester', ['activeSemester' => $activeSemester ? $activeSemester->id_semester : 'No active semester found']);
+
+            //         if ($activeSemester) {
+            //             Session::put('active_semester', $activeSemester->id_semester);
+            //             Session::put('tahun_ajaran', $activeSemester->tahun_ajaran);
+            //             Session::put('nama_semester', $activeSemester->nama_semester);
+            //             return redirect()->intended('dashboard')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
+            //         } else {
+            //             Auth::logout();
+            //             return redirect()->back()->with(['msg' => 'Tidak ada semester yang aktif.', 'type' => 'error']);
+            //         }
+            //         break;
+
+            //     case 'Guru':
+            //         $activeSemester = $this->getActiveSemesterForUser($user);
+
+            //         // Logging
+            //         Log::info('Active Semester for Guru', ['activeSemester' => $activeSemester ? $activeSemester->id_semester : 'No active semester found for Guru']);
+
+            //         if ($activeSemester) {
+            //             Session::put('active_semester', $activeSemester->id_semester);
+            //             Session::put('tahun_ajaran', $activeSemester->tahun_ajaran);
+            //             Session::put('nama_semester', $activeSemester->nama_semester);
+            //             return redirect()->intended('welcome')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
+            //         } else {
+            //             Auth::logout();
+            //             return redirect()->back()->with(['msg' => 'Tidak ada semester yang aktif untuk tahun ajaran Anda.', 'type' => 'error']);
+            //         }
+            //         break;
+
+            //     default:
+            //         return redirect()->intended('login');
+            //         break;
+            // }
         }
+
+        return redirect()->back()->with(['msg' => 'Username atau Password Salah', 'type' => 'error']);
     }
+
+
+
+
+
+
     //logout
 
     public function logout(Request $request)
@@ -89,7 +128,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home');
+        return redirect()->route('home')->with(['msg' => 'berhasil LogOut', 'type' => 'success']);
     }
 
     public function dashboard()

@@ -87,14 +87,15 @@
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" ">No</th>
-                                                            <th rowspan="2">Nis</th>
-                                                            <th rowspan="2">Nama</th>
-                                                            <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
-                                                            <th colspan="5" class="text-center">Jumlah</th>
-                                                        </tr>
-                                                        <tr>
-                                                               @foreach ($per as $p)
-                                                <td>{{ $p }}</td>
+                                                    <th rowspan="2">Nis</th>
+                                                    <th rowspan="2">Nama</th>
+                                                    <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
+                                                    <th colspan="5" class="text-center">Jumlah</th>
+                                                    </tr>
+                                                 @foreach ($per as $p)
+                                                <th>
+                                                    {{ $p }}
+                                                </th>
                                                 @endforeach
                                                 <td class="text-center">H</td>
                                                 <td class="text-center">I</td>
@@ -113,21 +114,24 @@
                                                     <td>{{ $item->siswa->nama }}</td>
                                                     @foreach ($per as $p)
                                                         <td>
-                                                            @if (!empty($absenSiswa[$item->id_trx_rombel_siswa]))
-                                                                @if (!empty($absenSiswa[$item->id_trx_rombel_siswa][$p]))
-                                                                    {{ $absenSiswa[$item->id_trx_rombel_siswa][$p] }}
-                                                                @else
-                                                                    <select
-                                                                        name="{{ $p }}[{{ $item->id_trx_rombel_siswa }}]"
-                                                                        class="keterangan-select" required>
-                                                                        <option value="">?</option>
-                                                                        <option value="H">H</option>
-                                                                        <option value="I">I</option>
-                                                                        <option value="S">S</option>
-                                                                        <option value="A">A</option>
-                                                                        <option value="B">B</option>
-                                                                    </select>
-                                                                @endif
+                                                            @php
+                                                                $absenValue = !empty(
+                                                                    $absenSiswa[$item->id_trx_rombel_siswa][$p]
+                                                                )
+                                                                    ? $absenSiswa[$item->id_trx_rombel_siswa][$p]
+                                                                    : null;
+                                                            @endphp
+                                                            @if ($absenValue !== null)
+                                                                <select
+                                                                    name="{{ $p }}[{{ $item->id_trx_rombel_siswa }}]"
+                                                                    class="keterangan-select" required>
+                                                                    <option value="">{{ $absenValue }}</option>
+                                                                    <option value="H">H</option>
+                                                                    <option value="I">I</option>
+                                                                    <option value="S">S</option>
+                                                                    <option value="A">A</option>
+                                                                    <option value="B">B</option>
+                                                                </select>
                                                             @else
                                                                 <select
                                                                     name="{{ $p }}[{{ $item->id_trx_rombel_siswa }}]"
@@ -171,4 +175,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

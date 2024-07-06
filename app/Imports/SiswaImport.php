@@ -32,16 +32,6 @@ class SiswaImport implements ToCollection
                 $data['foto'] = !empty($row[10]) ? $row[10] : '';
                 // dd($row);
                 $siswa = Siswa::create($data);
-                Log::info('Created Siswa with ID: ' . $siswa->id_siswa);
-
-                // Buat user berdasarkan data guru yang baru dibuat
-                $user = User::create([
-                    'username' => $data['nis'],
-                    'password' => Hash::make($data['nis']),
-                    'role' => 'Siswa',
-                    'id_siswa' => $siswa->id_siswa,
-                ]);
-                Log::info('Created User: ', $user->toArray());
             }
             $i++;
         }

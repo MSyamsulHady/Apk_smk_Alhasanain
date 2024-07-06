@@ -15,14 +15,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_semester')->nullable();
-            $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('id_siswa')->nullable();
-            $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('id_guru')->nullable();
             $table->foreign('id_guru')->references('id_guru')->on('gurus')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('username');
-            $table->enum('role', ['Admin', 'Siswa', 'Guru', 'Kepala Sekolah'])->default('siswa');
+            $table->enum('role', ['Admin', 'Guru'])->default('Guru');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DetailKelasController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\HalamanSiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KelasPelajaranController;
 use App\Http\Controllers\LandingController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PelanggaranController;
 use App\Http\Controllers\PertemuanController;
+use App\Http\Controllers\ProfileControler;
 use App\Http\Controllers\rombel_kelasController;
 use App\Http\Controllers\RombelController;
 use App\Http\Controllers\SanksiController;
@@ -48,9 +50,17 @@ Route::controller(LandingController::class)->group(function () {
 //     return view('backend.dashboard');
 // })->name('dashboard')->middleware('auth');
 
-Route::get('/profile', function () {
-    return view('backend.profile');
-})->name('profile');
+// Route::get('/profile_siswa', function () {
+//     return view('backend.bk.profile_siswa');
+// })->name('profile');
+
+Route::controller(HalamanSiswaController::class)->group(function () {
+    Route::get('/wellcome', 'index')->name('wellcome');
+});
+
+Route::controller(ProfileControler::class)->group(function () {
+    Route::get('/profile', 'index')->name('profile');
+});
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('DataUser', 'index')->name('datauser');
@@ -112,8 +122,8 @@ Route::controller(AbsenController::class)->group(function () {
     Route::get('/absen', 'index')->name('absen')->middleware('auth');
     Route::get('/absenSiswa/{id}', 'absen')->name('kelola_absen')->middleware('auth');
     Route::post('simpan/{id}/{id_pertemuan}', 'SimpanAbsen')->name('simpanAbsen')->middleware('auth');
+    Route::put('/editAbsen/{id}', 'updateAbsen')->name('update_absen');
     Route::get('rekapAbsen/{id}', 'rekapAbsen')->name('rekapAbsen')->middleware('auth');
-    Route::get('/rekap-absen/pdf/{id}', 'downloadRekapAbsenPDF')->name('rekapAbsen.pdf');
 });
 
 

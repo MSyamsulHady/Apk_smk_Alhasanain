@@ -29,20 +29,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($absen as $ab)
+                                    @foreach ($model as $ab)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $ab->rombel->kelas->nama_kelas }}</td>
-                                            <td>{{ $ab->rombel->mapel->nama_mapel }}</td>
+                                            <td>{{ $ab->kelas->nama_kelas }}</td>
+                                            <td>{{ $ab->mapel->nama_mapel }}</td>
+
                                             <td>{{ $ab->hari }}</td>
 
-                                            <td>{{ $ab->rombel->guru->nama }}</td>
-                                            <td>{{ $ab->rombel->kelas->semester->nama_semester }}
+                                            <td>{{ $ab->guru->nama }}</td>
+                                            <td>{{ $ab->kelas->semester->nama_semester }}
 
-                                                {{ $ab->rombel->kelas->semester->tahun_ajaran }}</td>
+                                                {{ $ab->kelas->semester->tahun_ajaran }}</td>
 
                                             <td>
-                                                <a href="{{ route('kelola_absen', $ab->id_pertemuan) }}"
+                                                <a href="{{ route('kelola_absen', $ab->id_rombel) }}"
                                                     class="btn btn-success pb-1 pt-0 px-2 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-list-columns-reverse"
@@ -53,7 +54,7 @@
 
                                                 </a>
 
-                                                <a href="{{ route('rekapAbsen', $ab->id_pertemuan) }}"
+                                                <a href="{{ route('rekapAbsen', $ab->id_rombel) }}"
                                                     class="btn btn-primary pb-1 pt-0 px-2 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-printer-fill me-1"
@@ -73,114 +74,10 @@
 
                             </table>
                         </div>
-                        {{-- modal Add --}}
-                        {{-- <div class="modal fade " id="ModalAdd" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Input Absen</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="{{ route('tambahAbsen') }}" method="POST">
-                                        @csrf
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-lg">
-                                                    <div class="form-group">
-                                                        <label for="nama_mapel">
-                                                            <h5> Kelas</h5>
-                                                        </label>
-                                                        <select class="custom-select" id="inputGroupSelect02"
-                                                            name="id_pertemuan">
-                                                            <option selected> --pilih Kelas--
-                                                            </option>
-                                                            @foreach ($kelas as $a)
-                                                                <option value="{{ $a->pertemuan->rombel->kelas }}">
-                                                                    {{ $a->pertemuan->rombel->kelas->nama_kelas }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="nama_mapel">
-                                                            <h5> Mata Pelajaran</h5>
-                                                        </label>
-                                                        <select class="custom-select" id="pertemuan" name="id_pertemuan">
-                                                            <option selected> --pilih Mata Pelajaran--
-                                                            </option>
-                                                            @foreach ($absen as $a)
-                                                                <option value="{{ $a->pertemuan->rombel }}">
-                                                                    {{ $a->pertemuan->rombel->mapel->nama_mapel }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="nama_mapel">
-                                                            <h5> Guru Pengampu</h5>
-                                                        </label>
-                                                        <select class="custom-select" id="pertemuan" name="id_pertemuan">
-                                                            <option selected> --pilih guru pengampu--
-                                                            </option>
-                                                            @foreach ($absen as $a)
-                                                                <option value="{{ $a->pertemuan->rombel }}">
-                                                                    {{ $a->pertemuan->rombel->guru->nama }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    {{-- <div class="form-group">
-                                                        <label for="">Guru pengampu</label>
-                                                        <input type="text" class="form-control" id="guru" readonly>
-                                                        <input type="hidden" name="id_guru" id="id_guru">
-                                                    </div> --}}
 
-                        {{-- </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Tutup</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> --}}
-
-
-                        {{-- end modal Add --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-{{-- @section('script')
-    <script>
-        $(document).ready(function() {
-            $('#pertemuan').on('change', function() {
-                let selectedValue = this.value;
-
-                $.ajax({
-                    url: '/ambilGuru/' + selectedValue,
-                    type: 'GET',
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            $('#guru').val(response.nama);
-                            $('#id_guru').val(response.id_guru);
-                        } else {
-                            alert('Guru tidak ditemukan');
-                        }
-                    },
-                    error: function() {
-                        alert('Terjadi kesalahan. Silakan coba lagi.');
-                    }
-                });
-            });
-        });
-    </script>
-@endsection --}}

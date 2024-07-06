@@ -19,7 +19,9 @@ class KelasController extends Controller
 
         $sesi = session()->get('id_semester');
         $siswa = Siswa::all();
-        $kelas = Kelas::with('semester')->where('id_semester', $sesi)->get();
+        $kelas = Kelas::whereHas('semester', function ($query) {
+            $query->where('status', 'Aktif');
+        })->get();
         // dd($kelas);
         return view('backend.bk.kelas', compact('semester', 'kelas', 'siswa'));
     }

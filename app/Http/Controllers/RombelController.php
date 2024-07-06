@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Pelajaran;
 use App\Models\Rombel;
+use App\Models\Semester;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -15,14 +16,26 @@ class RombelController extends Controller
 {
     public function index()
     {
-
+        // Ambil data semua pelajaran, kelas, dan guru
         $mapel = Pelajaran::all();
         $kelas = Kelas::all();
         $guru = Guru::all();
-        $data = Rombel::with('kelas', 'guru', 'mapel')->get();
-        return view('backend.bk.rombel', compact('data', 'mapel', 'kelas', 'guru'));
-    }
 
+        // Ambil semester yang aktif
+        $activeSemester = Semester::where('status', 'Aktif')->first();
+
+        if (!$activeSemester) {
+            return redirect()->back()->with('error', 'Tidak ada semester yang aktif.');
+        }
+
+        // Ambil data rombel yang terkait dengan semester aktif
+        $data = Rombel::whereHas('kelas', function ($query) use ($activeSemester) {
+            $query->where('id_semester', $activeSemester->id_semester);
+        })->with('kelas', 'guru', 'mapel')->get();
+
+        // Tampilkan view dengan data yang sudah dipersiapkan
+        return view('backend.bk.rombel', compact('data', 'mapel', 'kelas', 'guru', 'activeSemester'));
+    }
     public function addRombel(Request $request)
     {
         $request->validate([

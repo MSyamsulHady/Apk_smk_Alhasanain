@@ -11,26 +11,51 @@ use App\Models\Semester;
 use Carbon\Carbon;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class PertemuanController extends Controller
 {
     public function index()
     {
+
         //
-        $date = Carbon::now();
 
-        // Atur locale ke bahasa Indonesia
-        Carbon::setLocale('id');
+        {
+            // Atur locale ke bahasa Indonesia
+            Carbon::setLocale('id');
+            $date = Carbon::now();
+            $dayName = $date->translatedFormat('l');
 
-        // Format tanggal menjadi nama hari dalam bahasa Indonesia
-        $dayName = $date->translatedFormat('l');
-        $semester = Semester::all();
-        $rombel = Rombel::with('kelas', 'mapel', 'guru')->get();
-        $jadwal = Pertemuan::with('rombel')->get();
+            // Ambil semester aktif dari session atau dari database
+            $activeSemester = $this->getActiveSemester();
 
-        return view('backend.bk.jadwal', compact('jadwal', 'rombel', 'semester'));
+            if (!$activeSemester) {
+                return redirect()->back()->with(['msg' => 'Tidak ada semester yang aktif.', 'type' => 'error']);
+            }
+
+            // Ambil data rombel dan jadwal berdasarkan semester aktif
+            $semester = Semester::all();
+            $rombel = Rombel::with('kelas', 'mapel', 'guru')
+                ->whereHas('kelas.semester', function ($query) use ($activeSemester) {
+                    $query->where('id_semester', $activeSemester->id_semester);
+                })->get();
+
+            $jadwal = Pertemuan::with('rombel')
+                ->where('id_semester', $activeSemester->id_semester)
+                ->get();
+
+            return view('backend.bk.jadwal', compact('jadwal', 'rombel', 'semester', 'dayName'));
+        }
     }
+
+    // Metode untuk mendapatkan semester aktif dari database
+    protected function getActiveSemester()
+    {
+        return Semester::where('status', 'Aktif')->first();
+    }
+
+
     public function addPertemuan(Request $request)
     {
         try {

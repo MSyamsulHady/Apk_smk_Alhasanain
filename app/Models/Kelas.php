@@ -43,7 +43,7 @@ class Kelas extends Model
         return $this->hasMany(Rombel::class, 'id_kelas', 'id_kelas');
     }
 
-
+  
     /**
      * Get all of the comments for the Kelas
      *

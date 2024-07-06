@@ -21,4 +21,8 @@ class Guru extends Model
     {
         return $this->belongsTo(Kelas::class, 'id_kelas', 'id_kelas');
     }
+    public function rombels()
+    {
+        return $this->hasMany(Rombel::class, 'id_guru', 'id_guru');
+    }
 }

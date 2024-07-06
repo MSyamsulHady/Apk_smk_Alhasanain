@@ -77,7 +77,8 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="copyright ml-auto">
-                        2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com/">ThemeKita</a>
+                        copyright @ 2023-2024
+                        Smk Al Hasanain
                     </div>
                 </div>
             </footer>
@@ -109,7 +110,8 @@
                                                     class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
-                                                <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle border border-white">
+                                                <img src="{{ asset('asset_backend') }}/img/chadengle.jpg" alt="..."
+                                                    class="avatar-img rounded-circle border border-white">
                                             </div>
                                             <div class="avatar">
                                                 <img src="{{ asset('asset_backend') }}/img/mlane.jpg" alt="..."
@@ -521,27 +523,29 @@
                 </div>
             </div>
         </div>
-    </div>
+        <script src="{{ asset('asset_backend') }}/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
-    <!-- Bootstrap Notify -->
-    <script src="{{ asset('asset_backend') }}/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+        <script src="{{ asset('asset_backend') }}/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
-    <!-- Bootstrap Toggle -->
-    <script src="{{ asset('asset_backend') }}/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+        <script src="{{ asset('asset_backend') }}/js/atlantis.min.js"></script>
 
-    <!-- Select2 -->
-    <script src="{{ asset('asset_backend') }}/js/plugin/select2/select2.full.min.js"></script>
 
-    <!-- Owl Carousel -->
-    <script src="{{ asset('asset_backend') }}/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+        <!-- Bootstrap Notify -->
+        <script src="{{ asset('asset_backend') }}/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 
-    <!-- Magnific Popup -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Bootstrap Toggle -->
+        <script src="{{ asset('asset_backend') }}/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 
-    <!-- Atlantis JS -->
-    <script src="{{ asset('asset_backend') }}/js/atlantis.min.js"></script>
+        <!-- Select2 -->
+        <script src="{{ asset('asset_backend') }}/js/plugin/select2/select2.full.min.js"></script>
 
-    @yield('script')
+        <!-- Owl Carousel -->
+        <script src="{{ asset('asset_backend') }}/js/plugin/owl-carousel/owl.carousel.min.js"></script>
+
+        <!-- Magnific Popup -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        @yield('script')
 </body>
 
 </html>

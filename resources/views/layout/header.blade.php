@@ -24,7 +24,7 @@
 
         </nav>
         {{--  <!-- .navbar -->  --}}
-        {{--  <a href="courses.html" class="get-started-btn text-white">Login</a>  --}}
+        {{-- <a href="courses.html" class="get-started-btn text-white">Login</a> --}}
 
         <i class="bi bi-list mobile-nav-toggle"></i>
     </div>

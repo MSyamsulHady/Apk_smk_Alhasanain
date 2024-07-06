@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\Nilai;
 use App\Models\Pelajaran;
 use App\Models\Rombel;
+use App\Models\Semester;
 use App\Models\Siswa;
 use App\Models\TrxRombel_siswa;
 use Illuminate\Http\Request;
@@ -16,14 +17,24 @@ class NilaiController extends Controller
 {
     public function index()
     {
-        // group berdasarkan id kelas
-        // $rombel = Rombel::with('kelas')->select('id_kelas', DB::raw('count(id_mapel) as jml_mapel , min(id_rombel) as id_rombel'))->groupBy('id_kelas')->get();
-        if (Auth::user()->role == 'Guru') {
-            $model = Rombel::with('kelas', 'mapel')->where('id_guru', Auth::user()->id_guru)->get();
-        } else {
+        // Ambil semester aktif
+        $activeSemester = Semester::where('status', 'Aktif')->first();
 
-            $model = Rombel::with('kelas', 'mapel')->get();
+        if (!$activeSemester) {
+            return redirect()->back()->with('error', 'Tidak ada semester yang aktif.');
         }
+
+        // Ambil data nilai berdasarkan semester aktif dan guru yang login
+        if (Auth::user()->role == 'Guru') {
+            $model = Rombel::whereHas('kelas', function ($query) use ($activeSemester) {
+                $query->where('id_semester', $activeSemester->id_semester);
+            })->where('id_guru', Auth::user()->id_guru)->with('kelas', 'mapel', 'nilai')->get();
+        } else {
+            $model = Rombel::whereHas('kelas', function ($query) use ($activeSemester) {
+                $query->where('id_semester', $activeSemester->id_semester);
+            })->with('kelas', 'mapel', 'nilai')->get();
+        }
+
         return view('backend.bk.nilai', compact('model'));
     }
     public function kelolaNilai($id_kelas)

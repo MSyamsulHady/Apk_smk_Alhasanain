@@ -19,7 +19,22 @@
                     <i class="fa fa-search"></i>
                 </a>
             </li>
-            <h3 class="ms-2 white text-white mr-3 mt-2">{{ Auth::User()->username }}</h3>
+            {{-- <h3 class="ms-2 white text-white mr-3 mt-2">{{ Auth::User()-> }}</h3>
+             --}}
+
+            <h4 class="ms-2 white text-white mr-3 mt-2">
+                {{ Session::get('semester')->tahun_ajaran . ' ' . Session::get('semester')->nama_semester }}</h4>
+
+            @auth
+                @if (auth()->user()->role == 'Guru' && auth()->user()->guru)
+                    <h3 class="ms-2 white text-white mr-3 mt-2">{{ auth()->user()->guru->nama }}</h3>
+                @elseif (auth()->user()->role == 'Siswa' && auth()->user()->siswa)
+                    <h3 class="ms-2 white text-white mr-3 mt-2">{{ auth()->user()->siswa->nama }}</h3>
+                @else
+                    <h3 class="ms-2 white text-white mr-3 mt-2">{{ Auth::User()->username }}</h3>
+                @endif
+            @endauth
+
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
