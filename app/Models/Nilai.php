@@ -11,6 +11,7 @@ class Nilai extends Model
     use HasFactory;
 
     protected $primaryKey = 'id_nilai';
+    protected $foreign = 'id_rombel';
     protected $guraded = [];
 
     public function rombel()

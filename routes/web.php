@@ -9,6 +9,7 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KelasPelajaranController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PelanggaranController;
@@ -43,6 +44,7 @@ Route::controller(LandingController::class)->group(function () {
     Route::get('/pendaftaran', 'pendaftaran')->name('pendaftaran');
     Route::get('/prestasi', 'prestasi')->name('prestasi');
     Route::get('/kegiatan', 'kegiatan')->name('kegiatan');
+    Route::get('/detail/{id}', 'detailBerita')->name('detailBerita');
 });
 // Route::get('/dashboard', function () {
 //     return view('backend.dashboard');
@@ -94,12 +96,6 @@ Route::controller(KelasController::class)->group(function () {
     Route::delete('/deleteKelas/{id}', 'deleteKelas')->name('deleteKelas')->middleware('auth');
 });
 
-// Route::controller(DetailKelasController::class)->group(function () {
-//     Route::get('/detail/kelas/{id_kelas}', 'index')->name('detailkelas')->middleware('auth');
-//     // menampilkan siswa berdasarkan id kelasnya
-//     // Route::get('/kelassiswa/{kelas}', 'kelaskatagori')->name('kelaskatagori');
-//     Route::post('/insert/detail', 'insertdetail')->name('insertdetail')->middleware('auth');
-// });
 
 Route::get('/rombel', [RombelController::class, 'index'])->name('rombel');
 Route::post('/rombel/add', [RombelController::class, 'addRombel'])->name('rombel.add');
@@ -131,9 +127,14 @@ Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])-
 
 Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai');
 Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai');
-Route::post('/nilai/add', [NilaiController::class, 'InputNilai'])->name('inputNilai');
+Route::post('/nilai/add/{id}', [NilaiController::class, 'InputNilai'])->name('inputNilai');
 Route::controller(BeritaController::class)->group(function () {
     Route::get('/berita', 'index')->name('berita');
     Route::post('/berita/insert', 'insertBerita')->name('insertBerita');
     Route::delete('/berita/delete/{id}', 'deleteBerita')->name('deleteBerita');
+});
+Route::controller(LaporanController::class)->group(function () {
+    Route::get('/laporan', 'index')->name('laporan');
+    Route::get('/laporan/cetak/{id}', 'Rekap')->name('cetakLaporan');
+    Route::get('/laporan/cetakpdf/{id}', 'cetakPdf')->name('cetakPDF');
 });
