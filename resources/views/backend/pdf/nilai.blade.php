@@ -118,6 +118,7 @@
         <div class="footer">
             <p>Website: www.smkalhasanain.sch.id E-mail: smkalhasanain08@gmail.com</p>
         </div>
+        <h3 class="text-center">Rekapitulasi Nilai Siswa</h2>
     </div>
     {{-- end kop --}}
     <div>Kelas : {{ $kelas->nama_kelas }}</div>

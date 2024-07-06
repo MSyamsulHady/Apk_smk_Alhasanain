@@ -35,16 +35,91 @@
         .jum {
             column-span: 5;
         }
+
+        .kop-surat {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .kop-surat .logo {
+            float: left;
+            width: 15%;
+        }
+
+        .kop-surat .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .kop-surat .logo-kanan {
+            float: right;
+            width: 15%;
+        }
+
+        .kop-surat .logo-kanan img {
+            width: 100px;
+            height: auto;
+        }
+
+        .kop-surat .header {
+            display: inline-block;
+            width: 70%;
+        }
+
+        .kop-surat .header h1 {
+            margin: 0;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .kop-surat .header h2 {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .kop-surat .header p {
+            margin: 0;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .kop-surat .footer {
+            clear: both;
+            border-top: 2px solid black;
+            margin-top: 10px;
+            padding-top: 5px;
+        }
+
+        .kop-surat .footer p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        /* end kop */
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <div><strong>REKAPITULASI ABSENSI</strong></div>
-        <div>SMK Al Hasanain Nu Beraim</div>
-        <div>Jln.kesambik ngelah desa beraim kec. Praya Tengah, kab. Lombok Tengan, Prov. Nusa Tenggara Barat </div>
-        <hr>
+    {{-- kop --}}
+    <div class="kop-surat">
+        <div class="logo">
+            <img src="{{ asset('asset_backend/img/logo/yy.png') }}" alt="Logo Kiri">
+        </div>
+        <div class="header">
+            <h1>YAYASAN AL-HASANAIN NU BERAIM</h1>
+            <h2>SEKOLAH MENENGAH KEJURUAN AL-HASANAIN</h2>
+            <h2>REKAYASA PERANGKAT LUNAK (RPL) & PERHOTELAN</h2>
+            <p>Alamat: Kesambik Ngelah Desa Beraim Praya Tengah Lombok Tengah HP. 0818364401</p>
+        </div>
+        <div class="logo-kanan">
+            <img src="{{ asset('asset_backend/img/logo/ah.png') }}" alt="Logo Kanan">
+        </div>
+        <div class="footer">
+            <p>Website: www.smkalhasanain.sch.id E-mail: smkalhasanain08@gmail.com</p>
+        </div>
+        <h3 class="text-center">Rekapitulasi Absensi Siswa</h2>
     </div>
+    {{-- end kop --}}
     <div>Mata Pelajaran : {{ $data->mapel->nama_mapel }}</div>
     <div>Kelas : {{ $data->kelas->nama_kelas }}</div>
     <div>Guru Pengampu : {{ $data->guru->nama }}</div>
