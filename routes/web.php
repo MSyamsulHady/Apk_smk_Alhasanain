@@ -50,15 +50,13 @@ Route::controller(LandingController::class)->group(function () {
 });
 // Route::get('/dashboard', function () {
 //     return view('backend.dashboard');
-// })->name('dashboard')->middleware('auth');
+// })->name('dashboard')->middleware(['auth', 'MustAdmin:Admin']);
 
 // Route::get('/profile_siswa', function () {
 //     return view('backend.bk.profile_siswa');
 // })->name('profile');
 
-Route::controller(HalamanSiswaController::class)->group(function () {
-    Route::get('/wellcome', 'index')->name('wellcome');
-});
+
 
 Route::controller(ProfileControler::class)->group(function () {
     Route::get('/profile', 'index')->name('profile');
@@ -68,42 +66,42 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('DataUser', 'index')->name('datauser');
     Route::get('/login', 'login')->name('login')->middleware('guest');
     Route::post('prosesLogin', 'proseslogin')->name('proseslogin');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth',);
     Route::get('/dashboard', 'dashboard')->name('dashboard');
 });
 Route::controller(PelajaranController::class)->group(function () {
-    Route::get('/mapel', 'index')->name('mapel')->middleware('auth');
-    Route::post('/mapel/insert', 'ADDmapel')->name('mapelinsert')->middleware('auth');
-    Route::put('/mapel/update/{id}', 'UPDmapel')->name('updatemapel')->middleware('auth');
-    Route::delete('/deleteMapel/{id}', 'deleteMapel')->name('deleteMapel')->middleware('auth');
+    Route::get('/mapel', 'index')->name('mapel')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/mapel/insert', 'ADDmapel')->name('mapelinsert')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::put('/mapel/update/{id}', 'UPDmapel')->name('updatemapel')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::delete('/deleteMapel/{id}', 'deleteMapel')->name('deleteMapel')->middleware(['auth', 'MustAdmin:Admin']);
 });
 Route::controller(SiswaController::class)->group(function () {
-    Route::get('/datasiswa', 'index')->name('datasiswa')->middleware('auth');
-    Route::post('/datasiswa/insert_siswa', 'tambahSiswa')->name('insert_siswa')->middleware('auth');
-    Route::put('/datasiswa/update/{id}', 'editsiswa')->name('update_siswa')->middleware('auth');
-    Route::delete('/datasiswa/delete/{id}', 'deletesiswa')->name('delete_siswa')->middleware('auth');
-    Route::get('showSiswa', 'siswaShow')->name('showSiswa')->name('showSiswa')->middleware('auth');
-    Route::post('/prosesImport', 'importSiswa')->name('import_siswa')->middleware('auth');
+    Route::get('/datasiswa', 'index')->name('datasiswa')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/datasiswa/insert_siswa', 'tambahSiswa')->name('insert_siswa')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::put('/datasiswa/update/{id}', 'editsiswa')->name('update_siswa')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::delete('/datasiswa/delete/{id}', 'deletesiswa')->name('delete_siswa')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::get('showSiswa', 'siswaShow')->name('showSiswa')->name('showSiswa')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/prosesImport', 'importSiswa')->name('import_siswa')->middleware(['auth', 'MustAdmin:Admin']);
 });
 Route::controller(GuruController::class)->group(function () {
-    Route::get('/dataguru', 'index')->name('dataguru')->middleware('auth');
-    Route::post('/insert_guru', 'tambah_guru')->name('insert_guru')->middleware('auth');
-    Route::put('/dataguru/update/{id}', 'edit_guru')->middleware('auth')->middleware('auth');
-    Route::delete('/dataguru/delete/{id}', 'delete')->name('delete_guru')->middleware('auth');
-    ROute::get('showGuru/{id}', 'showguru')->name('showguru')->middleware('auth');
-    Route::post('/importguru', 'importGuru')->name('importGuru')->middleware('auth');
+    Route::get('/dataguru', 'index')->name('dataguru')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/insert_guru', 'tambah_guru')->name('insert_guru')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::put('/dataguru/update/{id}', 'edit_guru')->middleware(['auth', 'MustAdmin:Admin'])->middleware(['auth', 'MustAdmin:Admin']);
+    Route::delete('/dataguru/delete/{id}', 'delete')->name('delete_guru')->middleware(['auth', 'MustAdmin:Admin']);
+    ROute::get('showGuru/{id}', 'showguru')->name('showguru')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/importguru', 'importGuru')->name('importGuru')->middleware(['auth', 'MustAdmin:Admin']);
 });
 Route::controller(SemesterController::class)->group(function () {
-    Route::get('/semester', 'index')->name('semester')->middleware('auth');
-    Route::post('/insert_semester', 'insertSemester')->name('insert_semester')->middleware('auth');
-    Route::put('/semester/update/{id}', 'updateSemester')->name('update_semester')->middleware('auth');
-    Route::delete('/deletesemester/{id}', 'deleteSemester')->name('deleteSemester')->middleware('auth');
+    Route::get('/semester', 'index')->name('semester')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/insert_semester', 'insertSemester')->name('insert_semester')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::put('/semester/update/{id}', 'updateSemester')->name('update_semester')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::delete('/deletesemester/{id}', 'deleteSemester')->name('deleteSemester')->middleware(['auth', 'MustAdmin:Admin']);
 });
 Route::controller(KelasController::class)->group(function () {
-    Route::get('/kelas', 'index')->name('datakelas')->middleware('auth');
-    Route::post('/insert_kelas', 'insertKelas')->name('insertKelas')->middleware('auth');
-    Route::put('/kelas/update/{id}', 'updateKelas')->name('update_kelas')->middleware('auth');
-    Route::delete('/deleteKelas/{id}', 'deleteKelas')->name('deleteKelas')->middleware('auth');
+    Route::get('/kelas', 'index')->name('datakelas')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::post('/insert_kelas', 'insertKelas')->name('insertKelas')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::put('/kelas/update/{id}', 'updateKelas')->name('update_kelas')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::delete('/deleteKelas/{id}', 'deleteKelas')->name('deleteKelas')->middleware(['auth', 'MustAdmin:Admin']);
 });
 
 
@@ -125,26 +123,26 @@ Route::controller(AbsenController::class)->group(function () {
 
 Route::controller(PertemuanController::class)->group(function () {
     Route::get('/jadwalPelajaran', 'index')->name('jadwal');
-    Route::post('addPertemuan/', 'addPertemuan')->name('addjadwal')->middleware('auth');
-    Route::put('updatePertemuan/{id}', 'updatePertemuan')->name('updatePertemuan')->middleware('auth');
-    Route::delete('deletePertemuan/{id}', 'deletePertemuan')->name('deletePertemuan')->middleware('auth');
+    Route::post('addPertemuan/', 'addPertemuan')->name('addjadwal')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::put('updatePertemuan/{id}', 'updatePertemuan')->name('updatePertemuan')->middleware(['auth', 'MustAdmin:Admin']);
+    Route::delete('deletePertemuan/{id}', 'deletePertemuan')->name('deletePertemuan')->middleware(['auth', 'MustAdmin:Admin']);
 });
 
 
 
-Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel')->middleware('auth');
+Route::get('/trx_rombel/{id}', [trxRombelController::class, 'index'])->name('trx_rombel')->middleware(['auth', 'MustAdmin:Admin']);
 Route::post('/trx_rombel/add/{id}', [trxRombelController::class, 'addPeserta'])->name('add_peserta');
 
-Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai');
-Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai');
-Route::post('/nilai/add/{id}', [NilaiController::class, 'InputNilai'])->name('inputNilai');
+Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai')->middleware(['auth']);;
+Route::get('/nilai/kelas/{id}', [NilaiController::class, 'kelolaNilai'])->name('kelola_nilai')->middleware('auth',);;
+Route::post('/nilai/add/{id}', [NilaiController::class, 'InputNilai'])->name('inputNilai')->middleware('auth',);;
 Route::controller(BeritaController::class)->group(function () {
     Route::get('/berita', 'index')->name('berita');
     Route::post('/berita/insert', 'insertBerita')->name('insertBerita');
     Route::delete('/berita/delete/{id}', 'deleteBerita')->name('deleteBerita');
 });
 Route::controller(LaporanController::class)->group(function () {
-    Route::get('/laporan', 'index')->name('laporan');
-    Route::get('/laporan/cetak/{id}', 'Rekap')->name('cetakLaporan');
-    Route::get('/laporan/cetakpdf/{id}', 'cetakPdf')->name('cetakPDF');
+    Route::get('/laporan', 'index')->name('laporan')->middleware('auth',);
+    Route::get('/laporan/cetak/{id}', 'Rekap')->name('cetakLaporan')->middleware('auth',);;
+    Route::get('/laporan/cetakpdf/{id}', 'cetakPdf')->name('cetakPDF')->middleware('auth',);;
 });
