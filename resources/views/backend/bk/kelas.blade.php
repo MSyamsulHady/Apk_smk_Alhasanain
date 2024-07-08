@@ -14,7 +14,11 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
+                            </button>
+                        </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>

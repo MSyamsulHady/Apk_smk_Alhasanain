@@ -1,12 +1,12 @@
 <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-end">
+    <div class="container d-flex justify-content-between align-items-center">
         <div class="logoah">
-            <img src="assets/img/kol.png" style="width: 50%">
+            <img src="{{ asset('assets/img/kol.png') }}" class="img-fluid" width="200px">
         </div>
         {{--  <h1 class="logo me-auto"><a href="index.html">Smk al-Hasanain</a></h1>  --}}
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-                <li><a class="{{ request()->is('/') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
+                <li><a @class(['active' => request()->is('/')]) href="{{ route('home') }}">Home</a></li>
                 <li><a class="{{ request()->is('bk') ? 'active' : '' }}"
                         href="{{ route('bimbingan_konseling') }}">Bimbingan Konseling</a></li>
                 <li><a class="{{ request()->is('prestasi') ? 'active' : '' }}"

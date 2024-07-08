@@ -6,7 +6,7 @@
 
                 <div class="col-lg-4 col-md-6 footer-contact">
                     <div class="logo d-flex">
-                        <img src="assets/img/ah.png" style="height: 50px">
+                        <img src="{{ asset('assets/img/ah.png') }}" style="height: 50px">
                         <h3 class="p-3"> <b>SMK AL HASANAIN</b></h3>
                     </div>
 

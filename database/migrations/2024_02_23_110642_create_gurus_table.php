@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('tgl_lahir');
-            $table->string('tlp');
+            $table->string('tlp')->nullable();
             $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->string('pend_terakhir');
             $table->string('foto')->nullable();

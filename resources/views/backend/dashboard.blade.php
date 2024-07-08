@@ -106,7 +106,7 @@
                                     <div class="card card-dark bg-danger-gradient">
                                         <div class="card-body pb-0">
                                             <div class="h1 fw-bold float-right"><i class="fas fa-signal"></i></div>
-                                            <h2 class="mb-2">1</h2>
+                                            <h2 class="mb-2">{{ $jmlhNilai }}</h2>
                                             <p>Nilai</p>
                                             <div class="pull-in sparkline-fix chart-as-background">
                                                 <div id="lineChart"><canvas width="327" height="70"

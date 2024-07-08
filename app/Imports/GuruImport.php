@@ -23,7 +23,7 @@ class GuruImport implements ToCollection
                 $data['nama'] = $rows[1];
                 $data['alamat'] = $rows[2];
                 $data['tgl_lahir'] = $rows[3];
-                $data['tlp'] = $rows[4];
+                $data['tlp'] = !empty($rows[4]) ? $rows[4] : '';
                 $data['gender'] = $rows[5];
                 $data['pend_terakhir'] = $rows[6];
                 $data['foto'] = !empty($rows[7]) ? $rows[7] : '';
@@ -33,8 +33,8 @@ class GuruImport implements ToCollection
 
                 // Buat user berdasarkan data guru yang baru dibuat
                 $user = User::create([
-                    'username' => $data['nuptk'],
-                    'password' => Hash::make($data['nuptk']),
+                    'username' => $data['nama'],
+                    'password' => Hash::make(str_replace('-', '', $data['tgl_lahir'])),
                     'role' => 'Guru',
                     'id_guru' => $guru->id_guru,
                 ]);

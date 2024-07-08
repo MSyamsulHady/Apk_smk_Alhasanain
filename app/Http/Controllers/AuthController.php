@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absen;
 use App\Models\Guru;
 use App\Models\Kelas;
+use App\Models\Nilai;
 use App\Models\Pelajaran;
 use App\Models\Pertemuan;
 use App\Models\Semester;
@@ -138,7 +139,7 @@ class AuthController extends Controller
         $jumlahMapel = Pelajaran::count();
         $jumlahAbsensi = Pertemuan::count();
         $jumlahKelas = Kelas::count();
-
-        return view('backend.dashboard', compact('jumlahSiswa', 'jumlahGuru', 'jumlahAbsensi', 'jumlahKelas', 'jumlahMapel'));
+        $jmlhNilai = Nilai::count();
+        return view('backend.dashboard', compact('jumlahSiswa', 'jumlahGuru', 'jumlahAbsensi', 'jumlahKelas', 'jumlahMapel', 'jmlhNilai'));
     }
 }

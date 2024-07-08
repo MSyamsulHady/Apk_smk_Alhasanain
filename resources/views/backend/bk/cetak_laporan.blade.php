@@ -40,9 +40,13 @@
                                             <td class="td_n">{{ $loop->iteration }}</td>
                                             <td class="td_n">{{ $ss->siswa->nis }}</td>
                                             <td class="td_n">{{ $ss->siswa->nama }}</td>
-                                            @foreach ($ss->siswa->nilai as $nil)
-                                                <td class="td_n">{{ $nil->nilai }}</td>
-                                            @endforeach
+                                            @for ($i = 0; $i < $kelas->rombel->count(); $i++)
+                                                @if (!empty($ss->siswa->nilai[$i]))
+                                                    <td class="td_n">{{ $ss->siswa->nilai[$i]->nilai }}</td>
+                                                @else
+                                                    <td class="td_n">0</td>
+                                                @endif
+                                            @endfor
                                             <td class="td_n">{{ $nilais[$ss->id_siswa] }}</td>
                                         </tr>
                                     @endforeach
