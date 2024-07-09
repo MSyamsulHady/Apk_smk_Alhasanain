@@ -86,18 +86,22 @@
                         <p>Nilai Siswa</p>
                     </a>
                 </li>
-                <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
-                    <a href="{{ route('berita') }}">
-                        <i class="fas fa-newspaper"></i>
-                        <p>Berita</p>
-                    </a>
-                </li>
-                <li class="nav-item  {{ request()->routeIs('laporan') ? 'active' : '' }}">
-                    <a href="{{ route('laporan') }}">
-                        <i class="fa fa-print"></i>
-                        <p>Laporan</p>
-                    </a>
-                </li>
+                @if (Auth::user()->guru == 'Admin')
+                    <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
+                        <a href="{{ route('berita') }}">
+                            <i class="fas fa-newspaper"></i>
+                            <p>Berita</p>
+                        </a>
+                    </li>
+                    <li class="nav-item  {{ request()->routeIs('laporan') ? 'active' : '' }}">
+                        <a href="{{ route('laporan') }}">
+                            <i class="fa fa-print"></i>
+                            <p>Laporan</p>
+                        </a>
+                    </li>
+                @endif
+
+
             </ul>
         </div>
     </div>
