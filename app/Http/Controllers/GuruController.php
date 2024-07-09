@@ -25,7 +25,6 @@ class GuruController extends Controller
             'nama' => 'required',
             'alamat' => 'required',
             'tgl_lahir' => 'required',
-            'tlp' => 'required',
             'gender' => 'required',
             'tgl_lahir' => 'required',
             'pend_terakhir' => 'required'
@@ -52,8 +51,8 @@ class GuruController extends Controller
 
             // create guru user
             $user = new User();
-            $user->username = $request->nuptk;
-            $user->password = Hash::make($request->nuptk);
+            $user->username = $request->nama;
+            $user->password = Hash::make(str_replace('-', '', $request->tgl_lahir));
             $user->role = 'Guru';
             $user->id_guru = $data->id_guru;
             $user->save();

@@ -17,7 +17,7 @@
                         <div class="d-flex justify-content-between mb-3">
 
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                Add
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
                             </button>
                         </div>
                         <div class="table-responsive">

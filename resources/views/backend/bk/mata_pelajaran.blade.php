@@ -21,7 +21,7 @@
                         <div class="mb-3">
                             {{-- <a href="" class="btn btn-primary"> <b>+</b> Add </a> --}}
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
-                                Add
+                                <i class="fa fa-plus "></i> <span class="ml-1">Tambah</span>
                             </button>
                         </div>
                         <div class="table-responsive">
