@@ -35,7 +35,7 @@
                                             <td>{{ $ab->kelas->nama_kelas }}</td>
                                             <td>{{ $ab->mapel->nama_mapel }}</td>
 
-                                            <td>{{ $ab->hari }}</td>
+                                            <td>{{ $ab->pertemuan->hari }}</td>
 
                                             <td>{{ $ab->guru->nama }}</td>
                                             <td>{{ $ab->kelas->semester->nama_semester }}

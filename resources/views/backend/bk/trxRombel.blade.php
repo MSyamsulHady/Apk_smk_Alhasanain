@@ -13,12 +13,6 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddPeserta"><i
-                                class="fas fa-plus"></i>
-                            Tambah
-                        </button>
-                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -46,8 +40,6 @@
                             </tbody>
                         </table>
                     </div>
-
-
                 </div>
             </div>
         </div>

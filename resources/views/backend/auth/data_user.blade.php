@@ -19,10 +19,7 @@
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd">
                                 Add
                             </button>
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                data-target="#Import">
-                                Import
-                            </button>
+
                         </div>
                         <div class="table-responsive">
                             <table class="table">

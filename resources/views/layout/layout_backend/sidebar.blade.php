@@ -2,14 +2,14 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-primary">
-                @if (Auth::user()->role == 'Admin')
-                    <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
-                        <a href="{{ route('dashboard') }}" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-home"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                @endif
+
+                <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class="collapsed" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
                 @if (Auth::user()->role == 'Admin')
                     <li class="nav-item">
                         <a data-toggle="collapse" href="#sidebarLayouts">
@@ -100,8 +100,6 @@
                         </a>
                     </li>
                 @endif
-
-
             </ul>
         </div>
     </div>

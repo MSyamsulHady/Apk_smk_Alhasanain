@@ -28,8 +28,6 @@
             @auth
                 @if (auth()->user()->role == 'Guru' && auth()->user()->guru)
                     <h3 class="ms-2 white text-white mr-3 mt-2">{{ auth()->user()->guru->nama }}</h3>
-                @elseif (auth()->user()->role == 'Siswa' && auth()->user()->siswa)
-                    <h3 class="ms-2 white text-white mr-3 mt-2">{{ auth()->user()->siswa->nama }}</h3>
                 @else
                     <h3 class="ms-2 white text-white mr-3 mt-2">{{ Auth::User()->username }}</h3>
                 @endif
@@ -49,9 +47,16 @@
                                 <div class="avatar-lg"><img src="{{ asset('asset_backend') }}/img/profile.jpg"
                                         alt="image profile" class="avatar-img rounded"></div>
                                 <div class="u-text">
-                                    <h4>Hizrian</h4>
-                                    <p class="text-muted">hello@example.com</p><a href="{{ route('profile') }}"
-                                        class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                    <h4> @auth
+                                            @if (auth()->user()->role == 'Guru' && auth()->user()->guru)
+                                                <h3 class="ms-2  text-black mr-3 mt-2">{{ auth()->user()->guru->nama }}
+                                                </h3>
+                                            @else
+                                                <h3 class="ms-2 black text-black mr-3 mt-2">{{ Auth::User()->username }}
+                                                </h3>
+                                            @endif
+                                        @endauth
+                                    </h4>
                                 </div>
                             </div>
                         </li>

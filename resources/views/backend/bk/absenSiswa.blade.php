@@ -52,7 +52,7 @@
                                                                 <tr>
                                                                     <td class="fw-bold">Tahun Pelajaran</td>
                                                                     <td style="width: 1px" class="px-2">:</td>
-                                                                    <td>{{ $data->kelas->semester->tahun_ajaran }}
+                                                                    <td>{{ $data->kelas->semester->tahun_ajaran }} {{ $data->kelas->semester->nama_semester }}
                                                                     </td>
 
                                                                 </tr>
@@ -87,12 +87,12 @@
                                         <thead>
                                             <tr>
                                                 <th rowspan="2" ">No</th>
-                                                    <th rowspan="2">Nis</th>
-                                                    <th rowspan="2">Nama</th>
-                                                    <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
-                                                    <th colspan="5" class="text-center">Jumlah</th>
-                                                    </tr>
-                                                 @foreach ($per as $p)
+                                                        <th rowspan="2">Nis</th>
+                                                        <th rowspan="2">Nama</th>
+                                                        <th colspan="{{ $jumlahPertemuan }}" class="text-center">Pertemuan</th>
+                                                        <th colspan="5" class="text-center">Jumlah</th>
+                                                        </tr>
+                                                      @foreach ($per as $p)
                                                 <th>
                                                     {{ $p }}
                                                 </th>

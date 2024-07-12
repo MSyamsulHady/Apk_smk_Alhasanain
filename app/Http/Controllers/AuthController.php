@@ -71,50 +71,12 @@ class AuthController extends Controller
 
             // Logging
             Log::info('User logged in', ['username' => $user->username]);
-            return redirect()->route('dashboard')->with('msg', 'Selamat Datang!');
-            // Cek role user
-            // switch ($user->role) {
-            //     case 'Admin':
-            //         $activeSemester = $this->getActiveSemester();
-
-            //         // Logging
-            //         Log::info('Active Semester', ['activeSemester' => $activeSemester ? $activeSemester->id_semester : 'No active semester found']);
-
-            //         if ($activeSemester) {
-            //             Session::put('active_semester', $activeSemester->id_semester);
-            //             Session::put('tahun_ajaran', $activeSemester->tahun_ajaran);
-            //             Session::put('nama_semester', $activeSemester->nama_semester);
-            //             return redirect()->intended('dashboard')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
-            //         } else {
-            //             Auth::logout();
-            //             return redirect()->back()->with(['msg' => 'Tidak ada semester yang aktif.', 'type' => 'error']);
-            //         }
-            //         break;
-
-            //     case 'Guru':
-            //         $activeSemester = $this->getActiveSemesterForUser($user);
-
-            //         // Logging
-            //         Log::info('Active Semester for Guru', ['activeSemester' => $activeSemester ? $activeSemester->id_semester : 'No active semester found for Guru']);
-
-            //         if ($activeSemester) {
-            //             Session::put('active_semester', $activeSemester->id_semester);
-            //             Session::put('tahun_ajaran', $activeSemester->tahun_ajaran);
-            //             Session::put('nama_semester', $activeSemester->nama_semester);
-            //             return redirect()->intended('welcome')->with(['msg' => 'Login Berhasil.', 'type' => 'success']);
-            //         } else {
-            //             Auth::logout();
-            //             return redirect()->back()->with(['msg' => 'Tidak ada semester yang aktif untuk tahun ajaran Anda.', 'type' => 'error']);
-            //         }
-            //         break;
-
-            //     default:
-            //         return redirect()->intended('login');
-            //         break;
-            // }
+            return redirect()->route('dashboard')->with(['msg' => 'welcome to Aplikasi', 'type' => 'success']);
+        } else {
+            return redirect()->back()->withErrors([
+                'username' => 'Username atau Password Salah.',
+            ])->withInput($request->except('password'));
         }
-
-        return redirect()->back()->with(['msg' => 'Username atau Password Salah', 'type' => 'error']);
     }
 
 
