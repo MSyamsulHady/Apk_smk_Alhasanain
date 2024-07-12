@@ -13,18 +13,12 @@ use Ramsey\Uuid\Uuid;
 
 class SiswaController extends Controller
 {
-    public function allsiswa()
-    {
-        $allSiswa = Siswa::all();
-        return view('backend.bk.all_data_siswa', compact('allSiswa'));
-    }
-
     public function index()
     {
         // $siswa = Siswa::with('detail_kelas.kelas')
         //     ->whereRelation('detail_kelas.kelas', 'id_semester', session('id_semester'))
         //     ->get();
-        $siswa = Siswa::all();
+        $siswa = Siswa::latest()->simplePaginate(5);
 
         return view('backend.bk.data_siswa', compact('siswa'));
     }

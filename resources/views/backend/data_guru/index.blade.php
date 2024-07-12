@@ -36,8 +36,7 @@
                                         <th>NUPTK</th>
                                         <th>Nama</th>
                                         <th>No HP</th>
-                                        <th>Foto</th>
-                                        <th>#Action</th>
+                                        <th class="text-center">#Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,14 +51,8 @@
                                             </td>
                                             <td>{{ $gr->nama }}</td>
                                             <td>{{ $gr->tlp }}</td>
-                                            <td>
-                                                @empty($gr->foto)
-                                                    -
-                                                @endempty
-                                                <img src="{{ asset('Foto_guru/' . $gr->foto) }}" alt=""
-                                                    width="50">
-                                            </td>
-                                            <td>
+
+                                            <td class="text-center">
                                                 <div class="form-button-action">
                                                     <button type="button" data-toggle="modal"
                                                         data-target="#Modalshow{{ $gr->id_guru }}" title=""
@@ -129,7 +122,8 @@
                                         <div class="modal-header">
                                             <h4 class="modal-title text-center" id="exampleModalLabel">Form
                                                 Tambah Data Guru</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -385,6 +379,9 @@
                                 </div>
                                 <!-- End Modal Update -->
                             @endforeach
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            {{ $guru->links() }}
                         </div>
                     </div>
                 </div>

@@ -46,22 +46,68 @@ class NilaiController extends Controller
 
         return view('backend.bk.detail_nilai', compact('model'));
     }
+    // public function InputNilai(Request $req, $id)
+    // {
+    //     // dd($req->all());
+    //     try {
+    //         $nilais = [];
+    //         foreach ($req->all() as $key => $val) {
+    //             if ($key != "_token") {
+    //                 $nilais[] = ['id_rombel' => $id, 'id_siswa' => $key, 'nilai' => $val];
+    //             }
+    //         }
+    //         // dd($nilais);
+    //         Nilai::insert($nilais);
+    //         return back()->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
+    //     } catch (\Exception $e) {
+    //         // return abort('404');
+    //         return $e->getMessage();
+    //     }
+    // }
     public function InputNilai(Request $req, $id)
     {
-        // dd($req->all());
+        // Validasi data request jika diperlukan
+        $req->validate([
+            // 'key' => 'required|type', // Contoh validasi
+        ]);
+
         try {
+            // Array untuk menyimpan data nilai
             $nilais = [];
+
+            // Iterasi semua data request
             foreach ($req->all() as $key => $val) {
+                // Mengabaikan token CSRF
                 if ($key != "_token") {
-                    $nilais[] = ['id_rombel' => $id, 'id_siswa' => $key, 'nilai' => $val];
+                    $nilais[] = [
+                        'id_rombel' => $id,
+                        'id_siswa' => $key,
+                        'nilai' => $val,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ];
                 }
             }
-            // dd($nilais);
-            Nilai::insert($nilais);
+
+            // Upsert data ke dalam tabel Nilai
+            foreach ($nilais as $nilai) {
+                Nilai::updateOrInsert(
+                    [
+                        'id_rombel' => $nilai['id_rombel'],
+                        'id_siswa' => $nilai['id_siswa']
+                    ],
+                    [
+                        'nilai' => $nilai['nilai'],
+                        'updated_at' => $nilai['updated_at']
+                    ]
+                );
+            }
+
+            // Redirect dengan pesan sukses
             return back()->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
         } catch (\Exception $e) {
-            // return abort('404');
-            return $e->getMessage();
+            // Mengembalikan pesan error jika terjadi kesalahan
+            return back()->with(['msg' => 'Terjadi kesalahan: ' . $e->getMessage(), 'type' => 'danger']);
         }
     }
 }

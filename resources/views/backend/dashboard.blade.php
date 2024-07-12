@@ -108,18 +108,22 @@
                                     </a>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="card card-dark bg-danger-gradient">
-                                        <div class="card-body pb-0">
-                                            <div class="h1 fw-bold float-right"><i class="fas fa-signal"></i></div>
-                                            <h2 class="mb-2">1</h2>
-                                            <p>Nilai</p>
-                                            <div class="pull-in sparkline-fix chart-as-background">
-                                                <div id="lineChart"><canvas width="327" height="70"
-                                                        style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+                                    <a href="{{ route('nilai') }}">
+                                        <div class="card card-dark bg-danger-gradient">
+                                            <div class="card-body pb-0">
+                                                <div class="h1 fw-bold float-right"><i class="fas fa-signal"></i></div>
+                                                @if (Auth::user()->role == 'Admin')
+                                                    <h2 class="mb-2">{{ $jmlhNilai }}</h2>
+                                                @endif
+                                                <p>Nilai</p>
+                                                <div class="pull-in sparkline-fix chart-as-background">
+                                                    <div id="lineChart"><canvas width="327" height="70"
+                                                            style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>

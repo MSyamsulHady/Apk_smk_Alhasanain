@@ -8,6 +8,7 @@ use App\Models\Kelas;
 use App\Models\Nilai;
 use App\Models\Pelajaran;
 use App\Models\Pertemuan;
+use App\Models\Rombel;
 use App\Models\Semester;
 use App\Models\Siswa;
 use App\Models\User;
@@ -101,7 +102,7 @@ class AuthController extends Controller
         $jumlahMapel = Pelajaran::count();
         $jumlahAbsensi = Pertemuan::count();
         $jumlahKelas = Kelas::count();
-        $jmlhNilai = Nilai::count();
+        $jmlhNilai = Rombel::count();
         return view('backend.dashboard', compact('jumlahSiswa', 'jumlahGuru', 'jumlahAbsensi', 'jumlahKelas', 'jumlahMapel', 'jmlhNilai'));
     }
 }
