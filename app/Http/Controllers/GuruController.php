@@ -15,7 +15,7 @@ class GuruController extends Controller
 {
     public function index()
     {
-        $guru = Guru::all();
+        $guru = Guru::latest()->simplePaginate(5);
         return view('backend.data_guru.index', compact('guru'));
     }
     public function tambah_guru(Request $request)
@@ -101,14 +101,27 @@ class GuruController extends Controller
     }
     public function delete($id)
     {
-
         $data = Guru::findOrFail($id);
+
+        // Dapatkan user yang terkait dengan guru tersebut
+        $user = $data->user;
+
+        // Hapus file foto jika ada
         $file = public_path('/Foto_guru/') . $data->foto;
         if (file_exists($file)) {
             @unlink($file);
         }
+
+        // Hapus data guru
         $data->delete();
-        return redirect('dataguru')->with(['msg' => 'Data Berhasi Di hapus !', 'type' => 'success']);
+
+        // Hapus data user yang terkait
+        if ($user) {
+            $user->delete();
+        }
+
+        // Redirect dengan pesan sukses
+        return redirect('dataguru')->with(['msg' => 'Data Berhasil Dihapus!', 'type' => 'success']);
     }
     public function importGuru(Request $request)
     {
