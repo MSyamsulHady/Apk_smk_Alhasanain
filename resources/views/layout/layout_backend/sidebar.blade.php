@@ -86,7 +86,7 @@
                         <p>Nilai Siswa</p>
                     </a>
                 </li>
-                @if (Auth::user()->guru == 'Admin')
+                @if (Auth::user()->role == 'Admin')
                     <li class="nav-item  {{ request()->routeIs('berita') ? 'active' : '' }}">
                         <a href="{{ route('berita') }}">
                             <i class="fas fa-newspaper"></i>
