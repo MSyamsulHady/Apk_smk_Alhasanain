@@ -21,7 +21,7 @@ class AuthController extends Controller
 {
     public function index()
     {
-        $user = User::all();
+        $user = User::simplePaginate(3);
         $use = Auth::user();
 
         return view('backend.auth.data_user', compact('user', 'use'));

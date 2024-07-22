@@ -31,7 +31,7 @@ class RombelController extends Controller
         // Ambil data rombel yang terkait dengan semester aktif
         $data = Rombel::whereHas('kelas', function ($query) use ($activeSemester) {
             $query->where('id_semester', $activeSemester->id_semester);
-        })->with('kelas', 'guru', 'mapel')->get();
+        })->with('kelas', 'guru', 'mapel')->simplePaginate(3);
 
         // Tampilkan view dengan data yang sudah dipersiapkan
         return view('backend.bk.rombel', compact('data', 'mapel', 'kelas', 'guru', 'activeSemester'));

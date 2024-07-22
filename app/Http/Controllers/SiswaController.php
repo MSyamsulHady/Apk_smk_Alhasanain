@@ -18,7 +18,7 @@ class SiswaController extends Controller
         // $siswa = Siswa::with('detail_kelas.kelas')
         //     ->whereRelation('detail_kelas.kelas', 'id_semester', session('id_semester'))
         //     ->get();
-        $siswa = Siswa::latest()->simplePaginate(5);
+        $siswa = Siswa::simplePaginate(10);
 
         return view('backend.bk.data_siswa', compact('siswa'));
     }

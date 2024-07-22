@@ -65,7 +65,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <!-- Button trigger modal -->
+                            <div class="d-flex justify-content-end mt-3">
+                                {{ $pelajaran->links() }}
+                            </div>
 
 
                             <!-- Modal Add -->

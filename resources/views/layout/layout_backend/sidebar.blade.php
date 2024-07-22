@@ -80,7 +80,7 @@
 
                     </a>
                 </li>
-                <li class="nav-item  ">
+                <li class="nav-item  {{ request()->routeIs('nilai') ? 'active' : '' }}">
                     <a href="{{ route('nilai') }}">
                         <i class="fas fa-signal"></i>
                         <p>Nilai Siswa</p>

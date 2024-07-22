@@ -65,6 +65,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-end mt-3">
+                                {{ $data->links() }}
+                            </div>
                         </div>
                         {{-- modal Add --}}
                         <div class="modal fade " id="ModalAdd" tabindex="-1" role="dialog"
@@ -134,10 +137,8 @@
                             </div>
                         </div>
                         {{-- end modal Add --}}
-
-                        <!-- add peserta -->
                         @foreach ($data as $rmbl)
-                            <x-modal title="PESERTA DIDIK" id="ModalEdit{{ $rmbl->id_rombel }}">
+                            <x-modal title="Edit ROMBEL" id="ModalEdit{{ $rmbl->id_rombel }}">
 
                                 <form action="{{ route('rombel.updt', $rmbl->id_rombel) }}" method="POST">
                                     @csrf

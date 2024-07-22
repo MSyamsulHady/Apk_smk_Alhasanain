@@ -40,14 +40,14 @@
                                                         <td>{{ $j->siswa->nis }}</td>
                                                         <td>{{ $j->siswa->nama }}</td>
                                                         <td>
-                                                            <input type="text" name="{{ $j->siswa->id_siswa }}"
-                                                                value="{{ $j->siswa->nilai[0]->nilai }}">
-                                                            {{-- @empty($j->siswa->nilai[0]->nilai)
+
+                                                            @empty($j->siswa->nilai[0]->nilai)
                                                                 <input type="text" name="{{ $j->siswa->id_siswa }}">
-                                                            @endempty --}}
-                                                            {{-- @if (!empty($j->siswa->nilai) && !empty($j->siswa->nilai[0]->nilai))
-                                                                {{ $j->siswa->nilai[0]->nilai }}
-                                                            @endif --}}
+                                                            @endempty
+                                                            @if (!empty($j->siswa->nilai) && !empty($j->siswa->nilai[0]->nilai))
+                                                                <input type="text" name="{{ $j->siswa->id_siswa }}"
+                                                                    value="{{ $j->siswa->nilai[0]->nilai }}">
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
