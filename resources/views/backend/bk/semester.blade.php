@@ -78,7 +78,7 @@
                                         @csrf
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-lg">
+                                                <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="tahun_ajaran">tahun ajaran</label>
                                                         <input type="text"
@@ -92,31 +92,36 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="nama_semester">semester</label>
-                                                        <input type="text"
-                                                            class="form-control @error('nama_semester')  is-invalid
-                                                            @enderror"
-                                                            id="nama_semester" name="nama_semester"
-                                                            placeholder="nama_semester">
-                                                        @error('semester')
-                                                            <span class="invalid-feedback">{{ $message }}</span>
-                                                        @enderror
+                                                        <select
+                                                            class="form-control @error('semster')
+                                                                is-invalid
+                                                                @enderror"
+                                                            name="nama_semester">
+                                                            @error('semster')
+                                                                <span class="invalid-feedback">{{ $message }}</span>
+                                                            @enderror
+                                                            <option selected> -- Pilih -- </option>
+                                                            <option>Ganjil</option>
+                                                            <option>Genap</option>
+                                                        </select>
                                                     </div>
-                                                    <div class="form-check">
-                                                        <label>Status</label><br />
-                                                        <label class="form-radio-label">
-                                                            <input class="form-radio-input" type="radio" name="status"
-                                                                value="Aktif">
-                                                            <span class="form-radio-sign">Aktif</span>
-                                                        </label>
-                                                        <label class="form-radio-label ml-3">
-                                                            <input class="form-radio-input" type="radio" name="status"
-                                                                value="Tidak Aktif">
-                                                            <span class="form-radio-sign">Tidak Aktif</span>
-                                                        </label>
-                                                    </div>
+                                                </div>
+                                                <div class="form-check">
+                                                    <label>Status</label><br />
+                                                    <label class="form-radio-label">
+                                                        <input class="form-radio-input" type="radio" name="status"
+                                                            value="Aktif">
+                                                        <span class="form-radio-sign">Aktif</span>
+                                                    </label>
+                                                    <label class="form-radio-label ml-3">
+                                                        <input class="form-radio-input" type="radio" name="status"
+                                                            value="Tidak Aktif">
+                                                        <span class="form-radio-sign">Tidak Aktif</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Tutup</button>
@@ -161,15 +166,18 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nama_semester">semester</label>
-                                                            <input type="text"
-                                                                class="form-control @error('nama_semester')  is-invalid
-                                                        @enderror"
-                                                                id="nama_semester" name="nama_semester"
-                                                                placeholder="nama_semester"
-                                                                value="{{ $smtr->nama_semester }}">
-                                                            @error('semester')
-                                                                <span class="invalid-feedback">{{ $message }}</span>
-                                                            @enderror
+                                                            <select
+                                                                class="form-control @error('semster')
+                                                                    is-invalid
+                                                                    @enderror"
+                                                                name="nama_semester">
+                                                                @error('semster')
+                                                                    <span class="invalid-feedback">{{ $message }}</span>
+                                                                @enderror
+                                                                <option selected>{{ $smtr->nama_semester }}</option>
+                                                                <option>Ganjil</option>
+                                                                <option>Genap</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-check">
                                                             <label>Status</label><br />

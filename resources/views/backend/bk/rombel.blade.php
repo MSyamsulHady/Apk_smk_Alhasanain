@@ -86,40 +86,40 @@
                                                         <label for="nama_mapel">
                                                             <h5>Mata Pelajaran</h5>
                                                         </label>
-                                                        <select class="custom-select" id="mapel" name="id_mapel">
-                                                            <option selected> --pilih Mapel--
-                                                            </option>
+                                                        <select class="custom-select" id="mapel" name="id_mapel"
+                                                            required>
+                                                            <option value="" selected> --pilih Mapel-- </option>
                                                             @foreach ($mapel as $m)
-                                                                <option value="{{ $m->id_mapel }}">
-                                                                    {{ $m->nama_mapel }}
+                                                                <option value="{{ $m->id_mapel }}">{{ $m->nama_mapel }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="">Guru</label>
-                                                        <select class="custom-select" id="guru" name="id_guru">
-                                                            <option selected> --pilih Guru--
-                                                            </option>
-                                                            @foreach ($guru as $m)
-                                                                <option value="{{ $m->id_guru }}">
-                                                                    {{ $m->nama }}
+                                                        <label for="nama_guru">
+                                                            <h5>Guru</h5>
+                                                        </label>
+                                                        <select class="custom-select" id="guru" name="id_guru"
+                                                            required>
+                                                            <option value="" selected> --pilih Guru-- </option>
+                                                            @foreach ($guru as $g)
+                                                                <option value="{{ $g->id_guru }}">{{ $g->nama }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="nama_mapel">
+                                                        <label for="nama_kelas">
                                                             <h5>Kelas</h5>
                                                         </label>
-                                                        <select class="custom-select" id="inputGroupSelect02"
-                                                            name="id_kelas">
-                                                            <option selected> --pilih Kelas--
-                                                            </option>
-                                                            @foreach ($kelas as $kel)
-                                                                <option value="{{ $kel->id_kelas }}">
-                                                                    {{ $kel->nama_kelas }}
-                                                                </option>
+                                                        <select class="custom-select" id="selectKelas" name="id_kelas"
+                                                            required>
+                                                            <option value="" selected> --pilih Kelas-- </option>
+                                                            @foreach ($kelas as $k)
+                                                                @if ($k->id_semester == $activeSemester->id_semester)
+                                                                    <option value="{{ $k->id_kelas }}">
+                                                                        {{ $k->nama_kelas }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -133,12 +133,12 @@
                                 </div>
                             </div>
                         </div>
+
                         {{-- end modal Add --}}
 
-                        <!-- add peserta -->
+                        <!-- Loop through the data and create an edit modal for each item -->
                         @foreach ($data as $rmbl)
-                            <x-modal title="PESERTA DIDIK" id="ModalEdit{{ $rmbl->id_rombel }}">
-
+                            <x-modal title="Edit Rombel" id="ModalEdit{{ $rmbl->id_rombel }}">
                                 <form action="{{ route('rombel.updt', $rmbl->id_rombel) }}" method="POST">
                                     @csrf
                                     @method('put')
@@ -146,59 +146,62 @@
                                         <div class="row">
                                             <div class="col-lg">
                                                 <div class="form-group">
-                                                    <label for="nama_mapel">
+                                                    <label for="mapel">
                                                         <h5>Mata Pelajaran</h5>
                                                     </label>
-                                                    <select class="custom-select" id="mapel" name="id_mapel">
-                                                        <option selected value="{{ $rmbl->id_mapel }}">
-                                                            {{ $rmbl->mapel->nama_mapel }}
-                                                        </option>
+                                                    <select class="custom-select" id="mapel" name="id_mapel" required>
+                                                        <option value="" selected> --pilih Mapel-- </option>
                                                         @foreach ($mapel as $m)
-                                                            <option value="{{ $m->id_mapel }}">
+                                                            <option value="{{ $m->id_mapel }}"
+                                                                {{ $rmbl->id_mapel == $m->id_mapel ? 'selected' : '' }}>
                                                                 {{ $m->nama_mapel }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="">Guru</label>
-                                                    <select class="custom-select" id="guru" name="id_guru">
-                                                        <option selected value="{{ $rmbl->id_guru }}">
-                                                            {{ $rmbl->guru->nama }}
-                                                        </option>
-                                                        @foreach ($guru as $m)
-                                                            <option value="{{ $m->id_guru }}">
-                                                                {{ $m->nama }}
+                                                    <label for="guru">
+                                                        <h5>Guru</h5>
+                                                    </label>
+                                                    <select class="custom-select" id="guru" name="id_guru" required>
+                                                        <option value="" selected> --pilih Guru-- </option>
+                                                        @foreach ($guru as $g)
+                                                            <option value="{{ $g->id_guru }}"
+                                                                {{ $rmbl->id_guru == $g->id_guru ? 'selected' : '' }}>
+                                                                {{ $g->nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="nama_mapel">
+                                                    <label for="kelas">
                                                         <h5>Kelas</h5>
                                                     </label>
-                                                    <select class="custom-select" id="inputGroupSelect02"
-                                                        name="id_kelas">
-                                                        <option selected value="{{ $rmbl->id_kelas }}">
-                                                            {{ $rmbl->kelas->nama_kelas }}
-                                                        </option>
-                                                        @foreach ($kelas as $kel)
-                                                            <option value="{{ $kel->id_kelas }}">
-                                                                {{ $kel->nama_kelas }}
-                                                            </option>
+                                                    <select class="custom-select" id="selectKelas" name="id_kelas"
+                                                        required>
+                                                        <option value="" selected> --pilih Kelas-- </option>
+                                                        @foreach ($kelas as $k)
+                                                            @if ($k->id_semester == $activeSemester->id_semester)
+                                                                <option value="{{ $k->id_kelas }}"
+                                                                    {{ $rmbl->id_kelas == $k->id_kelas ? 'selected' : '' }}>
+                                                                    {{ $k->nama_kelas }}
+                                                                </option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Tutup</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
                                     </div>
                                 </form>
                             </x-modal>
                         @endforeach
-                        <!-- end add peserta -->
+
                     </div>
                 </div>
             </div>

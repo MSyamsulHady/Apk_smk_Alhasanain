@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('id_semester')->references('id_semester')->on('semesters')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('keterangan', ['H', 'A', 'B', 'S', 'I']);
             $table->char('pertemuan', 5)->nullable();
+            $table->date('tanggal')->nullable();
             $table->timestamps();
         });
     }

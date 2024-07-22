@@ -45,7 +45,7 @@ class PertemuanController extends Controller
                 ->where('id_semester', $activeSemester->id_semester)
                 ->get();
 
-            return view('backend.bk.jadwal', compact('jadwal', 'rombel', 'semester', 'dayName'));
+            return view('backend.bk.jadwal', compact('jadwal', 'rombel', 'semester', 'dayName', 'activeSemester'));
         }
     }
 

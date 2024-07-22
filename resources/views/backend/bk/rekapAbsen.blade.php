@@ -152,7 +152,7 @@
             @foreach ($data->kelas->trx_siswa as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->siswa->nis }}</td>
+                    <td class="text-sm-left">{{ $item->siswa->nis }}</td>
                     <td>{{ $item->siswa->nama }}</td>
                     @foreach ($per as $p)
                         <td>

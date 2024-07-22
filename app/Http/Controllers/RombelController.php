@@ -39,35 +39,74 @@ class RombelController extends Controller
     public function addRombel(Request $request)
     {
         $request->validate([
-            'id_kelas' => 'required',
-            'id_mapel' => 'required',
-            'id_guru' => 'required',
+            'id_mapel' => 'required|exists:pelajaran,id_mapel',
+            'id_guru' => 'required|exists:guru,id_guru',
+            'id_kelas' => 'required|exists:kelas,id_kelas',
         ]);
-        try {
-            Rombel::create($request->all());
-            return redirect('/rombel')->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
-        } catch (\Exception $e) {
-            return $e->getMessage();
+
+        $activeSemester = Semester::where('status', 'Aktif')->first();
+
+        if (!$activeSemester) {
+            return redirect()->back()->with('error', 'Tidak ada semester yang aktif.');
         }
+
+        // Pastikan kelas yang dipilih termasuk dalam semester aktif
+        $kelas = Kelas::where('id_kelas', $request->id_kelas)
+            ->where('id_semester', $activeSemester->id_semester)
+            ->first();
+
+        if (!$kelas) {
+            return redirect()->back()->with('error', 'Kelas yang dipilih tidak sesuai dengan semester aktif.');
+        }
+
+        $rombel = new Rombel();
+        $rombel->id_mapel = $request->id_mapel;
+        $rombel->id_guru = $request->id_guru;
+        $rombel->id_kelas = $request->id_kelas;
+        $rombel->save();
+
+
+        return redirect('/rombel')->with(['msg' => 'Data Berhasil Disimpan', 'type' => 'success']);
     }
+
 
     public function updtRombel(Request $request, $id)
     {
         $request->validate([
-            'id_kelas' => 'required',
-            'id_mapel' => 'required',
-            'id_guru' => 'required',
-
+            'id_kelas' => 'required|exists:kelas,id_kelas',
+            'id_mapel' => 'required|exists:pelajaran,id_mapel',
+            'id_guru' => 'required|exists:guru,id_guru',
         ]);
+
         try {
+            // Ambil semester yang aktif
+            $activeSemester = Semester::where('status', 'Aktif')->first();
+
+            if (!$activeSemester) {
+                return redirect()->back()->with('error', 'Tidak ada semester yang aktif.');
+            }
+
+            // Pastikan kelas yang dipilih termasuk dalam semester aktif
+            $kelas = Kelas::where('id_kelas', $request->id_kelas)
+                ->where('id_semester', $activeSemester->id_semester)
+                ->first();
+
+
+            if (!$kelas) {
+                return redirect()->back()->with('error', 'Kelas yang dipilih tidak sesuai dengan semester aktif.');
+            }
+
+
+            // Temukan data Rombel berdasarkan ID dan update data
             $data = Rombel::findOrFail($id);
             $data->id_kelas = $request->id_kelas;
             $data->id_mapel = $request->id_mapel;
             $data->id_guru = $request->id_guru;
             $data->save();
+
             return redirect('/rombel')->with(['msg' => 'Data Berhasil Diubah', 'type' => 'success']);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
     public function deleteRombel($id)

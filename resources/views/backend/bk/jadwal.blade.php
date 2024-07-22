@@ -76,7 +76,7 @@
                             </table>
                         </div>
                         {{-- modal Add --}}
-                        <div class="modal fade " id="ModalAdd" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -91,14 +91,14 @@
                                         <div class="modal-body">
                                             <div class="row-12">
                                                 <div class="col-lg">
+                                                    <!-- Kelas -->
                                                     <div class="form-group">
                                                         <label for="nama_mapel">
-                                                            <h5> Kelas</h5>
+                                                            <h5>Kelas</h5>
                                                         </label>
                                                         <select class="custom-select" id="inputGroupSelect02"
                                                             name="id_rombel">
-                                                            <option selected> --pilih Rombongan Belajar--
-                                                            </option>
+                                                            <option selected>--pilih Rombongan Belajar--</option>
                                                             @foreach ($rombel as $a)
                                                                 <option value="{{ $a->id_rombel }}">
                                                                     {{ $a->kelas->nama_kelas . ' | ' . $a->mapel->nama_mapel }}
@@ -106,29 +106,27 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+                                                    <!-- Semester -->
                                                     <div class="form-group">
-                                                        <label for="nama_mapel">
-                                                            <h5> Semester</h5>
+                                                        <label for="id_semester">
+                                                            <h5>Semester</h5>
                                                         </label>
                                                         <select class="custom-select" id="inputGroupSelect02"
-                                                            name="id_semester">
-                                                            <option selected> --pilih Semester--
+                                                            name="id_semester" disabled>
+                                                            <option value="{{ $activeSemester->id_semester }}" selected>
+                                                                {{ $activeSemester->nama_semester . ' | ' . $activeSemester->tahun_ajaran }}
                                                             </option>
-                                                            @foreach ($semester as $a)
-                                                                <option value="{{ $a->id_semester }}">
-                                                                    {{ $a->nama_semester . ' | ' . $a->tahun_ajaran }}
-                                                                </option>
-                                                            @endforeach
                                                         </select>
-
+                                                        <input type="hidden" name="id_semester"
+                                                            value="{{ $activeSemester->id_semester }}">
                                                     </div>
+                                                    <!-- Hari -->
                                                     <div class="form-group">
                                                         <label for="nama_mapel">
-                                                            <h5> Hari</h5>
+                                                            <h5>Hari</h5>
                                                         </label>
                                                         <select class="custom-select" id="inputGroupSelect02"
                                                             name="hari">
-
                                                             <option value="Senin">Senin</option>
                                                             <option value="Selasa">Selasa</option>
                                                             <option value="Rabu">Rabu</option>
@@ -138,12 +136,11 @@
                                                             <option value="Minggu">Minggu</option>
                                                         </select>
                                                     </div>
+                                                    <!-- Jumlah Pertemuan -->
                                                     <div class="form-group">
                                                         <label for="pertemuanKe">Jumlah Pertemuan</label>
                                                         <input type="number"
-                                                            class="form-control @error('pertemuanKe')
-                                                                    is-invalid
-                                                            @enderror"
+                                                            class="form-control @error('pertemuanKe') is-invalid @enderror"
                                                             id="nis" name="pertemuanKe" value="">
                                                         @error('pertemuanKe')
                                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -154,12 +151,12 @@
                                             <label for="dari_pukul" class="col-sm-2 ml-2">Pukul</label>
                                             <div class="form-group row">
                                                 <div class="col-sm-4 ml-3">
-                                                    <input type="time" value="" class="form-control  "
+                                                    <input type="time" value="" class="form-control"
                                                         name="mulai" id="" required>
                                                 </div>
                                                 <div class="mt-2">s/d</div>
                                                 <div class="col-sm-4">
-                                                    <input type="time" value="" class="form-control  "
+                                                    <input type="time" value="" class="form-control"
                                                         name="selesai" id="" required>
                                                 </div>
                                             </div>
@@ -173,6 +170,7 @@
                                 </div>
                             </div>
                         </div>
+
                         {{-- end modal Add --}}
                         {{-- modal Update --}}
                         @foreach ($jadwal as $jd)
@@ -210,23 +208,18 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="nama_mapel">
-                                                                <h5> Semester</h5>
+                                                            <label for="id_semester">
+                                                                <h5>Semester</h5>
                                                             </label>
                                                             <select class="custom-select" id="inputGroupSelect02"
-                                                                name="id_semester">
-                                                                @foreach ($semester as $smt)
-                                                                    <option selected value="{{ $smt->id_semester }}">
-                                                                        {{ $smt->nama_semester . ' | ' . $smt->tahun_ajaran }}
-                                                                    </option>
-                                                                @endforeach
-                                                                @foreach ($semester as $a)
-                                                                    <option value="{{ $a->id_semester }}">
-                                                                        {{ $a->nama_semester . ' | ' . $a->tahun_ajaran }}
-                                                                    </option>
-                                                                @endforeach
+                                                                name="id_semester" disabled>
+                                                                <option value="{{ $activeSemester->id_semester }}"
+                                                                    selected>
+                                                                    {{ $activeSemester->nama_semester . ' | ' . $activeSemester->tahun_ajaran }}
+                                                                </option>
                                                             </select>
-
+                                                            <input type="hidden" name="id_semester"
+                                                                value="{{ $activeSemester->id_semester }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="nama_mapel">

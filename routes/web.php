@@ -48,19 +48,8 @@ Route::controller(LandingController::class)->group(function () {
     Route::get('/kegiatan', 'kegiatan')->name('kegiatan');
     Route::get('/detail/{id}', 'detailBerita')->name('detailBerita');
 });
-// Route::get('/dashboard', function () {
-//     return view('backend.dashboard');
-// })->name('dashboard')->middleware(['auth', 'MustAdmin:Admin']);
-
-// Route::get('/profile_siswa', function () {
-//     return view('backend.bk.profile_siswa');
-// })->name('profile');
 
 
-
-Route::controller(ProfileControler::class)->group(function () {
-    Route::get('/profile', 'index')->name('profile');
-});
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('DataUser', 'index')->name('datauser');
@@ -68,6 +57,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('prosesLogin', 'proseslogin')->name('proseslogin');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth',);
     Route::get('/dashboard', 'dashboard')->name('dashboard');
+
 });
 Route::controller(PelajaranController::class)->group(function () {
     Route::get('/mapel', 'index')->name('mapel')->middleware(['auth', 'MustAdmin:Admin']);
@@ -114,10 +104,9 @@ Route::delete('/rombel/delete/{id}', [RombelController::class, 'deleteRombel'])-
 
 Route::controller(AbsenController::class)->group(function () {
     Route::get('/absen', 'index')->name('absen')->middleware('auth');
-    Route::get('/absenSiswa/{id}', 'absen')->name('kelola_absen')->middleware('auth');
+    Route::get('/absenSiswa/{id_rombel}/{id_pertemuan}', 'absen')->name('kelola_absen')->middleware('auth');
     Route::post('simpan/{id}/{id_pertemuan}', 'SimpanAbsen')->name('simpanAbsen')->middleware('auth');
-    Route::put('/editAbsen/{id}', 'updateAbsen')->name('update_absen');
-    Route::get('rekapAbsen/{id}', 'rekapAbsen')->name('rekapAbsen')->middleware('auth');
+    Route::get('rekapAbsen/{id_rombel}/{id_pertemuan}', 'rekapAbsen')->name('rekapAbsen')->middleware('auth');
 });
 
 
