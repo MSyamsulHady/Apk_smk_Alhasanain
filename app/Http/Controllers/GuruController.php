@@ -15,7 +15,7 @@ class GuruController extends Controller
 {
     public function index()
     {
-        $guru = Guru::latest()->simplePaginate(5);
+        $guru = Guru::simplePaginate(10);
         return view('backend.data_guru.index', compact('guru'));
     }
     public function tambah_guru(Request $request)

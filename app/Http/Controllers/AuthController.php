@@ -24,7 +24,6 @@ class AuthController extends Controller
 
     public function index()
     {
-
         $user = User::all();
         $use = Auth::user();
 
@@ -108,7 +107,7 @@ class AuthController extends Controller
         $jumlahKelas = Kelas::count();
         $jmlhNilai = Rombel::count();
         $semester = Semester::all();
-    
+
 
 
         return view('backend.dashboard', compact('jumlahSiswa', 'jumlahGuru', 'jumlahAbsensi', 'jumlahKelas', 'jumlahMapel', 'jmlhNilai'));

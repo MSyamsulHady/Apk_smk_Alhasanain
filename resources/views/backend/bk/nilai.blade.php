@@ -40,6 +40,12 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if (Auth::user()->role == 'Admin')
+                                <div class="d-flex justify-content-end mt-3">
+                                    {{ $model->links() }}
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

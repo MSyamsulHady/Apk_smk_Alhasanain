@@ -33,7 +33,7 @@ class NilaiController extends Controller
         } else {
             $model = Rombel::whereHas('kelas', function ($query) use ($activeSemester) {
                 $query->where('id_semester', $activeSemester->id_semester);
-            })->with('kelas', 'mapel', 'nilai')->get();
+            })->with('kelas', 'mapel', 'nilai')->simplePaginate(3);
         }
 
         return view('backend.bk.nilai', compact('model'));

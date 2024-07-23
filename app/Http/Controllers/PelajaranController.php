@@ -11,7 +11,7 @@ class PelajaranController extends Controller
     public function index()
     {
         $guru = Guru::with('Pelajaran')->get();
-        $pelajaran = Pelajaran::with('guru')->get();
+        $pelajaran = Pelajaran::with('guru')->simplePaginate(5);
         $title = 'pelajaran';
         return view('backend.bk.mata_pelajaran', compact('guru', 'pelajaran', 'title'));
     }
